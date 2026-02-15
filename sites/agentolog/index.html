@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentolog — Enterprise AI Training</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        
+        * {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-light {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.6;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        
+        .dot-pattern {
+            background-image: radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        
+        .hero-text {
+            font-size: clamp(3rem, 6vw, 6rem);
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+        }
+        
+        .subhead {
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
+            letter-spacing: 0.02em;
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .glow {
+            box-shadow: 0 0 40px rgba(238, 179, 73, 0.4);
+        }
+        
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+
+<style>
+/* Scroll-triggered animations */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+[data-animate="fade-up"] { transform: translateY(40px); }
+[data-animate="fade-in"] { transform: translateY(0) scale(0.98); }
+[data-animate="slide-left"] { transform: translateX(-60px); opacity: 0; }
+[data-animate="slide-left"].visible { transform: translateX(0); opacity: 1; }
+[data-animate="slide-right"] { transform: translateX(60px); opacity: 0; }
+[data-animate="slide-right"].visible { transform: translateX(0); opacity: 1; }
+
+/* Staggered children */
+[data-stagger] > * { opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-stagger].visible > *:nth-child(1) { transition-delay: 0ms; }
+[data-stagger].visible > *:nth-child(2) { transition-delay: 120ms; }
+[data-stagger].visible > *:nth-child(3) { transition-delay: 240ms; }
+[data-stagger].visible > *:nth-child(4) { transition-delay: 360ms; }
+[data-stagger].visible > *:nth-child(5) { transition-delay: 480ms; }
+[data-stagger].visible > * { opacity: 1; transform: translateY(0); }
+
+/* Animated gradient background */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animated-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+}
+
+/* Parallax hero */
+.parallax-hero {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* Premium button shimmer */
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+.btn-shimmer { position: relative; overflow: hidden; }
+.btn-shimmer::after {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Smooth image reveal */
+img { transition: opacity 0.6s ease, transform 0.6s ease; }
+img:hover { transform: scale(1.02); }
+
+/* Line draw animation */
+@keyframes line-grow { from { width: 0; } to { width: 100%; } }
+.line-reveal { overflow: hidden; }
+.line-reveal.visible > div, .line-reveal.visible > span {
+    animation: line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+</style>
+
+</head>
+<body class="bg-white text-gray-900 antialiased">
+    
+    <!-- Skip to main content -->
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-black focus:text-white">Skip to main content</a>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-light">
+        <div class="max-w-[1440px] mx-auto px-8 lg:px-16">
+            <div class="flex items-center justify-between h-20">
+                <a href="#" class="text-2xl font-extrabold tracking-tight">Agentolog</a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#services" class="text-sm font-light tracking-wide hover:text-[#EEB349] transition">Services</a>
+                    <a href="#about" class="text-sm font-light tracking-wide hover:text-[#EEB349] transition">About</a>
+                    <a href="#contact" class="text-sm font-light tracking-wide hover:text-[#EEB349] transition">Contact</a>
+                    <a href="#" class="text-sm font-light tracking-wide hover:text-[#EEB349] transition">Login</a>
+                    <a href="#contact" class="px-6 py-2.5 bg-[#EEB349] text-white text-sm font-semibold rounded-full hover:glow transition">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <main id="main">
+        <section class="min-h-screen flex items-center relative overflow-hidden bg-white pt-20" data-animate="fade-up">
+            <div class="max-w-[1440px] mx-auto px-8 lg:px-16 w-full">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <!-- Left: Typography -->
+                    <div class="space-y-8 lg:pr-12">
+                        <h1 class="hero-text font-extrabold leading-none">
+                            AI That<br/>Actually<br/>Works
+                        </h1>
+                        <p class="subhead font-light text-gray-600 max-w-xl leading-relaxed">
+                            Enterprise AI training that deploys agents in all environments with patterns that scale.
+                        </p>
+                        <a href="#contact" class="inline-block px-10 py-4 bg-[#EEB349] text-white font-semibold rounded-full glow hover:scale-105 transition-transform text-lg">
+                            Get in Touch
+                        </a>
+                    </div>
+                    
+                    <!-- Right: Abstract Visuals -->
+                    <div class="relative h-[600px] hidden lg:block">
+                        <div class="gradient-orb w-96 h-96 bg-[#EEB349] absolute top-20 right-10"></div>
+                        <div class="gradient-orb w-80 h-80 bg-amber-300 absolute bottom-20 right-40" style="animation-delay: -5s;"></div>
+                        <div class="gradient-orb w-64 h-64 bg-yellow-400 absolute top-40 right-32" style="animation-delay: -10s;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+                <div class="w-px h-16 bg-gray-300"></div>
+                <div class="scroll-indicator w-1 h-1 rounded-full bg-gray-400"></div>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section id="about" class="py-32 bg-gray-50 dot-pattern relative" data-animate="fade-up">
+            <div class="max-w-[1440px] mx-auto px-8 lg:px-16">
+                <div class="grid lg:grid-cols-5 gap-16 items-start">
+                    <div class="lg:col-span-2" data-animate="slide-right">
+                        <h2 class="text-6xl font-extrabold leading-tight">About</h2>
+                    </div>
+                    <div class="lg:col-span-3 space-y-6" data-animate="slide-right">
+                        <p class="text-2xl font-light leading-relaxed text-gray-700">
+                            Enterprise AI Training
+                        </p>
+                        <p class="text-xl font-light leading-relaxed text-gray-600">
+                            20 years in enterprise tech. We don't do what everyone else does.
+                        </p>
+                        <p class="text-xl font-light leading-relaxed text-gray-600">
+                            From zero to deployed. Let us build AI agents that actually work in all environments with patterns that scale.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Services Section -->
+        <section id="services" class="py-32 bg-gray-900 text-white relative overflow-hidden" data-animate="fade-in">
+            <!-- Background decoration -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="gradient-orb w-[600px] h-[600px] bg-[#EEB349] absolute -top-40 -left-40"></div>
+                <div class="gradient-orb w-[500px] h-[500px] bg-[#EEB349] absolute -bottom-40 -right-40" style="animation-delay: -7s;"></div>
+            </div>
+            
+            <div class="max-w-[1440px] mx-auto px-8 lg:px-16 relative z-10">
+                <h2 class="text-6xl font-extrabold mb-16 tracking-tight">Premium Services</h2>
+                
+                <!-- Bento Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr" data-stagger>
+                    <!-- Large card spanning 2 cols -->
+                    <div class="lg:col-span-2 glass p-10 rounded-3xl card-hover" data-animate="slide-right">
+                        <h3 class="text-3xl font-bold mb-4">Production AI Agents</h3>
+                        <p class="text-lg font-light text-gray-300 leading-relaxed">
+                            Let us build AI agents that actually work in all environments with patterns that scale.
+                        </p>
+                    </div>
+                    
+                    <div class="glass p-10 rounded-3xl card-hover">
+                        <h3 class="text-2xl font-bold mb-4">Automate Your Work</h3>
+                        <p class="text-base font-light text-gray-300 leading-relaxed">
+                            Let us take care of repetitive tasks so you can focus on your business.
+                        </p>
+                    </div>
+                    
+                    <div class="glass p-10 rounded-3xl card-hover">
+                        <h3 class="text-2xl font-bold mb-4">Enterprise AI Training</h3>
+                        <p class="text-base font-light text-gray-300 leading-relaxed">
+                            20 years in enterprise tech. Training that actually delivers results.
+                        </p>
+                    </div>
+                    
+                    <div class="lg:col-span-2 glass p-10 rounded-3xl card-hover flex items-center" data-animate="slide-right">
+                        <div>
+                            <h3 class="text-3xl font-bold mb-4">From Zero to Deployed</h3>
+                            <p class="text-lg font-light text-gray-300 leading-relaxed">
+                                We don't do what everyone else does. Our approach ensures your AI actually works.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section id="contact" class="py-32 bg-[#EEB349] text-white relative overflow-hidden" data-animate="fade-up">
+            <div class="max-w-[1440px] mx-auto px-8 lg:px-16 text-center relative z-10">
+                <h2 class="text-6xl lg:text-7xl font-extrabold mb-8 leading-tight max-w-4xl mx-auto">
+                    Ready to Experience AI That Actually Works?
+                </h2>
+                <p class="text-2xl font-light mb-12 max-w-2xl mx-auto opacity-90">
+                    Let's build AI agents that work in your environment with patterns that scale.
+                </p>
+                <a href="#" class="inline-block px-12 py-5 bg-white text-[#EEB349] font-bold rounded-full text-lg hover:scale-105 transition-transform shadow-2xl">
+                    Get in Touch
+                </a>
+            </div>
+            
+            <!-- Decorative line -->
+            <div class="absolute bottom-0 left-0 right-0 h-px bg-white opacity-20"></div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="py-20 bg-gray-900 text-white">
+            <div class="max-w-[1440px] mx-auto px-8 lg:px-16">
+                <div class="grid lg:grid-cols-2 gap-16 items-start">
+                    <div>
+                        <h2 class="text-5xl font-extrabold mb-4 tracking-tight">Agentolog</h2>
+                        <p class="text-lg font-light text-gray-400">Enterprise AI Training</p>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row gap-12 lg:justify-end">
+                        <div class="space-y-3">
+                            <a href="#services" class="block text-gray-400 hover:text-white transition font-light">Services</a>
+                            <a href="#about" class="block text-gray-400 hover:text-white transition font-light">About</a>
+                            <a href="#contact" class="block text-gray-400 hover:text-white transition font-light">Contact</a>
+                        </div>
+                        <div class="space-y-3">
+                            <a href="#" class="block text-gray-400 hover:text-white transition font-light">Login</a>
+                            <a href="#contact" class="block text-gray-400 hover:text-white transition font-light">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-16 pt-8 border-t border-gray-800">
+                    <p class="text-sm text-gray-500 font-light">Agentolog — AI That Actually Works</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+    
+
+<script>
+// Intersection Observer for scroll animations
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('[data-animate], [data-stagger]').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Parallax on hero
+    const hero = document.querySelector('.parallax-hero');
+    if (hero) {
+        window.addEventListener('scroll', () => {
+            const scroll = window.pageYOffset;
+            hero.style.transform = `translateY(${scroll * 0.3}px)`;
+        }, { passive: true });
+    }
+
+    // Add shimmer to primary CTA buttons
+    document.querySelectorAll('button, a').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+        if (el.classList.contains('bg-primary') || el.classList.contains('bg-accent') ||
+            text.includes('risk talks') || text.includes('get started') || text.includes('contact')) {
+            if (el.querySelector('span') || el.childNodes.length <= 3) {
+                el.classList.add('btn-shimmer');
+            }
+        }
+    });
+});
+</script>
+
+</body>
+</html>
