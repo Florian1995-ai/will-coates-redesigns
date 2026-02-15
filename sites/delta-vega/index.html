@@ -1,183 +1,250 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
+<html class="scroll-smooth" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Delta Vega | Financial Engineering Consultancy</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#ee5b2b",
-                        "background-light": "#f8f6f6",
-                        "background-dark": "#221510",
-                        "delta-dark": "#09240F",
-                    },
-                    fontFamily: {
-                        "display": ["Manrope", "sans-serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                },
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#092510",
+              "accent": "#FF0000",
+              "background-light": "#f6f8f6",
+              "background-dark": "#131f16",
             },
-        }
+            fontFamily: {
+              "display": ["Manrope", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
     </script>
+<style>
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .dot-grid {
+            background-image: radial-gradient(rgba(9, 37, 16, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .text-huge {
+            font-size: clamp(4rem, 15vw, 8rem);
+            line-height: 0.9;
+        }
+        .orb-gradient {
+            background: radial-gradient(circle at center, #1a4a25 0%, #092510 70%);
+        }
+    </style>
 <style>
     body {
       min-height: max(884px, 100dvh);
     }
   </style>
   </head>
-<body class="bg-background-light dark:bg-background-dark font-display text-delta-dark dark:text-white transition-colors duration-300">
-<!-- Navigation Header -->
-<nav class="sticky top-0 z-50 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-primary/10 px-6 py-4 flex justify-between items-center">
-<div class="font-extrabold text-xl tracking-tighter text-delta-dark dark:text-white">
-            DELTA<span class="text-primary">VEGA</span>
+<body class="bg-background-light dark:bg-background-dark font-display text-primary selection:bg-accent selection:text-white overflow-x-hidden">
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 w-full z-50 border-b border-primary/5 bg-background-light/80 backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-sm flex items-center justify-center">
+<span class="text-white font-bold text-xs uppercase">DV</span>
 </div>
-<button class="text-delta-dark dark:text-white">
+<span class="font-extrabold tracking-tighter text-xl uppercase">Delta Vega</span>
+</div>
+<!-- Mobile Menu Toggle -->
+<button class="lg:hidden p-2 text-primary">
 <span class="material-icons">menu</span>
 </button>
+<!-- Desktop Links -->
+<div class="hidden lg:flex items-center gap-8 text-xs font-bold tracking-widest uppercase">
+<a class="hover:text-accent transition-colors" href="#">Home</a>
+<a class="hover:text-accent transition-colors" href="#">About</a>
+<a class="hover:text-accent transition-colors" href="#">Video</a>
+<a class="hover:text-accent transition-colors" href="#">Training</a>
+<a class="hover:text-accent transition-colors" href="#">Publications</a>
+<a class="ml-4 px-6 py-3 bg-primary text-white hover:bg-accent transition-all" href="#">Risk Talks</a>
+</div>
+</div>
 </nav>
 <!-- Hero Section -->
-<section class="relative min-h-[80vh] flex flex-col justify-center px-6 py-20 overflow-hidden">
-<div class="absolute top-20 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+<section class="relative min-h-screen flex items-center pt-20 overflow-hidden px-6">
+<div class="absolute right-[-10%] top-[10%] w-[80vw] h-[80vw] orb-gradient rounded-full blur-3xl opacity-20 -z-10"></div>
+<div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 <div class="relative z-10">
-<h1 class="text-6xl md:text-7xl font-extrabold tracking-tight leading-none mb-4 text-delta-dark dark:text-white">
-                Delta <br/>Vega
-            </h1>
-<p class="text-xl md:text-2xl font-medium text-delta-dark/70 dark:text-white/70 mb-10 max-w-[280px]">
-                Financial Engineering (FE) Consultancy
-            </p>
-<button class="bg-primary hover:bg-primary/90 text-white font-bold py-4 px-10 rounded-lg shadow-xl shadow-primary/20 transition-all flex items-center gap-2 text-lg uppercase tracking-wider">
-                Risk Talks
-                <span class="material-icons text-sm">arrow_forward_ios</span>
+<p class="text-xs font-bold tracking-[0.3em] uppercase text-accent mb-6">Financial Engineering</p>
+<h1 class="text-huge font-extrabold tracking-tighter mb-8">
+                    Delta<br/>Vega
+                </h1>
+<p class="text-2xl font-light text-primary/70 max-w-md leading-relaxed mb-10">
+                    Engineering financial resilience through elite quantitative strategy and high-fidelity insights.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="group flex items-center justify-between bg-primary text-white px-8 py-5 rounded-none font-bold tracking-widest uppercase text-sm hover:bg-accent transition-all duration-300">
+                        Risk Talks
+                        <span class="material-icons">arrow_forward</span>
 </button>
+<button class="px-8 py-5 border border-primary/20 font-bold tracking-widest uppercase text-sm hover:border-primary transition-all">
+                        View Publications
+                    </button>
 </div>
-<!-- Decorative abstract pattern -->
-<div class="absolute bottom-0 left-0 w-full h-1/3 opacity-20 pointer-events-none">
-<div class="w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary via-transparent to-transparent"></div>
 </div>
-</section>
-<!-- About Section -->
-<section class="bg-white dark:bg-delta-dark/20 px-6 py-24">
-<div class="max-w-screen-sm mx-auto">
-<h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
-<span class="w-8 h-1 bg-primary rounded-full"></span>
-                More About Delta Vega
-            </h2>
-<div class="text-lg leading-relaxed text-delta-dark/80 dark:text-white/80 space-y-6">
-<p>
-                    Delta Vega is a financial engineering (FE) consultancy. Its product lines include video, training, and publications. 
-                </p>
-<p>
-                    The company also offers regular talks on risk management, free and open to the public via Zoom and You Tube.
-                </p>
+<!-- Abstract Visual -->
+<div class="relative hidden lg:block h-[600px]">
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="relative w-[500px] h-[500px]">
+<!-- Abstract Geometric Elements -->
+<div class="absolute inset-0 border border-primary/10 rounded-full animate-spin-slow"></div>
+<div class="absolute inset-10 border border-primary/5 rounded-full"></div>
+<div class="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+<div class="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-transparent via-primary/20 to-transparent"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/5 rounded-full blur-2xl"></div>
+<img alt="Abstract Financial Engineering visualization" class="w-full h-full object-cover rounded-xl mix-blend-multiply opacity-80" data-alt="Abstract glowing mesh representing financial data networks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Omce5QKr5dj42EE3emL5vqmH95ANfQomXukLDaPCxa67kwCn7lMJB3k3IEwmlwqSKytuDhEC_-hnQc7SArGpSV1eIlYYtBlKAZWZIINRMEDIharm2OWlo7kAxJmrpxEaM_cQjKBqCDwq34EGZ8ipU4-J-GF5Db4p_cvaeoDTrS-MFpS4wI_XvN4qSUyuQ2yX4v7sxXMMAlVeOJatQ1SElMamZwU5CoJ4j1Pd069ir9kwnBRXuTI6sHPvQjgO_rOiR1jhJOi7bu14"/>
+</div>
+</div>
 </div>
 </div>
 </section>
-<!-- Services Section -->
-<section class="px-6 py-24 bg-background-light dark:bg-background-dark">
-<h2 class="text-xs font-bold uppercase tracking-[0.3em] text-primary mb-12 text-center">Our Offerings</h2>
-<div class="grid grid-cols-1 gap-6 max-w-screen-sm mx-auto">
-<!-- Video Card -->
-<div class="bg-white dark:bg-delta-dark/40 p-8 rounded-xl border border-primary/5 shadow-sm hover:shadow-md transition-shadow">
-<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
-<span class="material-icons text-primary">play_circle_filled</span>
+<!-- About Section - Editorial Split -->
+<section class="py-32 bg-white dot-grid border-y border-primary/5">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+<div class="lg:col-span-5">
+<h2 class="text-5xl lg:text-7xl font-extrabold tracking-tighter leading-none">
+                        More About<br/>Delta Vega
+                    </h2>
+<div class="w-20 h-1 bg-accent mt-8"></div>
 </div>
-<h3 class="text-xl font-bold mb-3 uppercase tracking-wide">Video</h3>
-<p class="text-delta-dark/60 dark:text-white/60 text-sm leading-relaxed">
-                    Expert visual analysis and digital insights on complex financial structures and market movements.
-                </p>
+<div class="lg:col-span-7">
+<p class="text-3xl font-light leading-relaxed text-primary/80 mb-8">
+                        Delta Vega is a premier financial engineering (FE) consultancy. We bridge the gap between abstract mathematical theory and real-world market volatility.
+                    </p>
+<p class="text-xl font-normal leading-loose text-primary/60">
+                        Our product linesâspanning video analysis, elite training workshops, and peer-reviewed publicationsâare designed for financial professionals who demand precision, clarity, and actionable intelligence in an increasingly complex global landscape.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Services Bento Grid -->
+<section class="py-32 bg-primary">
+<div class="max-w-7xl mx-auto px-6">
+<div class="mb-16">
+<p class="text-xs font-bold tracking-[0.3em] uppercase text-accent mb-4">Core Ecosystem</p>
+<h2 class="text-4xl lg:text-5xl font-extrabold tracking-tighter text-white">Strategic Product Lines</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Large Video Card -->
+<div class="lg:col-span-2 relative group overflow-hidden rounded-xl h-[500px] glass">
+<div class="absolute inset-0">
+<img alt="Digital interface" class="w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-700" data-alt="Close up of high tech digital interface with glowing lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9rDQoydAcjUwY7xvqtLTTnx4QNJbBwEzN0i-2E2EKms5TWPg9u5az3yWA-ZgEtdnKD7zFdH8Gr1OXKhtA7T2gvmifo7VmqEaI25yfwcDFyc3diL_hD9s7QCj13F6OKsoAHWZApgdKJ1mYMJMKYh-k7pbKZ-3eVZdDSc1zCJkCocy9PcHYajMuUAsqUrAncwRmQMHrXD2FLwomh9i9bm2GnVhhBHomRh2UQdvhrjJlRn9MRe2FUmO0MTQB2jIGIPhW8fP0dD6G5rgZ"/>
+</div>
+<div class="relative h-full p-10 flex flex-col justify-end">
+<span class="material-icons text-white/50 mb-4 text-4xl">play_circle_filled</span>
+<h3 class="text-white text-3xl font-extrabold tracking-tight mb-4 uppercase">Video</h3>
+<p class="text-white/60 text-lg font-light max-w-md">High-fidelity financial insights delivered through cinematic quantitative analysis.</p>
+<a class="mt-6 flex items-center text-white font-bold text-xs tracking-widest uppercase hover:text-accent transition-colors" href="#">
+                            Enter the Studio <span class="material-icons">north_east</span>
+</a>
+</div>
 </div>
 <!-- Training Card -->
-<div class="bg-white dark:bg-delta-dark/40 p-8 rounded-xl border border-primary/5 shadow-sm hover:shadow-md transition-shadow">
-<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
-<span class="material-icons text-primary">school</span>
+<div class="relative group overflow-hidden rounded-xl h-[500px] glass border-white/5">
+<div class="relative h-full p-10 flex flex-col justify-between">
+<div class="w-12 h-12 bg-white/5 flex items-center justify-center rounded-sm">
+<span class="material-icons text-white">school</span>
 </div>
-<h3 class="text-xl font-bold mb-3 uppercase tracking-wide">Training</h3>
-<p class="text-delta-dark/60 dark:text-white/60 text-sm leading-relaxed">
-                    Customized educational programs designed to empower financial professionals with advanced FE methodologies.
-                </p>
+<div>
+<h3 class="text-white text-3xl font-extrabold tracking-tight mb-4 uppercase">Training</h3>
+<p class="text-white/60 text-lg font-light">Elite engineering workshops for senior quantitative teams.</p>
+<a class="mt-6 flex items-center text-white font-bold text-xs tracking-widest uppercase hover:text-accent transition-colors" href="#">
+                                Curricula <span class="material-icons">north_east</span>
+</a>
 </div>
-<!-- Publications Card -->
-<div class="bg-white dark:bg-delta-dark/40 p-8 rounded-xl border border-primary/5 shadow-sm hover:shadow-md transition-shadow">
-<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-6">
-<span class="material-icons text-primary">auto_stories</span>
 </div>
-<h3 class="text-xl font-bold mb-3 uppercase tracking-wide">Publications</h3>
-<p class="text-delta-dark/60 dark:text-white/60 text-sm leading-relaxed">
-                    In-depth research papers, whitepapers, and regular market reports authored by industry leaders.
-                </p>
+</div>
+<!-- Publications Card - Full Width on Mobile -->
+<div class="lg:col-span-3 relative group overflow-hidden rounded-xl p-10 glass border-white/5">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+<div class="flex-1">
+<h3 class="text-white text-3xl font-extrabold tracking-tight mb-4 uppercase">Publications</h3>
+<p class="text-white/60 text-lg font-light max-w-2xl">Access our library of peer-reviewed market analysis, whitepapers, and proprietary financial engineering frameworks.</p>
+</div>
+<button class="bg-white text-primary px-8 py-5 font-bold tracking-widest uppercase text-sm hover:bg-accent hover:text-white transition-all">
+                            Browse Repository
+                        </button>
+</div>
+</div>
 </div>
 </div>
 </section>
-<!-- Contact Section -->
-<section class="px-6 py-24 bg-white dark:bg-delta-dark/10">
-<div class="max-w-screen-sm mx-auto">
-<h2 class="text-3xl font-bold mb-4">Connect</h2>
-<p class="text-delta-dark/60 dark:text-white/60 mb-10">Inquire about our consultancy services or join the next risk talk.</p>
-<form class="space-y-4">
-<div>
-<input class="w-full bg-background-light dark:bg-background-dark border-transparent focus:border-primary focus:ring-primary rounded-lg p-4 text-delta-dark dark:text-white" placeholder="Name" type="text"/>
+<!-- CTA Band -->
+<section class="py-24 bg-primary relative overflow-hidden">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+<div class="max-w-4xl mx-auto px-6 text-center">
+<h2 class="text-4xl lg:text-6xl font-extrabold tracking-tighter text-white mb-12">
+                Navigate the Complex.
+            </h2>
+<div class="flex justify-center">
+<button class="relative group px-12 py-6 overflow-hidden">
+<div class="absolute inset-0 bg-accent transform group-hover:scale-110 transition-transform duration-300"></div>
+<div class="absolute inset-0 bg-accent blur-xl opacity-30 group-hover:opacity-60 transition-opacity"></div>
+<span class="relative z-10 text-white font-extrabold tracking-[0.4em] uppercase text-sm">Risk Talks</span>
+</button>
 </div>
-<div>
-<input class="w-full bg-background-light dark:bg-background-dark border-transparent focus:border-primary focus:ring-primary rounded-lg p-4 text-delta-dark dark:text-white" placeholder="Email" type="email"/>
-</div>
-<div>
-<textarea class="w-full bg-background-light dark:bg-background-dark border-transparent focus:border-primary focus:ring-primary rounded-lg p-4 text-delta-dark dark:text-white" placeholder="Message" rows="4"></textarea>
-</div>
-<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg shadow-lg shadow-primary/20 transition-all uppercase tracking-widest text-sm" type="submit">
-                    Risk Talks
-                </button>
-</form>
 </div>
 </section>
 <!-- Footer -->
-<footer class="bg-delta-dark dark:bg-black text-white px-6 pt-20 pb-12">
-<div class="max-w-screen-sm mx-auto">
-<div class="grid grid-cols-2 gap-x-12 gap-y-10 mb-20">
-<div class="flex flex-col gap-4">
-<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">Home</a>
-<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">About</a>
-<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">Video</a>
-</div>
-<div class="flex flex-col gap-4">
-<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">Training</a>
-<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">Publications</a>
-<a class="text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors" href="#">Contact</a>
-</div>
-</div>
-<div class="pt-10 border-t border-white/10">
-<div class="mb-8 space-y-2">
-<p class="text-sm text-white/50 flex items-center gap-2">
-<span class="material-icons text-primary text-sm">mail</span>
-                        contact@deltavega.com
-                    </p>
-<p class="text-sm text-white/50 flex items-center gap-2">
-<span class="material-icons text-primary text-sm">place</span>
-                        Financial District, London
+<footer class="bg-background-light py-24 border-t border-primary/5">
+<div class="max-w-7xl mx-auto px-6">
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-16 lg:gap-8 mb-24">
+<div class="lg:col-span-2">
+<h2 class="text-6xl lg:text-8xl font-extrabold tracking-tighter uppercase mb-8">
+                        Delta<br/>Vega
+                    </h2>
+<p class="text-primary/60 font-light max-w-sm">
+                        Premier consultancy specializing in advanced financial engineering and risk architecture.
                     </p>
 </div>
-<div class="flex justify-between items-center opacity-40">
-<p class="text-[10px] uppercase tracking-widest">© Delta Vega</p>
-<div class="flex gap-4">
-<span class="material-icons text-lg">language</span>
-<span class="material-icons text-lg">public</span>
+<div>
+<h4 class="font-bold uppercase tracking-widest text-xs mb-8">Platform</h4>
+<ul class="space-y-4 text-sm font-light text-primary/70">
+<li><a class="hover:text-accent transition-colors" href="#">Video Insights</a></li>
+<li><a class="hover:text-accent transition-colors" href="#">Training Modules</a></li>
+<li><a class="hover:text-accent transition-colors" href="#">White Papers</a></li>
+<li><a class="hover:text-accent transition-colors" href="#">Strategic Advisory</a></li>
+</ul>
 </div>
+<div>
+<h4 class="font-bold uppercase tracking-widest text-xs mb-8">Contact</h4>
+<ul class="space-y-4 text-sm font-light text-primary/70">
+<li>Inquiries: hello@deltavega.engineering</li>
+<li>Media: press@deltavega.engineering</li>
+<li class="pt-4 flex gap-6">
+<a class="hover:text-accent" href="#"><span class="material-icons text-xl">terminal</span></a>
+<a class="hover:text-accent" href="#"><span class="material-icons text-xl">language</span></a>
+<a class="hover:text-accent" href="#"><span class="material-icons text-xl">podcasts</span></a>
+</li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold tracking-widest uppercase text-primary/40">
+<p>© Delta Vega Engineering. All rights reserved.</p>
+<div class="flex gap-8">
+<a class="hover:text-primary" href="#">Privacy Policy</a>
+<a class="hover:text-primary" href="#">Terms of Service</a>
 </div>
 </div>
 </div>
 </footer>
-<!-- Fixed Map Element (Visual only as per instructions) -->
-<div class="hidden" data-location="London" style=""></div>
 </body></html>
