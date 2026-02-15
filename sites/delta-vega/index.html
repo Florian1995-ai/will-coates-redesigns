@@ -1,49 +1,60 @@
 <!DOCTYPE html>
 
-<html class="scroll-smooth" lang="en"><head>
+<html lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Delta Vega | Financial Engineering Consultancy</title>
+<title>Delta Vega | Financial Engineering</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "primary": "#092510",
-              "accent": "#FF0000",
-              "background-light": "#f6f8f6",
-              "background-dark": "#131f16",
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#102509",
+                        "accent": "#FF0000",
+                        "background-light": "#f6f8f6",
+                        "background-dark": "#161f13",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
             },
-            fontFamily: {
-              "display": ["Manrope", "sans-serif"]
-            },
-            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-          },
-        },
-      }
+        }
     </script>
 <style>
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(16, 37, 9, 0.1);
         }
-        .dot-grid {
-            background-image: radial-gradient(rgba(9, 37, 16, 0.1) 1px, transparent 1px);
-            background-size: 24px 24px;
+        .orb-gradient {
+            background: radial-gradient(circle at center, #102509 0%, transparent 70%);
+            opacity: 0.15;
+            filter: blur(60px);
         }
         .text-huge {
             font-size: clamp(4rem, 15vw, 8rem);
             line-height: 0.9;
         }
-        .orb-gradient {
-            background: radial-gradient(circle at center, #1a4a25 0%, #092510 70%);
+        .broken-grid-offset {
+            margin-left: 2rem;
+            border-left: 1px solid rgba(16, 37, 9, 0.1);
+            padding-left: 1.5rem;
+        }
+        .accent-glow {
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
         }
     </style>
 <style>
@@ -51,200 +62,268 @@
       min-height: max(884px, 100dvh);
     }
   </style>
-  </head>
-<body class="bg-background-light dark:bg-background-dark font-display text-primary selection:bg-accent selection:text-white overflow-x-hidden">
+  
+<style>
+/* Scroll-triggered animations */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+[data-animate="fade-up"] { transform: translateY(40px); }
+[data-animate="fade-in"] { transform: translateY(0) scale(0.98); }
+[data-animate="slide-left"] { transform: translateX(-60px); opacity: 0; }
+[data-animate="slide-left"].visible { transform: translateX(0); opacity: 1; }
+[data-animate="slide-right"] { transform: translateX(60px); opacity: 0; }
+[data-animate="slide-right"].visible { transform: translateX(0); opacity: 1; }
+
+/* Staggered children */
+[data-stagger] > * { opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-stagger].visible > *:nth-child(1) { transition-delay: 0ms; }
+[data-stagger].visible > *:nth-child(2) { transition-delay: 120ms; }
+[data-stagger].visible > *:nth-child(3) { transition-delay: 240ms; }
+[data-stagger].visible > *:nth-child(4) { transition-delay: 360ms; }
+[data-stagger].visible > *:nth-child(5) { transition-delay: 480ms; }
+[data-stagger].visible > * { opacity: 1; transform: translateY(0); }
+
+/* Animated gradient background */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animated-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+}
+
+/* Parallax hero */
+.parallax-hero {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* Premium button shimmer */
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+.btn-shimmer { position: relative; overflow: hidden; }
+.btn-shimmer::after {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Smooth image reveal */
+img { transition: opacity 0.6s ease, transform 0.6s ease; }
+img:hover { transform: scale(1.02); }
+
+/* Line draw animation */
+@keyframes line-grow { from { width: 0; } to { width: 100%; } }
+.line-reveal { overflow: hidden; }
+.line-reveal.visible > div, .line-reveal.visible > span {
+    animation: line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+</style>
+
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-primary selection:bg-accent selection:text-white">
 <!-- Navigation -->
-<nav class="fixed top-0 left-0 w-full z-50 border-b border-primary/5 bg-background-light/80 backdrop-blur-md">
-<div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-<div class="flex items-center gap-2">
-<div class="w-8 h-8 bg-primary rounded-sm flex items-center justify-center">
-<span class="text-white font-bold text-xs uppercase">DV</span>
-</div>
-<span class="font-extrabold tracking-tighter text-xl uppercase">Delta Vega</span>
-</div>
-<!-- Mobile Menu Toggle -->
-<button class="lg:hidden p-2 text-primary">
-<span class="material-icons">menu</span>
-</button>
-<!-- Desktop Links -->
-<div class="hidden lg:flex items-center gap-8 text-xs font-bold tracking-widest uppercase">
-<a class="hover:text-accent transition-colors" href="#">Home</a>
-<a class="hover:text-accent transition-colors" href="#">About</a>
-<a class="hover:text-accent transition-colors" href="#">Video</a>
-<a class="hover:text-accent transition-colors" href="#">Training</a>
-<a class="hover:text-accent transition-colors" href="#">Publications</a>
-<a class="ml-4 px-6 py-3 bg-primary text-white hover:bg-accent transition-all" href="#">Risk Talks</a>
-</div>
+<nav class="fixed top-0 w-full z-50 px-6 py-8 flex justify-between items-center mix-blend-difference text-white">
+<div class="font-extrabold text-2xl tracking-tighter">DV.</div>
+<div class="flex items-center gap-4">
+<span class="text-xs uppercase tracking-[0.3em] font-medium">Menu</span>
+<div class="w-8 h-[1px] bg-white"></div>
 </div>
 </nav>
 <!-- Hero Section -->
-<section class="relative min-h-screen flex items-center pt-20 overflow-hidden px-6">
-<div class="absolute right-[-10%] top-[10%] w-[80vw] h-[80vw] orb-gradient rounded-full blur-3xl opacity-20 -z-10"></div>
-<div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<section class="relative min-h-screen flex flex-col justify-end px-6 pb-20 overflow-hidden" data-animate="fade-up">
+<!-- Abstract Orb Background -->
+<div class="absolute top-20 -right-20 w-80 h-80 rounded-full orb-gradient"></div>
 <div class="relative z-10">
-<p class="text-xs font-bold tracking-[0.3em] uppercase text-accent mb-6">Financial Engineering</p>
-<h1 class="text-huge font-extrabold tracking-tighter mb-8">
-                    Delta<br/>Vega
-                </h1>
-<p class="text-2xl font-light text-primary/70 max-w-md leading-relaxed mb-10">
-                    Engineering financial resilience through elite quantitative strategy and high-fidelity insights.
+<h1 class="text-huge font-extrabold tracking-tighter mb-4">
+                Delta<br/>Vega
+            </h1>
+<div class="max-w-[280px] space-y-8">
+<p class="text-xl font-light leading-relaxed opacity-80">
+                    Engineering financial resilience through elite consultancy.
                 </p>
-<div class="flex flex-col sm:flex-row gap-4">
-<button class="group flex items-center justify-between bg-primary text-white px-8 py-5 rounded-none font-bold tracking-widest uppercase text-sm hover:bg-accent transition-all duration-300">
-                        Risk Talks
-                        <span class="material-icons">arrow_forward</span>
+<button class="bg-accent text-white px-8 py-5 rounded-lg flex items-center gap-3 accent-glow font-bold uppercase tracking-widest text-xs">
+                    Risk Talks
+                    <span class="material-icons">north_east</span>
 </button>
-<button class="px-8 py-5 border border-primary/20 font-bold tracking-widest uppercase text-sm hover:border-primary transition-all">
-                        View Publications
-                    </button>
 </div>
 </div>
-<!-- Abstract Visual -->
-<div class="relative hidden lg:block h-[600px]">
-<div class="absolute inset-0 flex items-center justify-center">
-<div class="relative w-[500px] h-[500px]">
-<!-- Abstract Geometric Elements -->
-<div class="absolute inset-0 border border-primary/10 rounded-full animate-spin-slow"></div>
-<div class="absolute inset-10 border border-primary/5 rounded-full"></div>
-<div class="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
-<div class="absolute top-0 left-1/2 w-px h-full bg-gradient-to-b from-transparent via-primary/20 to-transparent"></div>
-<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/5 rounded-full blur-2xl"></div>
-<img alt="Abstract Financial Engineering visualization" class="w-full h-full object-cover rounded-xl mix-blend-multiply opacity-80" data-alt="Abstract glowing mesh representing financial data networks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Omce5QKr5dj42EE3emL5vqmH95ANfQomXukLDaPCxa67kwCn7lMJB3k3IEwmlwqSKytuDhEC_-hnQc7SArGpSV1eIlYYtBlKAZWZIINRMEDIharm2OWlo7kAxJmrpxEaM_cQjKBqCDwq34EGZ8ipU4-J-GF5Db4p_cvaeoDTrS-MFpS4wI_XvN4qSUyuQ2yX4v7sxXMMAlVeOJatQ1SElMamZwU5CoJ4j1Pd069ir9kwnBRXuTI6sHPvQjgO_rOiR1jhJOi7bu14"/>
+<!-- Decorative Line -->
+<div class="absolute bottom-10 left-0 w-full px-6">
+<div class="w-full h-[1px] bg-primary/10"></div>
 </div>
+</section>
+<!-- About Section: Editorial Split -->
+<section class="py-24 px-6 bg-white" data-animate="fade-up">
+<div class="mb-12">
+<span class="text-[10px] uppercase tracking-[0.5em] text-primary/40 font-bold">Introduction</span>
+<h2 class="text-4xl font-extrabold mt-4 mb-8 leading-tight">More About<br/>Delta Vega</h2>
+</div>
+<div class="space-y-8">
+<div class="relative">
+<img alt="Corporate Office" class="w-full h-[400px] object-cover rounded-xl grayscale hover:grayscale-0 transition-all duration-700" data-alt="Modern minimalist London office architectural detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT2yTAqj5t2fHCdiIzrZ48JKQmUwwVdbuigaMy5rHHOXf16TQngNdznyMQomUB1LzVW-RpOTyyyhmau2hR-sRzwXwYintfExn7pb-qpCQn0NooW1PCQF5HxL_aa4IJfZ_7wvzSN9CSMIncKZ3Nkzme0DZ9PEKJ3MWLmSuSyfT_UIAoDVeuQC6FZ0xQ_sk7e3Cc4Xf9iIF5oquCd5dXhAtaoEw2CgDU3IuHGg6t0BTdf1xGa12HjzdcplO0gqK68_OTPLR959kxueY"/>
+<div class="absolute -bottom-6 -right-2 bg-primary text-white p-6 rounded-lg max-w-[200px]">
+<p class="text-[10px] uppercase tracking-widest opacity-60 mb-2">London HQ</p>
+<p class="text-sm font-light">Mayfair District, Financial Heart</p>
+</div>
+</div>
+<div class="broken-grid-offset mt-16">
+<p class="text-2xl font-light leading-relaxed text-primary/90 italic">
+                    "We redefine the parameters of risk, transforming volatility into a strategic asset for the modern professional."
+                </p>
+<div class="mt-8 flex items-center gap-4">
+<div class="w-12 h-[1px] bg-accent"></div>
+<span class="text-xs font-bold uppercase tracking-widest">Est. 2014</span>
 </div>
 </div>
 </div>
 </section>
-<!-- About Section - Editorial Split -->
-<section class="py-32 bg-white dot-grid border-y border-primary/5">
-<div class="max-w-7xl mx-auto px-6">
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-<div class="lg:col-span-5">
-<h2 class="text-5xl lg:text-7xl font-extrabold tracking-tighter leading-none">
-                        More About<br/>Delta Vega
-                    </h2>
-<div class="w-20 h-1 bg-accent mt-8"></div>
+<!-- Services Section: Bento Grid -->
+<section class="py-24 px-4 bg-background-light" data-animate="fade-in">
+<div class="px-2 mb-12">
+<h3 class="text-xs uppercase tracking-[0.4em] font-bold text-primary/40 mb-2">Our Solutions</h3>
+<div class="w-12 h-1 bg-primary"></div>
 </div>
-<div class="lg:col-span-7">
-<p class="text-3xl font-light leading-relaxed text-primary/80 mb-8">
-                        Delta Vega is a premier financial engineering (FE) consultancy. We bridge the gap between abstract mathematical theory and real-world market volatility.
-                    </p>
-<p class="text-xl font-normal leading-loose text-primary/60">
-                        Our product linesâspanning video analysis, elite training workshops, and peer-reviewed publicationsâare designed for financial professionals who demand precision, clarity, and actionable intelligence in an increasingly complex global landscape.
-                    </p>
+<div class="grid grid-cols-2 gap-3" data-stagger>
+<!-- Video: Spans 2 columns -->
+<div class="col-span-2 relative h-[300px] rounded-xl overflow-hidden glass-card p-6 flex flex-col justify-end">
+<img alt="Video Services" class="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay" data-alt="Abstract dynamic light streaks representing video data" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-7mBu4piQix0_XzBYQ5iD1SYYglMBNgtTHhaR3SRw4sXyBV9E-kVvEptqhSwLy15xvljNUT9mhUMJSpXwClTXjmMktVtVwK1Je6O246oQG6onzdx0JB0gGf0hkOGTlZcPVJJ5daVYo4St9o1tum9IMB_2immIo4TWKBEpA3cMhmkV3KVelsAJ8MlrFJicBtBza-X-KgcydVmRCmq7gQgYtsLy86YR0jXDX4YsDXsftpb15Nl6yS7iMy6OILLpO3rNZDMEZisit5I"/>
+<div class="relative z-10">
+<span class="material-icons">play_circle</span>
+<h4 class="text-2xl font-extrabold mb-2 uppercase">Video</h4>
+<p class="text-sm font-light opacity-70">High-fidelity analysis and market insights delivered visually.</p>
 </div>
 </div>
-</div>
-</section>
-<!-- Services Bento Grid -->
-<section class="py-32 bg-primary">
-<div class="max-w-7xl mx-auto px-6">
-<div class="mb-16">
-<p class="text-xs font-bold tracking-[0.3em] uppercase text-accent mb-4">Core Ecosystem</p>
-<h2 class="text-4xl lg:text-5xl font-extrabold tracking-tighter text-white">Strategic Product Lines</h2>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-<!-- Large Video Card -->
-<div class="lg:col-span-2 relative group overflow-hidden rounded-xl h-[500px] glass">
-<div class="absolute inset-0">
-<img alt="Digital interface" class="w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-700" data-alt="Close up of high tech digital interface with glowing lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9rDQoydAcjUwY7xvqtLTTnx4QNJbBwEzN0i-2E2EKms5TWPg9u5az3yWA-ZgEtdnKD7zFdH8Gr1OXKhtA7T2gvmifo7VmqEaI25yfwcDFyc3diL_hD9s7QCj13F6OKsoAHWZApgdKJ1mYMJMKYh-k7pbKZ-3eVZdDSc1zCJkCocy9PcHYajMuUAsqUrAncwRmQMHrXD2FLwomh9i9bm2GnVhhBHomRh2UQdvhrjJlRn9MRe2FUmO0MTQB2jIGIPhW8fP0dD6G5rgZ"/>
-</div>
-<div class="relative h-full p-10 flex flex-col justify-end">
-<span class="material-icons text-white/50 mb-4 text-4xl">play_circle_filled</span>
-<h3 class="text-white text-3xl font-extrabold tracking-tight mb-4 uppercase">Video</h3>
-<p class="text-white/60 text-lg font-light max-w-md">High-fidelity financial insights delivered through cinematic quantitative analysis.</p>
-<a class="mt-6 flex items-center text-white font-bold text-xs tracking-widest uppercase hover:text-accent transition-colors" href="#">
-                            Enter the Studio <span class="material-icons">north_east</span>
-</a>
-</div>
-</div>
-<!-- Training Card -->
-<div class="relative group overflow-hidden rounded-xl h-[500px] glass border-white/5">
-<div class="relative h-full p-10 flex flex-col justify-between">
-<div class="w-12 h-12 bg-white/5 flex items-center justify-center rounded-sm">
-<span class="material-icons text-white">school</span>
-</div>
+<!-- Training -->
+<div class="col-span-1 glass-card p-6 rounded-xl flex flex-col justify-between aspect-square">
+<span class="material-icons text-primary/40">model_training</span>
 <div>
-<h3 class="text-white text-3xl font-extrabold tracking-tight mb-4 uppercase">Training</h3>
-<p class="text-white/60 text-lg font-light">Elite engineering workshops for senior quantitative teams.</p>
-<a class="mt-6 flex items-center text-white font-bold text-xs tracking-widest uppercase hover:text-accent transition-colors" href="#">
-                                Curricula <span class="material-icons">north_east</span>
-</a>
+<h4 class="text-lg font-extrabold mb-1">Training</h4>
+<p class="text-xs font-light opacity-70">Mastering complexity.</p>
 </div>
 </div>
-</div>
-<!-- Publications Card - Full Width on Mobile -->
-<div class="lg:col-span-3 relative group overflow-hidden rounded-xl p-10 glass border-white/5">
-<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-<div class="flex-1">
-<h3 class="text-white text-3xl font-extrabold tracking-tight mb-4 uppercase">Publications</h3>
-<p class="text-white/60 text-lg font-light max-w-2xl">Access our library of peer-reviewed market analysis, whitepapers, and proprietary financial engineering frameworks.</p>
-</div>
-<button class="bg-white text-primary px-8 py-5 font-bold tracking-widest uppercase text-sm hover:bg-accent hover:text-white transition-all">
-                            Browse Repository
-                        </button>
-</div>
+<!-- Publications -->
+<div class="col-span-1 bg-primary text-white p-6 rounded-xl flex flex-col justify-between aspect-square">
+<span class="material-icons text-accent">article</span>
+<div>
+<h4 class="text-lg font-extrabold mb-1">Pubs</h4>
+<p class="text-xs font-light opacity-60">Insight journals.</p>
 </div>
 </div>
 </div>
 </section>
-<!-- CTA Band -->
-<section class="py-24 bg-primary relative overflow-hidden">
-<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
-<div class="max-w-4xl mx-auto px-6 text-center">
-<h2 class="text-4xl lg:text-6xl font-extrabold tracking-tighter text-white mb-12">
-                Navigate the Complex.
-            </h2>
-<div class="flex justify-center">
-<button class="relative group px-12 py-6 overflow-hidden">
-<div class="absolute inset-0 bg-accent transform group-hover:scale-110 transition-transform duration-300"></div>
-<div class="absolute inset-0 bg-accent blur-xl opacity-30 group-hover:opacity-60 transition-opacity"></div>
-<span class="relative z-10 text-white font-extrabold tracking-[0.4em] uppercase text-sm">Risk Talks</span>
-</button>
+<!-- CTA Section: Dark Band -->
+<section class="bg-primary py-24 px-6 relative overflow-hidden" data-animate="fade-up">
+<!-- Background accents -->
+<div class="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[1px] bg-white rotate-45"></div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[1px] bg-white -rotate-45"></div>
 </div>
+<div class="relative z-10 text-center space-y-10">
+<h2 class="text-white text-5xl font-extrabold tracking-tighter">Ready for the shift?</h2>
+<p class="text-white/60 font-light max-w-xs mx-auto text-lg leading-relaxed">
+                Join our exclusive network of financial engineers and risk specialists.
+            </p>
+<button class="bg-accent text-white px-10 py-6 rounded-lg accent-glow font-bold uppercase tracking-widest text-sm inline-flex items-center gap-4">
+                Start Risk Talks
+                <span class="material-icons">arrow_forward</span>
+</button>
 </div>
 </section>
 <!-- Footer -->
-<footer class="bg-background-light py-24 border-t border-primary/5">
-<div class="max-w-7xl mx-auto px-6">
-<div class="grid grid-cols-1 lg:grid-cols-4 gap-16 lg:gap-8 mb-24">
-<div class="lg:col-span-2">
-<h2 class="text-6xl lg:text-8xl font-extrabold tracking-tighter uppercase mb-8">
-                        Delta<br/>Vega
-                    </h2>
-<p class="text-primary/60 font-light max-w-sm">
-                        Premier consultancy specializing in advanced financial engineering and risk architecture.
-                    </p>
+<footer class="bg-background-light py-20 px-6 border-t border-primary/5">
+<div class="grid grid-cols-1 gap-16" data-stagger>
+<div class="space-y-6">
+<h2 class="text-3xl font-extrabold tracking-tighter">Delta Vega.</h2>
+<p class="text-sm font-light opacity-60 leading-loose">
+                    Premium financial engineering consultancy. <br/>
+                    Awarded 'Innovation in Risk' 2023.
+                </p>
 </div>
-<div>
-<h4 class="font-bold uppercase tracking-widest text-xs mb-8">Platform</h4>
-<ul class="space-y-4 text-sm font-light text-primary/70">
-<li><a class="hover:text-accent transition-colors" href="#">Video Insights</a></li>
-<li><a class="hover:text-accent transition-colors" href="#">Training Modules</a></li>
-<li><a class="hover:text-accent transition-colors" href="#">White Papers</a></li>
-<li><a class="hover:text-accent transition-colors" href="#">Strategic Advisory</a></li>
+<div class="grid grid-cols-2 gap-8" data-stagger>
+<div class="space-y-4">
+<h5 class="text-[10px] uppercase tracking-widest font-bold opacity-40">Locations</h5>
+<ul class="text-sm font-medium space-y-2">
+<li>London, UK</li>
+<li>Geneva, CH</li>
+<li>New York, US</li>
 </ul>
 </div>
-<div>
-<h4 class="font-bold uppercase tracking-widest text-xs mb-8">Contact</h4>
-<ul class="space-y-4 text-sm font-light text-primary/70">
-<li>Inquiries: hello@deltavega.engineering</li>
-<li>Media: press@deltavega.engineering</li>
-<li class="pt-4 flex gap-6">
-<a class="hover:text-accent" href="#"><span class="material-icons text-xl">terminal</span></a>
-<a class="hover:text-accent" href="#"><span class="material-icons text-xl">language</span></a>
-<a class="hover:text-accent" href="#"><span class="material-icons text-xl">podcasts</span></a>
-</li>
+<div class="space-y-4">
+<h5 class="text-[10px] uppercase tracking-widest font-bold opacity-40">Social</h5>
+<ul class="text-sm font-medium space-y-2">
+<li>LinkedIn</li>
+<li>Intelligence</li>
+<li>Archive</li>
 </ul>
 </div>
 </div>
-<div class="pt-8 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold tracking-widest uppercase text-primary/40">
-<p>© Delta Vega Engineering. All rights reserved.</p>
-<div class="flex gap-8">
-<a class="hover:text-primary" href="#">Privacy Policy</a>
-<a class="hover:text-primary" href="#">Terms of Service</a>
+<div class="pt-12 border-t border-primary/5 flex flex-col gap-6 items-start">
+<div class="flex gap-8 text-[10px] uppercase tracking-widest font-bold opacity-40">
+<span>Privacy</span>
+<span>Terms</span>
+<span>© </span>
+</div>
+<!-- Map Placeholder Image -->
+<div class="w-full h-32 rounded-lg overflow-hidden relative grayscale opacity-50">
+<img alt="Location Map" class="w-full h-full object-cover" data-alt="Abstract minimal map of London city center" data-location="London" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrwi149ILpe8mpaJg3qU1OqDh1O-Pfozrd9y9vTZnChdjoHHsfdRaJTeegbiW5pj4FRIoJoyliWQ9D4GpdAeXBpYqIWAijH-5pTGNN4y97f6zj3tQRkliDO4_f5s96v2YTp8rjIMLikJjmP76RC0WdbQkdy3vp9XMHjwcojFP2I7p2RHI30qPyp9vGX6w39Myeorg88jMpF9uaIwlA04Stv2Tr0-aiQUsvzUs4ElbfFPdkzT3FkRX9MpU1m1a7cHG8zQ1H3ZSfm9g"/>
+<div class="absolute inset-0 bg-primary/20"></div>
 </div>
 </div>
 </div>
 </footer>
+
+<script>
+// Intersection Observer for scroll animations
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('[data-animate], [data-stagger]').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Parallax on hero
+    const hero = document.querySelector('.parallax-hero');
+    if (hero) {
+        window.addEventListener('scroll', () => {
+            const scroll = window.pageYOffset;
+            hero.style.transform = `translateY(${scroll * 0.3}px)`;
+        }, { passive: true });
+    }
+
+    // Add shimmer to primary CTA buttons
+    document.querySelectorAll('button, a').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+        if (el.classList.contains('bg-primary') || el.classList.contains('bg-accent') ||
+            text.includes('risk talks') || text.includes('get started') || text.includes('contact')) {
+            if (el.querySelector('span') || el.childNodes.length <= 3) {
+                el.classList.add('btn-shimmer');
+            }
+        }
+    });
+});
+</script>
+
 </body></html>
