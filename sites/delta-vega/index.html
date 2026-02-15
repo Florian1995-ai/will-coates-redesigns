@@ -1,333 +1,262 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delta Vega — Financial Engineering Consultancy</title>
+    <title>Delta Vega - Professional Training & Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#09240F',
+                        accent: '#FF0000',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
-        
         * {
             font-family: 'Inter', sans-serif;
         }
-        
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        
-        .glass-light {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-        
-        .glow-red {
-            box-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
+        .gradient-bg {
+            background: linear-gradient(135deg, #09240F 0%, #0a3515 50%, #09240F 100%);
         }
-        
-        .gradient-orb {
-            background: radial-gradient(circle at 30% 40%, rgba(255, 0, 0, 0.15), transparent 60%),
-                        radial-gradient(circle at 70% 60%, rgba(9, 36, 15, 0.2), transparent 60%);
-        }
-        
-        .dot-grid {
-            background-image: radial-gradient(circle, rgba(9, 36, 15, 0.15) 1px, transparent 1px);
-            background-size: 24px 24px;
-        }
-        
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.4);
-        }
-        
-        .text-fluid-hero {
-            font-size: clamp(64px, 7vw, 112px);
-        }
-        
-        .text-fluid-sub {
-            font-size: clamp(18px, 1.8vw, 24px);
-        }
-        
-        .text-fluid-body {
-            font-size: clamp(16px, 1.2vw, 18px);
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .line-decoration {
-            position: relative;
-        }
-        
-        .line-decoration::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 60px;
-            height: 1px;
-            background: #FF0000;
+        .nav-shadow {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
         }
     </style>
-
-<style>
-/* Scroll-triggered animations */
-[data-animate] {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-[data-animate].visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-[data-animate="fade-up"] { transform: translateY(40px); }
-[data-animate="fade-in"] { transform: translateY(0) scale(0.98); }
-[data-animate="slide-left"] { transform: translateX(-60px); opacity: 0; }
-[data-animate="slide-left"].visible { transform: translateX(0); opacity: 1; }
-[data-animate="slide-right"] { transform: translateX(60px); opacity: 0; }
-[data-animate="slide-right"].visible { transform: translateX(0); opacity: 1; }
-
-/* Staggered children */
-[data-stagger] > * { opacity: 0; transform: translateY(30px);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-[data-stagger].visible > *:nth-child(1) { transition-delay: 0ms; }
-[data-stagger].visible > *:nth-child(2) { transition-delay: 120ms; }
-[data-stagger].visible > *:nth-child(3) { transition-delay: 240ms; }
-[data-stagger].visible > *:nth-child(4) { transition-delay: 360ms; }
-[data-stagger].visible > *:nth-child(5) { transition-delay: 480ms; }
-[data-stagger].visible > * { opacity: 1; transform: translateY(0); }
-
-/* Animated gradient background */
-@keyframes gradient-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-.animated-gradient {
-    background-size: 200% 200%;
-    animation: gradient-shift 8s ease infinite;
-}
-
-/* Parallax hero */
-.parallax-hero {
-    will-change: transform;
-    transition: transform 0.1s linear;
-}
-
-/* Premium button shimmer */
-@keyframes shimmer {
-    0% { left: -100%; }
-    100% { left: 200%; }
-}
-.btn-shimmer { position: relative; overflow: hidden; }
-.btn-shimmer::after {
-    content: '';
-    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-    animation: shimmer 3s ease-in-out infinite;
-}
-
-/* Smooth image reveal */
-img { transition: opacity 0.6s ease, transform 0.6s ease; }
-img:hover { transform: scale(1.02); }
-
-/* Line draw animation */
-@keyframes line-grow { from { width: 0; } to { width: 100%; } }
-.line-reveal { overflow: hidden; }
-.line-reveal.visible > div, .line-reveal.visible > span {
-    animation: line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-</style>
-
 </head>
 <body class="bg-white text-gray-900 antialiased">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass-light">
-        <div class="max-w-screen-xl mx-auto px-8 py-6 flex items-center justify-between">
-            <div class="text-xl font-bold tracking-tight" style="color: #09240F;">DELTA VEGA</div>
-            <div class="flex gap-10 text-sm tracking-widest uppercase">
-                <a href="#home" class="hover:text-red-600 transition">Home</a>
-                <a href="#about" class="hover:text-red-600 transition">About</a>
-                <a href="#video" class="hover:text-red-600 transition">Video</a>
-                <a href="#training" class="hover:text-red-600 transition">Training</a>
-                <a href="#publications" class="hover:text-red-600 transition">Publications</a>
-                <a href="#contact" class="hover:text-red-600 transition">Contact</a>
+    <nav id="navbar" class="fixed top-0 w-full bg-white z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold text-primary">Delta Vega</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-accent transition-colors duration-300">Home</a>
+                    <a href="#about" class="text-gray-700 hover:text-accent transition-colors duration-300">About</a>
+                    <a href="#services" class="text-gray-700 hover:text-accent transition-colors duration-300">Services</a>
+                    <a href="#contact" class="text-gray-700 hover:text-accent transition-colors duration-300">Contact</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-primary">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2">
+                <a href="#home" class="block py-2 text-gray-700 hover:text-accent transition-colors duration-300">Home</a>
+                <a href="#about" class="block py-2 text-gray-700 hover:text-accent transition-colors duration-300">About</a>
+                <a href="#services" class="block py-2 text-gray-700 hover:text-accent transition-colors duration-300">Services</a>
+                <a href="#contact" class="block py-2 text-gray-700 hover:text-accent transition-colors duration-300">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center overflow-hidden" style="background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);" data-animate="fade-up">
-        <div class="max-w-screen-xl mx-auto px-8 py-32 grid grid-cols-2 gap-20 items-center w-full" data-stagger>
-            <!-- Left: Typography -->
-            <div class="space-y-8">
-                <h1 class="text-fluid-hero font-extrabold leading-none tracking-tighter" style="color: #09240F;">
-                    Delta<br/>Vega
-                </h1>
-                <p class="text-fluid-sub font-light tracking-wide text-gray-700 leading-relaxed max-w-xl">
-                    Financial engineering consultancy delivering video, training, and publications for risk management professionals.
-                </p>
-                <a href="#contact" class="inline-block px-10 py-4 bg-red-600 text-white font-semibold tracking-wide uppercase text-sm glow-red hover:bg-red-700 transition">
-                    Risk Talks
-                </a>
+    <section id="home" class="gradient-bg pt-32 pb-20 px-6 min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto w-full">
+            <div class="max-w-4xl fade-in">
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">Professional Training & Technical Solutions</h1>
+                <p class="text-xl md:text-2xl text-gray-200 mb-10 leading-relaxed">Delivering specialized training programs and technical expertise to empower your team with industry-leading knowledge and skills.</p>
+                <a href="#contact" class="inline-block bg-accent hover:bg-red-700 text-white font-semibold px-10 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">Get Started</a>
             </div>
-            
-            <!-- Right: Abstract Visual -->
-            <div class="relative h-[600px] gradient-orb flex items-center justify-center animate-float">
-                <div class="absolute inset-0 rounded-full" style="background: radial-gradient(circle at center, rgba(9, 36, 15, 0.08) 0%, transparent 70%);"></div>
-                <div class="absolute w-96 h-96 rounded-full border border-gray-200 opacity-40"></div>
-                <div class="absolute w-80 h-80 rounded-full border border-gray-300 opacity-30"></div>
-                <div class="absolute w-64 h-64 rounded-full" style="background: radial-gradient(circle, rgba(255, 0, 0, 0.1) 0%, transparent 70%);"></div>
-            </div>
-        </div>
-        
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-center">
-            <div class="w-px h-16 bg-gray-300 mx-auto mb-3"></div>
-            <p class="text-xs tracking-widest uppercase text-gray-400">Scroll</p>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="relative py-32 dot-grid" data-animate="fade-up">
-        <div class="max-w-screen-xl mx-auto px-8 grid grid-cols-5 gap-20" data-stagger>
-            <!-- Left: Heading -->
-            <div class="col-span-2">
-                <h2 class="text-6xl font-extrabold tracking-tighter line-decoration pt-12" style="color: #09240F;">
-                    More About<br/>Delta Vega
-                </h2>
+    <section id="about" class="py-24 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="max-w-3xl mx-auto text-center fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-6">Why Choose Delta Vega</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-8">Delta Vega provides comprehensive training programs, educational resources, and technical publications designed to meet the evolving needs of professionals across various industries.</p>
+                <p class="text-lg text-gray-700 leading-relaxed">Our approach combines theoretical knowledge with practical application, ensuring that participants gain actionable insights and skills they can implement immediately.</p>
             </div>
-            
-            <!-- Right: Content -->
-            <div class="col-span-3 space-y-8">
-                <p class="text-fluid-body font-light leading-relaxed text-gray-700">
-                    Delta Vega is a financial engineering (FE) consultancy. Its product lines include video, training, and publications.
-                </p>
-                <p class="text-fluid-body font-light leading-relaxed text-gray-700">
-                    The company also offers regular talks on risk management, free and open to the public via Zoom and You Tube.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Bento Grid -->
-    <section id="services" class="relative py-32" style="background: #09240F;" data-animate="fade-in">
-        <div class="max-w-screen-xl mx-auto px-8">
-            <h2 class="text-5xl font-extrabold tracking-tighter text-white mb-16 line-decoration">Services</h2>
-            
-            <div class="grid grid-cols-3 gap-8" data-stagger>
-                <!-- Video - Large Card -->
-                <div id="video" class="col-span-2 glass p-12 rounded-lg card-hover">
-                    <h3 class="text-4xl font-bold text-white mb-4">Video</h3>
-                    <p class="text-lg font-light text-gray-300 leading-relaxed">Financial engineering video content and resources.</p>
+            <div class="grid md:grid-cols-3 gap-8 mt-16 fade-in">
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary mb-2">Expert-Led</h3>
+                    <p class="text-gray-600">Industry professionals with real-world experience</p>
                 </div>
-                
-                <!-- Training -->
-                <div id="training" class="glass p-12 rounded-lg card-hover">
-                    <h3 class="text-3xl font-bold text-white mb-4">Training</h3>
-                    <p class="text-lg font-light text-gray-300 leading-relaxed">Professional development programs.</p>
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary mb-2">Comprehensive Resources</h3>
+                    <p class="text-gray-600">Publications and materials for continued learning</p>
                 </div>
-                
-                <!-- Publications -->
-                <div id="publications" class="col-span-3 glass p-12 rounded-lg card-hover">
-                    <h3 class="text-3xl font-bold text-white mb-4">Publications</h3>
-                    <p class="text-lg font-light text-gray-300 leading-relaxed">Research and thought leadership in financial engineering and risk management.</p>
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-primary mb-2">Practical Application</h3>
+                    <p class="text-gray-600">Hands-on training with immediate value</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Band -->
-    <section id="contact" class="relative py-32" style="background: #09240F;" data-animate="fade-up">
-        <div class="max-w-screen-xl mx-auto px-8 text-center">
-            <h2 class="text-5xl font-bold text-white mb-8 tracking-tight">Join our free risk management talks</h2>
-            <p class="text-xl font-light text-gray-300 mb-12 max-w-2xl mx-auto">Open to the public via Zoom and YouTube</p>
-            <a href="#" class="inline-block px-12 py-5 bg-red-600 text-white font-semibold tracking-wide uppercase text-base glow-red hover:bg-red-700 transition">
-                RISK TALKS
-            </a>
+    <!-- Services Section -->
+    <section id="services" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl md:text-5xl font-bold text-primary mb-4">What We Offer</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Comprehensive solutions tailored to your professional development needs</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-gray-50 p-8 rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 fade-in">
+                    <div class="text-4xl mb-4">📚</div>
+                    <h3 class="text-2xl font-semibold text-primary mb-3">Training Programs</h3>
+                    <p class="text-gray-600 leading-relaxed">Structured training courses designed to enhance technical skills and industry knowledge.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 fade-in">
+                    <div class="text-4xl mb-4">🎥</div>
+                    <h3 class="text-2xl font-semibold text-primary mb-3">Video Resources</h3>
+                    <p class="text-gray-600 leading-relaxed">Educational video content providing visual learning experiences and demonstrations.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 fade-in">
+                    <div class="text-4xl mb-4">📄</div>
+                    <h3 class="text-2xl font-semibold text-primary mb-3">Publications</h3>
+                    <p class="text-gray-600 leading-relaxed">Technical publications and research materials for in-depth study and reference.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 fade-in">
+                    <div class="text-4xl mb-4">💼</div>
+                    <h3 class="text-2xl font-semibold text-primary mb-3">Consulting Services</h3>
+                    <p class="text-gray-600 leading-relaxed">Expert guidance and consultation to address your specific technical challenges.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="gradient-bg py-24 px-6">
+        <div class="max-w-4xl mx-auto text-center fade-in">
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Ready to Get Started?</h2>
+            <p class="text-xl text-gray-200 mb-10 leading-relaxed">Connect with us today to learn more about our training programs and technical solutions.</p>
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8">
+                <div class="flex flex-col md:flex-row items-center justify-center gap-8 text-white">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        <a href="mailto:js1@delta-vega.com" class="hover:text-accent transition-colors duration-300">js1@delta-vega.com</a>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                        </svg>
+                        <a href="tel:1620419057" class="hover:text-accent transition-colors duration-300">1620419057</a>
+                    </div>
+                </div>
+            </div>
+            <a href="mailto:js1@delta-vega.com" class="inline-block bg-accent hover:bg-red-700 text-white font-semibold px-10 py-4 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">Contact Us Now</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="relative py-20 bg-white border-t border-gray-200">
-        <div class="max-w-screen-xl mx-auto px-8">
-            <div class="flex justify-between items-start">
+    <footer class="bg-primary text-white py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
                 <div>
-                    <h3 class="text-4xl font-bold tracking-tighter mb-4" style="color: #09240F;">DELTA VEGA</h3>
-                    <p class="text-sm font-light text-gray-500">Financial Engineering Consultancy</p>
+                    <h3 class="text-2xl font-bold mb-4">Delta Vega</h3>
+                    <p class="text-gray-300">Professional training and technical solutions</p>
                 </div>
-                
-                <div class="flex gap-12 text-sm tracking-widest uppercase text-gray-600">
-                    <a href="#home" class="hover:text-red-600 transition">Home</a>
-                    <a href="#about" class="hover:text-red-600 transition">About</a>
-                    <a href="#video" class="hover:text-red-600 transition">Video</a>
-                    <a href="#training" class="hover:text-red-600 transition">Training</a>
-                    <a href="#publications" class="hover:text-red-600 transition">Publications</a>
-                    <a href="#contact" class="hover:text-red-600 transition">Contact</a>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <div class="flex flex-col space-y-2">
+                        <a href="#home" class="text-gray-300 hover:text-accent transition-colors duration-300">Home</a>
+                        <a href="#about" class="text-gray-300 hover:text-accent transition-colors duration-300">About</a>
+                        <a href="#services" class="text-gray-300 hover:text-accent transition-colors duration-300">Services</a>
+                        <a href="#contact" class="text-gray-300 hover:text-accent transition-colors duration-300">Contact</a>
+                    </div>
                 </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Information</h4>
+                    <p class="text-gray-300 mb-2">Email: js1@delta-vega.com</p>
+                    <p class="text-gray-300">Phone: 1620419057</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-gray-300">
+                <p>&copy; 2025 Delta Vega. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-
-<script>
-// Intersection Observer for scroll animations
-document.addEventListener('DOMContentLoaded', () => {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-shadow');
+            } else {
+                navbar.classList.remove('nav-shadow');
             }
         });
-    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
-    document.querySelectorAll('[data-animate], [data-stagger]').forEach(el => {
-        observer.observe(el);
-    });
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
 
-    // Parallax on hero
-    const hero = document.querySelector('.parallax-hero');
-    if (hero) {
-        window.addEventListener('scroll', () => {
-            const scroll = window.pageYOffset;
-            hero.style.transform = `translateY(${scroll * 0.3}px)`;
-        }, { passive: true });
-    }
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
 
-    // Add shimmer to primary CTA buttons
-    document.querySelectorAll('button, a').forEach(el => {
-        const text = el.textContent.trim().toLowerCase();
-        if (el.classList.contains('bg-primary') || el.classList.contains('bg-accent') ||
-            text.includes('risk talks') || text.includes('get started') || text.includes('contact')) {
-            if (el.querySelector('span') || el.childNodes.length <= 3) {
-                el.classList.add('btn-shimmer');
-            }
-        }
-    });
-});
-</script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
 
 </body>
 </html>
