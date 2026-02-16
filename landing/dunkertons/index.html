@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dunkertonscider - Award Winning Organic Ciders</title>
+    <link rel="icon" href="https://www.dunkertonscider.co.uk/cdn/shop/files/dunkerton-favicon.png?v=1613519272">
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#41416A',
+                        accent: '#CEA365',
+                        background: '#FAF7F4',
+                        text: '#252A2B'
+                    },
+                    fontFamily: {
+                        heading: ['Figtree', 'sans-serif'],
+                        body: ['Arial', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            color: #252A2B;
+            background: #FAF7F4;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Figtree', sans-serif;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-sticky {
+            backdrop-filter: blur(12px);
+            background: rgba(250, 247, 244, 0.92);
+            box-shadow: 0 1px 0 rgba(65, 65, 106, 0.08);
+        }
+        .btn-primary {
+            background: #CEA365;
+            color: #FFFFFF;
+            border-radius: 0px;
+            padding: 16px 40px;
+            font-weight: 600;
+            font-size: clamp(15px, 1.1vw, 18px);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            box-shadow: 0 4px 14px rgba(206, 163, 101, 0.3);
+        }
+        .btn-primary:hover {
+            box-shadow: 0 6px 24px rgba(206, 163, 101, 0.5);
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: #CEA365;
+            border: 2px solid #CEA365;
+            border-radius: 0px;
+            padding: 14px 38px;
+            font-weight: 600;
+            font-size: clamp(15px, 1.1vw, 18px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .btn-secondary:hover {
+            background: #CEA365;
+            color: #FFFFFF;
+        }
+        .card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(65, 65, 106, 0.15);
+        }
+        .gradient-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(206, 163, 101, 0.15) 0%, rgba(206, 163, 101, 0) 70%);
+            filter: blur(60px);
+            pointer-events: none;
+        }
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+    </style>
+
+<style>
+/* Scroll-triggered animations */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+[data-animate="fade-up"] { transform: translateY(40px); }
+[data-animate="fade-in"] { transform: translateY(0) scale(0.98); }
+[data-animate="slide-left"] { transform: translateX(-60px); opacity: 0; }
+[data-animate="slide-left"].visible { transform: translateX(0); opacity: 1; }
+[data-animate="slide-right"] { transform: translateX(60px); opacity: 0; }
+[data-animate="slide-right"].visible { transform: translateX(0); opacity: 1; }
+
+/* Staggered children */
+[data-stagger] > * { opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-stagger].visible > *:nth-child(1) { transition-delay: 0ms; }
+[data-stagger].visible > *:nth-child(2) { transition-delay: 120ms; }
+[data-stagger].visible > *:nth-child(3) { transition-delay: 240ms; }
+[data-stagger].visible > *:nth-child(4) { transition-delay: 360ms; }
+[data-stagger].visible > *:nth-child(5) { transition-delay: 480ms; }
+[data-stagger].visible > * { opacity: 1; transform: translateY(0); }
+
+/* Animated gradient background */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animated-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+}
+
+/* Parallax hero */
+.parallax-hero {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* Premium button shimmer */
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+.btn-shimmer { position: relative; overflow: hidden; }
+.btn-shimmer::after {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Smooth image reveal */
+img { transition: opacity 0.6s ease, transform 0.6s ease; }
+img:hover { transform: scale(1.02); }
+
+/* Line draw animation */
+@keyframes line-grow { from { width: 0; } to { width: 100%; } }
+.line-reveal { overflow: hidden; }
+.line-reveal.visible > div, .line-reveal.visible > span {
+    animation: line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+</style>
+
+<style>
+
+/* Design Polish: tokens */
+:root {
+  --dp-bg0: #FFFFFF;
+  --dp-bg1: #f7f7f7;
+  --dp-card: rgba(0,0,0,0.02);
+  --dp-card-hover: rgba(0,0,0,0.04);
+  --dp-text: #000000;
+  --dp-muted: rgba(0,0,0,0.55);
+  --dp-border: rgba(0,0,0,0.08);
+  --dp-border-hover: rgba(0,0,0,0.15);
+  --dp-primary: #333333;
+  --dp-accent: #0066cc;
+  --dp-radius: 16px;
+  --dp-shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --dp-shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+  --dp-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dp-t-hero: clamp(44px, 5vw, 96px);
+  --dp-t-h2: clamp(28px, 2.5vw, 48px);
+  --dp-t-body: clamp(15px, 1.1vw, 18px);
+  --dp-section-pad: clamp(56px, 7vw, 112px);
+}
+/* Design Polish: subtle noise texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+/* Design Polish: section rhythm */
+section {
+  padding-top: var(--dp-section-pad, 80px);
+  padding-bottom: var(--dp-section-pad, 80px);
+}
+section:first-of-type {
+  padding-top: 0;
+}
+/* Design Polish: card surfaces */
+.dp-card,
+[class*="backdrop-blur"],
+[class*="bg-white/"],
+[class*="bg-black/"] {
+  border: 1px solid var(--dp-border);
+  border-radius: var(--dp-radius);
+  box-shadow: var(--dp-shadow-sm);
+  transition: all 0.4s var(--dp-ease);
+}
+.dp-card:hover,
+[class*="backdrop-blur"]:hover,
+[class*="bg-white/"]:hover,
+[class*="bg-black/"]:hover {
+  border-color: var(--dp-border-hover);
+  box-shadow: var(--dp-shadow-lg);
+  transform: translateY(-4px);
+}
+/* Design Polish: gradient hero heading */
+.dp-gradient-text {
+  background: linear-gradient(135deg, #000000 0%, #0066cc 50%, #000000 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: dp-gradient-shift 6s ease infinite;
+}
+@keyframes dp-gradient-shift {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+/* Design Polish: sticky nav */
+nav, header nav, [class*="fixed"][class*="top"] {
+  backdrop-filter: blur(12px) saturate(1.5);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
+}
+</style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="flex items-center justify-between h-20">
+                <div class="text-2xl font-heading font-extrabold text-primary">Dunkertonscider</div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#home" class="text-text font-body font-medium hover:text-accent transition-colors">Home</a>
+                    <a href="#about" class="text-text font-body font-medium hover:text-accent transition-colors">About</a>
+                    <a href="#services" class="text-text font-body font-medium hover:text-accent transition-colors">Services</a>
+                    <a href="#contact" class="text-text font-body font-medium hover:text-accent transition-colors">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 bottom-0 w-64 bg-background shadow-2xl z-50 md:hidden">
+        <div class="flex flex-col h-full">
+            <div class="flex justify-end p-6">
+                <button id="mobile-menu-close" class="p-2">
+                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-6 px-6">
+                <a href="#home" class="text-text font-body font-medium text-lg hover:text-accent transition-colors mobile-link">Home</a>
+                <a href="#about" class="text-text font-body font-medium text-lg hover:text-accent transition-colors mobile-link">About</a>
+                <a href="#services" class="text-text font-body font-medium text-lg hover:text-accent transition-colors mobile-link">Services</a>
+                <a href="#contact" class="text-text font-body font-medium text-lg hover:text-accent transition-colors mobile-link">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20" style="background: linear-gradient(135deg, #FAF7F4 0%, #FFFFFF 100%);" data-animate="fade-up">
+        <div class="gradient-orb" style="top: -200px; right: -200px;"></div>
+        <div class="gradient-orb" style="bottom: -300px; left: -300px; background: radial-gradient(circle, rgba(65, 65, 106, 0.08) 0%, rgba(65, 65, 106, 0) 70%);"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-32 relative z-10">
+            <div class="text-center fade-in">
+                <h1 class="font-heading font-extrabold text-primary leading-none tracking-tight mb-6 dp-gradient-text" style="font-size: clamp(44px, 5vw, 96px);">
+                    The Home of Award Winning<br>Organic Ciders
+                </h1>
+                <p class="font-body font-light text-text max-w-2xl mx-auto mb-10 leading-relaxed" style="font-size: clamp(18px, 1.5vw, 24px);">
+                    We're deep into flavour here, our ciders really taste of apples
+                </p>
+                <a href="#contact" class="btn-primary">Explore Our Collection</a>
+            </div>
+        </div>
+    </section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#0066cc" fill-opacity="0.06"/></svg></div>
+
+
+    <!-- About / Trust Section -->
+    <section id="about" class="relative py-20 lg:py-28" style="background: #FFFFFF;" data-animate="fade-up">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="fade-in">
+                    <h2 class="font-heading font-extrabold text-primary leading-tight mb-6" style="font-size: clamp(32px, 3vw, 56px);">
+                        Founded in Herefordshire.<br>Crafted in Gloucestershire.
+                    </h2>
+                    <p class="font-body text-text leading-relaxed mb-4" style="font-size: clamp(15px, 1.1vw, 18px);">
+                        Since 1980, we've been pioneering organic cider and perry production using distinctive cider apples and perry pears, hand-blended using traditional techniques.
+                    </p>
+                </div>
+                <div class="fade-in">
+                    <div class="space-y-6">
+                        <div class="flex items-start space-x-4">
+                            <svg class="w-8 h-8 text-accent flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="font-heading font-bold text-primary text-xl mb-2">Certified Organic by the Soil Association</h3>
+                                <p class="font-body text-text" style="font-size: clamp(15px, 1.1vw, 17px);">Over 30 years of organic certification—no other UK cider producer has this legacy.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <svg class="w-8 h-8 text-accent flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="font-heading font-bold text-primary text-xl mb-2">Complete Traceability</h3>
+                                <p class="font-body text-text" style="font-size: clamp(15px, 1.1vw, 17px);">Every apple and pear can be traced to its specific organic orchard in our network.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4">
+                            <svg class="w-8 h-8 text-accent flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <h3 class="font-heading font-bold text-primary text-xl mb-2">Traditional Craftsmanship</h3>
+                                <p class="font-body text-text" style="font-size: clamp(15px, 1.1vw, 17px);">Natural fermentation for up to a year, hand-blending up to 30 different apple varieties.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#0066cc" fill-opacity="0.06"/></svg></div>
+
+
+    <!-- Services Section -->
+    <section id="services" class="relative py-20 lg:py-28" style="background: linear-gradient(135deg, #FAF7F4 0%, #FFFFFF 100%);" data-animate="fade-in">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-heading font-extrabold text-primary leading-tight mb-4" style="font-size: clamp(32px, 3vw, 56px);">
+                    Our Ciders & Perry
+                </h2>
+                <p class="font-body font-light text-text max-w-2xl mx-auto" style="font-size: clamp(16px, 1.2vw, 20px);">
+                    Pressed, fermented, matured & bottled with care
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 fade-in">
+                <!-- Service Card 1 -->
+                <div class="card p-8 shadow-2xl">
+                    <div class="mb-6">
+                        <svg class="w-16 h-16 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-bold text-primary text-2xl mb-3">Craft Organic Cider</h3>
+                    <p class="font-body text-text leading-relaxed" style="font-size: clamp(15px, 1.1vw, 17px);">
+                        Traditional cider made without concentrates or chemicals, naturally fermented for authentic apple flavour.
+                    </p>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="card p-8 shadow-2xl">
+                    <div class="mb-6">
+                        <svg class="w-16 h-16 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-bold text-primary text-2xl mb-3">Premium Reserve</h3>
+                    <p class="font-body text-text leading-relaxed" style="font-size: clamp(15px, 1.1vw, 17px);">
+                        Elevated with Champagne yeast and carbonation for a refined, sparkling experience.
+                    </p>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="card p-8 shadow-2xl">
+                    <div class="mb-6">
+                        <svg class="w-16 h-16 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-bold text-primary text-2xl mb-3">Organic Perry</h3>
+                    <p class="font-body text-text leading-relaxed" style="font-size: clamp(15px, 1.1vw, 17px);">
+                        Crafted from distinctive perry pears using the same traditional methods as our ciders.
+                    </p>
+                </div>
+
+                <!-- Service Card 4 -->
+                <div class="card p-8 shadow-2xl md:col-span-2 lg:col-span-3" data-animate="slide-right">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <div class="mb-6">
+                                <svg class="w-16 h-16 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
+                                </svg>
+                            </div>
+                            <h3 class="font-heading font-bold text-primary text-2xl mb-3">Gluten-Free & Vegan Certified</h3>
+                            <p class="font-body text-text leading-relaxed" style="font-size: clamp(15px, 1.1vw, 17px);">
+                                All our products are suitable for vegans and vegetarians, naturally gluten-free and Soil Association certified organic.
+                            </p>
+                        </div>
+                        <div class="text-center md:text-right">
+                            <p class="font-heading font-light text-primary italic text-3xl lg:text-4xl leading-snug">
+                                "Harvested September to December, fermented naturally for up to a year"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#0066cc" fill-opacity="0.06"/></svg></div>
+
+
+    <!-- CTA Section -->
+    <section class="relative py-20 lg:py-32" style="background: linear-gradient(135deg, #41416A 0%, #2d2d4a 100%);" data-animate="fade-up">
+        <div class="absolute inset-0 opacity-10">
+            <div class="gradient-orb" style="top: -100px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, rgba(206, 163, 101, 0.4) 0%, rgba(206, 163, 101, 0) 70%);"></div>
+        </div>
+        <div class="max-w-5xl mx-auto px-6 lg:px-12 text-center relative z-10 fade-in">
+            <h2 class="font-heading font-extrabold text-white leading-tight mb-6" style="font-size: clamp(36px, 4vw, 64px);">
+                Subscribe to Our Newsletter
+            </h2>
+            <p class="font-body font-light text-white opacity-90 mb-10 max-w-2xl mx-auto leading-relaxed" style="font-size: clamp(16px, 1.3vw, 22px);">
+                Stay updated with our latest releases, orchard news, and special offers
+            </p>
+            <a href="#contact" class="btn-primary">Get In Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="relative py-16 lg:py-20" style="background: #FFFFFF;">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <div class="text-3xl font-heading font-extrabold text-primary mb-4">Dunkertonscider</div>
+                    <p class="font-body text-text opacity-80" style="font-size: clamp(14px, 1vw, 16px);">
+                        Award-winning organic ciders and perry since 1980
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-heading font-bold text-primary text-lg mb-4">Navigation</h4>
+                    <div class="space-y-2">
+                        <a href="#home" class="block font-body text-text hover:text-accent transition-colors">Home</a>
+                        <a href="#about" class="block font-body text-text hover:text-accent transition-colors">About</a>
+                        <a href="#services" class="block font-body text-text hover:text-accent transition-colors">Services</a>
+                        <a href="#contact" class="block font-body text-text hover:text-accent transition-colors">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-heading font-bold text-primary text-lg mb-4">Contact</h4>
+                    <p class="font-body text-text mb-2">
+                        <span class="font-semibold">Phone:</span><br>
+                        <a href="tel:1620229450" class="hover:text-accent transition-colors">1620229450</a>
+                    </p>
+                    <p class="font-body text-text">
+                        <span class="font-semibold">Location:</span><br>
+                        Herefordshire & Gloucestershire
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-primary border-opacity-10 pt-8 text-center">
+                <p class="font-body text-text opacity-60" style="font-size: clamp(13px, 1vw, 15px);">
+                    &copy; 2026 Dunkertonscider. All rights reserved. Certified Organic by the Soil Association.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll-triggered fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Sticky navigation
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('nav-sticky');
+            } else {
+                nav.classList.remove('nav-sticky');
+            }
+        });
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+        });
+
+        mobileMenuClose.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
+<script>
+// Intersection Observer for scroll animations
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('[data-animate], [data-stagger]').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Parallax on hero
+    const hero = document.querySelector('.parallax-hero');
+    if (hero) {
+        window.addEventListener('scroll', () => {
+            const scroll = window.pageYOffset;
+            hero.style.transform = `translateY(${scroll * 0.3}px)`;
+        }, { passive: true });
+    }
+
+    // Add shimmer to primary CTA buttons
+    document.querySelectorAll('button, a').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+        if (el.classList.contains('bg-primary') || el.classList.contains('bg-accent') ||
+            text.includes('risk talks') || text.includes('get started') || text.includes('contact')) {
+            if (el.querySelector('span') || el.childNodes.length <= 3) {
+                el.classList.add('btn-shimmer');
+            }
+        }
+    });
+});
+</script>
+
+<div style="text-align:center;padding:16px 12px;font-size:11px;opacity:0.4;font-family:system-ui,sans-serif;letter-spacing:0.02em;">Demo generated from publicly available website content · No claims invented · <a href="https://www.dunkertonscider.co.uk/" style="color:inherit;text-decoration:underline" target="_blank">View original site</a></div>
+</body>
+</html>
