@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agentolog — AI That Actually Works</title>
@@ -92,6 +93,160 @@
             max-height: 300px;
         }
     </style>
+
+<style>
+/* Scroll-triggered animations */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+[data-animate="fade-up"] { transform: translateY(40px); }
+[data-animate="fade-in"] { transform: translateY(0) scale(0.98); }
+[data-animate="slide-left"] { transform: translateX(-60px); opacity: 0; }
+[data-animate="slide-left"].visible { transform: translateX(0); opacity: 1; }
+[data-animate="slide-right"] { transform: translateX(60px); opacity: 0; }
+[data-animate="slide-right"].visible { transform: translateX(0); opacity: 1; }
+
+/* Staggered children */
+[data-stagger] > * { opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-stagger].visible > *:nth-child(1) { transition-delay: 0ms; }
+[data-stagger].visible > *:nth-child(2) { transition-delay: 120ms; }
+[data-stagger].visible > *:nth-child(3) { transition-delay: 240ms; }
+[data-stagger].visible > *:nth-child(4) { transition-delay: 360ms; }
+[data-stagger].visible > *:nth-child(5) { transition-delay: 480ms; }
+[data-stagger].visible > * { opacity: 1; transform: translateY(0); }
+
+/* Animated gradient background */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animated-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+}
+
+/* Parallax hero */
+.parallax-hero {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* Premium button shimmer */
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+.btn-shimmer { position: relative; overflow: hidden; }
+.btn-shimmer::after {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Smooth image reveal */
+img { transition: opacity 0.6s ease, transform 0.6s ease; }
+img:hover { transform: scale(1.02); }
+
+/* Line draw animation */
+@keyframes line-grow { from { width: 0; } to { width: 100%; } }
+.line-reveal { overflow: hidden; }
+.line-reveal.visible > div, .line-reveal.visible > span {
+    animation: line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+</style>
+
+<style>
+
+/* Design Polish: tokens */
+:root {
+  --dp-bg0: #000103;
+  --dp-bg1: #07080a;
+  --dp-card: rgba(255,255,255,0.04);
+  --dp-card-hover: rgba(255,255,255,0.07);
+  --dp-text: #FFFFFF;
+  --dp-muted: rgba(248,250,252,0.6);
+  --dp-border: rgba(255,255,255,0.08);
+  --dp-border-hover: rgba(255,255,255,0.15);
+  --dp-primary: #EEB349;
+  --dp-accent: #EEB349;
+  --dp-radius: 16px;
+  --dp-shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --dp-shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
+  --dp-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dp-t-hero: clamp(44px, 5vw, 96px);
+  --dp-t-h2: clamp(28px, 2.5vw, 48px);
+  --dp-t-body: clamp(15px, 1.1vw, 18px);
+  --dp-section-pad: clamp(56px, 7vw, 112px);
+}
+/* Design Polish: subtle noise texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+/* Design Polish: section rhythm */
+section {
+  padding-top: var(--dp-section-pad, 80px);
+  padding-bottom: var(--dp-section-pad, 80px);
+}
+section:first-of-type {
+  padding-top: 0;
+}
+/* Design Polish: card surfaces */
+.dp-card,
+[class*="backdrop-blur"],
+[class*="bg-white/"],
+[class*="bg-black/"] {
+  border: 1px solid var(--dp-border);
+  border-radius: var(--dp-radius);
+  box-shadow: var(--dp-shadow-sm);
+  transition: all 0.4s var(--dp-ease);
+}
+.dp-card:hover,
+[class*="backdrop-blur"]:hover,
+[class*="bg-white/"]:hover,
+[class*="bg-black/"]:hover {
+  border-color: var(--dp-border-hover);
+  box-shadow: var(--dp-shadow-lg);
+  transform: translateY(-4px);
+}
+/* Design Polish: gradient hero heading */
+.dp-gradient-text {
+  background: linear-gradient(135deg, #FFFFFF 0%, #EEB349 50%, #FFFFFF 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: dp-gradient-shift 6s ease infinite;
+}
+@keyframes dp-gradient-shift {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+/* Design Polish: sticky nav */
+nav, header nav, [class*="fixed"][class*="top"] {
+  backdrop-filter: blur(12px) saturate(1.5);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
+}
+</style>
 </head>
 <body>
     <!-- Navigation -->
@@ -129,13 +284,13 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20" data-animate="fade-up">
         <div class="gradient-orb top-1/4 left-1/4"></div>
         <div class="gradient-orb bottom-1/4 right-1/4"></div>
         
         <div class="max-w-7xl mx-auto px-6 lg:px-8 py-32 text-center relative z-10">
             <div class="fade-in">
-                <h1 class="heading text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tight mb-8 leading-none">
+                <h1 class="heading text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tight mb-8 leading-none dp-gradient-text">
                     AI That Actually<br><span class="text-primary">Works</span>
                 </h1>
                 <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
@@ -147,9 +302,11 @@
             </div>
         </div>
     </section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#EEB349" fill-opacity="0.06"/></svg></div>
+
 
     <!-- About Section -->
-    <section id="about" class="py-32 bg-[#0a0b0d]">
+    <section id="about" class="py-32 bg-[#0a0b0d]" data-animate="fade-up">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <div class="fade-in">
@@ -168,9 +325,11 @@
             </div>
         </div>
     </section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#EEB349" fill-opacity="0.06"/></svg></div>
+
 
     <!-- Services Section -->
-    <section id="services" class="py-32 relative">
+    <section id="services" class="py-32 relative" data-animate="fade-in">
         <div class="gradient-orb top-0 right-0 opacity-50"></div>
         
         <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
@@ -228,9 +387,11 @@
             </div>
         </div>
     </section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#EEB349" fill-opacity="0.06"/></svg></div>
+
 
     <!-- CTA Section -->
-    <section id="contact" class="py-32 bg-primary relative overflow-hidden">
+    <section id="contact" class="py-32 bg-primary relative overflow-hidden" data-animate="fade-up">
         <div class="absolute inset-0 opacity-10">
             <div class="absolute top-0 left-0 w-96 h-96 bg-background rounded-full blur-3xl"></div>
             <div class="absolute bottom-0 right-0 w-96 h-96 bg-background rounded-full blur-3xl"></div>
@@ -315,5 +476,45 @@
             });
         });
     </script>
+
+<script>
+// Intersection Observer for scroll animations
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('[data-animate], [data-stagger]').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Parallax on hero
+    const hero = document.querySelector('.parallax-hero');
+    if (hero) {
+        window.addEventListener('scroll', () => {
+            const scroll = window.pageYOffset;
+            hero.style.transform = `translateY(${scroll * 0.3}px)`;
+        }, { passive: true });
+    }
+
+    // Add shimmer to primary CTA buttons
+    document.querySelectorAll('button, a').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+        if (el.classList.contains('bg-primary') || el.classList.contains('bg-accent') ||
+            text.includes('risk talks') || text.includes('get started') || text.includes('contact')) {
+            if (el.querySelector('span') || el.childNodes.length <= 3) {
+                el.classList.add('btn-shimmer');
+            }
+        }
+    });
+});
+</script>
+
+<div style="text-align:center;padding:16px 12px;font-size:11px;opacity:0.4;font-family:system-ui,sans-serif;letter-spacing:0.02em;">Demo generated from publicly available website content · No claims invented · <a href="https://agentolog.vercel.app" style="color:inherit;text-decoration:underline" target="_blank">View original site</a></div>
 </body>
 </html>
