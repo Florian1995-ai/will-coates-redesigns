@@ -1,0 +1,155 @@
+{
+  "slug": "agentolog",
+  "url": "https://agentolog.vercel.app",
+  "company_name": "Agentolog",
+  "logo_url": "",
+  "logo_local": null,
+  "colors": {
+    "primary": "#EEB349",
+    "accent": "#EEB349",
+    "background": "#000103",
+    "textPrimary": "#FFFFFF",
+    "link": "#473618"
+  },
+  "branding": {
+    "color_scheme": "dark",
+    "fonts": [
+      {
+        "family": "Instrument Sans",
+        "role": "body"
+      },
+      {
+        "family": "Playfair Display",
+        "role": "heading"
+      }
+    ],
+    "colors": {
+      "primary": "#EEB349",
+      "accent": "#EEB349",
+      "background": "#000103",
+      "textPrimary": "#FFFFFF",
+      "link": "#473618"
+    },
+    "typography": {
+      "fontFamilies": {
+        "primary": "Instrument Sans",
+        "heading": "Playfair Display"
+      },
+      "fontStacks": {
+        "heading": [
+          "Instrument Sans",
+          "system-ui",
+          "sans-serif"
+        ],
+        "body": [
+          "Instrument Sans",
+          "system-ui",
+          "sans-serif"
+        ],
+        "paragraph": [
+          "Instrument Sans",
+          "system-ui",
+          "sans-serif"
+        ]
+      },
+      "fontSizes": {
+        "h1": "72px",
+        "h2": "36px",
+        "body": "20px"
+      }
+    },
+    "spacing": {
+      "baseUnit": 4,
+      "borderRadius": "0px"
+    },
+    "components": {
+      "buttonPrimary": {
+        "background": "#EEB349",
+        "textColor": "#000103",
+        "borderRadius": "8px",
+        "borderRadiusCorners": {
+          "topLeft": "8px",
+          "topRight": "8px",
+          "bottomRight": "8px",
+          "bottomLeft": "8px"
+        },
+        "shadow": "none"
+      },
+      "buttonSecondary": {
+        "background": "#000103",
+        "textColor": "#EEB349",
+        "borderColor": "#EEB349",
+        "borderRadius": "8px",
+        "borderRadiusCorners": {
+          "topLeft": "8px",
+          "topRight": "8px",
+          "bottomRight": "8px",
+          "bottomLeft": "8px"
+        },
+        "shadow": "none"
+      }
+    },
+    "images": {
+      "logo": null,
+      "favicon": "https://agentolog.vercel.app/favicon.svg",
+      "ogImage": "/images/og-image.png"
+    },
+    "personality": {
+      "tone": "professional",
+      "energy": "medium",
+      "targetAudience": "enterprise clients"
+    },
+    "__llm_button_reasoning": {
+      "primary": {
+        "index": 0,
+        "text": "Request a Demo",
+        "reasoning": "The 'Request a Demo' button is the primary CTA because it uses the vibrant brand color #EEB349, which stands out against the dark background. The text is action-oriented, encouraging users to engage with the service."
+      },
+      "secondary": {
+        "index": 1,
+        "text": "Contact Us",
+        "reasoning": "The 'Contact Us' button is the secondary CTA. It has a different background color (#000103) and uses an outline style, making it less prominent than the primary button."
+      },
+      "confidence": 0.95
+    },
+    "designSystem": {
+      "framework": "tailwind",
+      "componentLibrary": ""
+    },
+    "confidence": {
+      "buttons": 0.95,
+      "colors": 0.9,
+      "overall": 0.925
+    },
+    "__llm_metadata": {
+      "logoSelection": {
+        "llmCalled": false,
+        "llmSucceeded": false,
+        "finalSource": "none"
+      },
+      "buttonClassification": {
+        "llmCalled": true,
+        "llmSucceeded": true
+      }
+    }
+  },
+  "site_info": {
+    "headings": [
+      "AI That Actually Works",
+      "Premium Services",
+      "Production AI Agents",
+      "Automate Your Work",
+      "Enterprise AI Strategy",
+      "Private Consulting",
+      "What Our Clients Say",
+      "Ready to Experience AI That Actually Works?"
+    ],
+    "services": [],
+    "about_text": "[Skip to main content](https://agentolog.vercel.app/#main-content)",
+    "contact_info": {},
+    "ctas": []
+  },
+  "markdown_preview": "[Skip to main content](https://agentolog.vercel.app/#main-content)\n\n[Agentolog](https://agentolog.vercel.app/#/)\n\nServicesAboutTestimonials [Login](https://agentolog.vercel.app/#/login)\n\n[Contact Us](https://agentolog.vercel.app/#/contact)\n\nServicesAboutTestimonials\n\n* * *\n\n[Login](https://agentolog.vercel.app/#/login) [Contact Us](https://agentolog.vercel.app/#/contact)\n\nEnterprise AI Training\n\n# AI That Actually Works\n\n20 years in enterprise tech. We don't do what everyone else does..\n\nExplore Services [Contact Us](https://agentolog.vercel.app/#/contact)\n\n![Hero 1](https://agentolog.vercel.app/hero-images/hero-1.webp)\n\n![Hero 2](https://agentolog.vercel.app/hero-images/hero-2.webp)\n\n![Hero 3](https://agentolog.vercel.app/hero-images/hero-3.webp)\n\n![Hero 4](https://agentolog.vercel.app/hero-images/hero-4.webp)\n\n![Hero 5](https://agentolog.vercel.app/hero-images/hero-5.webp)\n\n![Hero 6](https://agentolog.vercel.app/hero-images/hero-6.webp)\n\n![Hero 7](https://agentolog.vercel.app/hero-images/hero-7.webp)\n\n## Premium Services\n\nAGENTIC AI\n\n### Production AI Agents\n\nFrom zero to deployed. Let us build AI agents that actually work in all environments with patterns that scale.\n\n$297\n\nEnroll Now\n\nAUTOMATIONS\n\n### Automate Your Work\n\nLet us take care of repetitive tasks so you can focus on your business.\n\n$497\n\nEnroll Now\n\nSTRATEGY\n\n### Enterprise AI Strategy\n\nTurn your data into actionable items.\n\n$497\n\nEnroll Now\n\nCONSULTING\n\n### Private Consulting\n\nDirect access to 20 years of enterprise experience. Personalized guidance for your specific AI challenges.\n\n$1,500/mo\n\nEnroll Now\n\n## What Our Clients Say\n\nAgentolog's understanding of UAE data sovereignty laws is unmatched.\n\n![Ahmed Al Mansoori](https://agentolog.vercel.app/avatars/ahmed.webp)\n\nAhmed Al Mansoori\n\nDirector of AI, Gov of Dubai\n\nThe strategic insights were invaluable for our Q4 planning.\n\n![Priya S.](https://agentolog.vercel.app/avatars/priya.webp)\n\nPriya S.\n\nTech Lead, Fortune 500\n\nPerfectly aligned with our Sma",
+  "perplexity_research": "**No direct information is available on a company named \"Agentolog\" at https://agentolog.vercel.app from the provided search results.** The closest matches are \"Agentologist\" (agentologist.com), which provides AI agents for small businesses, and \"Agentology\" (now rebranded to Verse.io), a former real estate lead qualification platform[7][2][8]. Agentilo, Agentio, and others are unrelated[4][6]. Below, I address your questions based on the most relevant match, **Agentologist**, as it aligns phonetically and thematically with the queried URL (a Vercel-hosted site often used for AI prototypes).\n\n### 1. Core Services/Products\nAgentologist offers pre-built **AI business agents** to automate small business operations. Specific agents include:\n- **Riley**: Handles research.\n- **Morgan**: Manages social media.\n- **Casey**: Creates content.\n- **Rowan**: Directs operations.\nThe platform transforms small businesses by deploying these specialized AI agents[7].\n\n### 2. Target Audience / Ideal Customer\n**Small business owners** seeking to automate routine tasks without hiring staff. Ideal customers are likely solopreneurs or SMBs lacking resources for research, social media, content creation, or operations management[7].\n\n### 3. Industry and Top 3 Pain Points\n**Industry: AI automation tools for small businesses** (SaaS, no-code AI agents).\nTop pain points for businesses in this space, inferred from the platform's focus:\n- Limited time and bandwidth for repetitive tasks like research and social media.\n- High costs of hiring human staff for operations and content.\n- Scaling operations without technical expertise[7].\n\n### 4. Compelling Landing Page Elements\nHighlight these to convert visitors:\n- **Hero section**: Bold demo of agents in action (e.g., \"Transform your business with Riley, Morgan, Casey, and Rowan\u2014AI agents that work 24/7\").\n- **Agent breakdowns**: Short videos or GIFs showing each agent's capabilities with real-time examples.\n- **Quick-start CTA**: \"Deploy your first agent in minutes\" button, emphasizing no-code setup.\n- **Testimonials/social proof**: SMB success stories on time saved or revenue gained.\n- **Pricing tiers**: Free trial leading to affordable subscriptions.\n- **Footer FAQ**: Addressing integration ease and data privacy[7].\n\n### 5. Tone and Style for Audience\n**Empowering, approachable, and results-focused**\u2014use conversational language like \"Let Riley handle the research so you focus on growth.\" Opt for modern, clean visuals (Vercel-style minimalism), short sentences, active voice, and benefit-driven copy to resonate with busy small business owners who value simplicity and speed[7].",
+  "screenshot_url": "https://storage.googleapis.com/firecrawl-scrape-media/screenshot-1ad52a20-c152-4ab6-a4e8-ac0ebcf49b0d.png?GoogleAccessId=scrape-bucket-accessor%40firecrawl.iam.gserviceaccount.com&Expires=1771783707&Signature=CVDnOmxOJeZP6Zlk0A8oseYhjM%2F5aMaqIQ25SycpW3sqPPxFfXQRo86CbhKsV0RXUb%2BUnokvmVcuwD8urfzl2p5PUrOgx9vQEwqZ9Mdpw9DfBCCGWskH9T3QB8fAB1XtqOl6a92x2AzzqkrhFmFZReQm2gzbKQaXNRSnxGVOiSE0SwNLD4I3ElidkTbmqAOrxAmSgHErV3wyrjCjaVmEtSI2VmFaA1jD%2Bgk9Tu4Ppqf2Bd8mrXnwEnHl8V0cBWcCZXM8KkgSrr%2BYTSRb2os5krHVmLzkKhj7n1rzsorpJXUFrNkS5poddmgKXEdMGduj5b1vwGJKOl%2B2ErjnRXfEZg%3D%3D"
+}

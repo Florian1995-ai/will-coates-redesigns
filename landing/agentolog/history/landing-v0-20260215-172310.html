@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentolog — AI That Actually Works</title>
+    <link rel="icon" href="https://agentolog.vercel.app/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700;800&family=Playfair+Display:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#EEB349',
+                        accent: '#EEB349',
+                        background: '#000103',
+                        text: '#FFFFFF'
+                    },
+                    fontFamily: {
+                        heading: ['"Instrument Sans"', 'sans-serif'],
+                        body: ['"Playfair Display"', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Playfair Display', serif;
+            background: #000103;
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6, .heading {
+            font-family: 'Instrument Sans', sans-serif;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .glow-btn {
+            box-shadow: 0 0 40px rgba(238, 179, 73, 0.4);
+            transition: all 0.3s ease;
+        }
+        .glow-btn:hover {
+            box-shadow: 0 0 60px rgba(238, 179, 73, 0.6);
+            transform: translateY(-2px);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(238, 179, 73, 0.2);
+        }
+        .gradient-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(238, 179, 73, 0.3) 0%, rgba(238, 179, 73, 0) 70%);
+            filter: blur(80px);
+            pointer-events: none;
+        }
+        .nav-sticky {
+            backdrop-filter: blur(12px);
+            background: rgba(0, 1, 3, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .mobile-menu.open {
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="heading text-2xl font-bold text-primary">Agentolog</div>
+                
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="text-text hover:text-primary transition-colors duration-300">Home</a>
+                    <a href="#about" class="text-text hover:text-primary transition-colors duration-300">About</a>
+                    <a href="#services" class="text-text hover:text-primary transition-colors duration-300">Services</a>
+                    <a href="#contact" class="text-text hover:text-primary transition-colors duration-300">Contact</a>
+                </div>
+
+                <!-- Mobile Hamburger -->
+                <button id="mobile-toggle" class="md:hidden text-text">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="mobile-menu md:hidden">
+                <div class="flex flex-col gap-4 py-6">
+                    <a href="#home" class="text-text hover:text-primary transition-colors duration-300">Home</a>
+                    <a href="#about" class="text-text hover:text-primary transition-colors duration-300">About</a>
+                    <a href="#services" class="text-text hover:text-primary transition-colors duration-300">Services</a>
+                    <a href="#contact" class="text-text hover:text-primary transition-colors duration-300">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <div class="gradient-orb top-1/4 left-1/4"></div>
+        <div class="gradient-orb bottom-1/4 right-1/4"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 py-32 text-center relative z-10">
+            <div class="fade-in">
+                <h1 class="heading text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tight mb-8 leading-none">
+                    AI That Actually<br><span class="text-primary">Works</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
+                    Transform your business with production-ready AI agents that automate operations, research, content creation, and social media management.
+                </p>
+                <a href="#contact" class="inline-block px-10 py-5 bg-primary text-background text-lg font-semibold rounded-lg glow-btn heading">
+                    Request a Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 bg-[#0a0b0d]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="fade-in">
+                    <h2 class="heading text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                        Premium Services for Modern Businesses
+                    </h2>
+                </div>
+                <div class="fade-in">
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-6">
+                        Agentolog delivers pre-built AI business agents designed to automate small business operations. Our specialized agents handle research, social media management, content creation, and operational direction.
+                    </p>
+                    <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
+                        We empower small business owners and solopreneurs to scale operations without technical expertise or the high costs of hiring additional staff.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-32 relative">
+        <div class="gradient-orb top-0 right-0 opacity-50"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20 fade-in">
+                <h2 class="heading text-5xl md:text-6xl font-bold mb-6">Production AI Agents</h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                    Deploy specialized AI agents that work 24/7 to automate your business operations
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Riley -->
+                <div class="glass-card rounded-2xl p-8 fade-in">
+                    <div class="w-16 h-16 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="heading text-2xl font-bold mb-4">Riley</h3>
+                    <p class="text-gray-300 leading-relaxed">Handles comprehensive research tasks, gathering and analyzing data to inform your business decisions.</p>
+                </div>
+
+                <!-- Morgan -->
+                <div class="glass-card rounded-2xl p-8 fade-in">
+                    <div class="w-16 h-16 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="heading text-2xl font-bold mb-4">Morgan</h3>
+                    <p class="text-gray-300 leading-relaxed">Manages your social media presence, scheduling posts and engaging with your audience automatically.</p>
+                </div>
+
+                <!-- Casey -->
+                <div class="glass-card rounded-2xl p-8 fade-in">
+                    <div class="w-16 h-16 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="heading text-2xl font-bold mb-4">Casey</h3>
+                    <p class="text-gray-300 leading-relaxed">Creates compelling content for your brand, from blog posts to marketing materials.</p>
+                </div>
+
+                <!-- Rowan -->
+                <div class="glass-card rounded-2xl p-8 fade-in">
+                    <div class="w-16 h-16 bg-primary/20 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="heading text-2xl font-bold mb-4">Rowan</h3>
+                    <p class="text-gray-300 leading-relaxed">Directs operations and coordinates workflows, ensuring seamless business execution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="py-32 bg-primary relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-background rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-background rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
+            <div class="fade-in">
+                <h2 class="heading text-5xl md:text-6xl font-bold mb-6 text-background leading-tight">
+                    Ready to Experience AI That Actually Works?
+                </h2>
+                <p class="text-xl md:text-2xl text-background/80 mb-12 leading-relaxed">
+                    Deploy your first AI agent in minutes and transform how your business operates.
+                </p>
+                <a href="https://agentolog.vercel.app" class="inline-block px-10 py-5 bg-background text-primary text-lg font-semibold rounded-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 heading">
+                    Request a Demo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-[#0a0b0d] border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="heading text-2xl font-bold text-primary">Agentolog</div>
+                <div class="flex gap-8">
+                    <a href="#home" class="text-gray-400 hover:text-primary transition-colors duration-300">Home</a>
+                    <a href="#about" class="text-gray-400 hover:text-primary transition-colors duration-300">About</a>
+                    <a href="#services" class="text-gray-400 hover:text-primary transition-colors duration-300">Services</a>
+                    <a href="#contact" class="text-gray-400 hover:text-primary transition-colors duration-300">Contact</a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-500 text-sm">
+                &copy; 2026 Agentolog. AI That Actually Works.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sticky Navigation
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('nav-sticky');
+            } else {
+                nav.classList.remove('nav-sticky');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    mobileMenu.classList.remove('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
