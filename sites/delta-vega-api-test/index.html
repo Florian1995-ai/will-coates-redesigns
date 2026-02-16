@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delta Vega Api Test — Financial Engineering Consultancy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@300;400;600;700;800&family=Overpass:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Overpass', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Palanquin', sans-serif;
+        }
+        
+        .hero-heading {
+            font-size: clamp(44px, 5vw, 96px);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+        }
+        
+        .section-heading {
+            font-size: clamp(28px, 2.5vw, 48px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        
+        .subhead {
+            font-size: clamp(18px, 1.4vw, 24px);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+        
+        .body-text {
+            font-size: clamp(15px, 1.1vw, 18px);
+            font-weight: 400;
+            line-height: 1.7;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .elevated-card {
+            background: #ffffff;
+            border-radius: 2px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .elevated-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.25);
+        }
+        
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        
+        .cta-button {
+            background: transparent;
+            color: #FFFFFF;
+            border-radius: 2px;
+            padding: 18px 48px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border: 2px solid #FF0000;
+            background: #FF0000;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+        }
+        
+        .cta-button:hover {
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .cta-button-secondary {
+            background: transparent;
+            color: #09240F;
+            border: 2px solid #FF0000;
+            box-shadow: none;
+        }
+        
+        .cta-button-secondary:hover {
+            background: rgba(255, 0, 0, 0.05);
+        }
+        
+        .dot-grid {
+            background-image: radial-gradient(circle, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        
+        .radial-highlight {
+            background: radial-gradient(circle at center, rgba(255, 0, 0, 0.08) 0%, transparent 70%);
+        }
+        
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.1), transparent);
+        }
+        
+        nav a {
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: #FF0000;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Overpass', 'sans-serif'],
+                        'heading': ['Palanquin', 'sans-serif'],
+                    },
+                    colors: {
+                        'primary': '#09240F',
+                        'accent': '#FF0000',
+                    },
+                }
+            }
+        }
+    </script>
+
+<style>
+/* Scroll-triggered animations */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+[data-animate="fade-up"] { transform: translateY(40px); }
+[data-animate="fade-in"] { transform: translateY(0) scale(0.98); }
+[data-animate="slide-left"] { transform: translateX(-60px); opacity: 0; }
+[data-animate="slide-left"].visible { transform: translateX(0); opacity: 1; }
+[data-animate="slide-right"] { transform: translateX(60px); opacity: 0; }
+[data-animate="slide-right"].visible { transform: translateX(0); opacity: 1; }
+
+/* Staggered children */
+[data-stagger] > * { opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-stagger].visible > *:nth-child(1) { transition-delay: 0ms; }
+[data-stagger].visible > *:nth-child(2) { transition-delay: 120ms; }
+[data-stagger].visible > *:nth-child(3) { transition-delay: 240ms; }
+[data-stagger].visible > *:nth-child(4) { transition-delay: 360ms; }
+[data-stagger].visible > *:nth-child(5) { transition-delay: 480ms; }
+[data-stagger].visible > * { opacity: 1; transform: translateY(0); }
+
+/* Animated gradient background */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animated-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+}
+
+/* Parallax hero */
+.parallax-hero {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* Premium button shimmer */
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+.btn-shimmer { position: relative; overflow: hidden; }
+.btn-shimmer::after {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Smooth image reveal */
+img { transition: opacity 0.6s ease, transform 0.6s ease; }
+img:hover { transform: scale(1.02); }
+
+/* Line draw animation */
+@keyframes line-grow { from { width: 0; } to { width: 100%; } }
+.line-reveal { overflow: hidden; }
+.line-reveal.visible > div, .line-reveal.visible > span {
+    animation: line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+</style>
+
+</head>
+<body class="bg-white text-black">
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-black/5">
+        <div class="max-w-[1440px] mx-auto px-8 py-6 flex items-center justify-between">
+            <div class="font-heading font-bold text-xl tracking-tight">Delta Vega Api Test</div>
+            <div class="flex gap-12 text-sm font-medium tracking-wider uppercase">
+                <a href="#home" class="hover:text-accent transition-colors">Home</a>
+                <a href="#about" class="hover:text-accent transition-colors">About</a>
+                <a href="#video" class="hover:text-accent transition-colors">Video</a>
+                <a href="#training" class="hover:text-accent transition-colors">Training</a>
+                <a href="#publications" class="hover:text-accent transition-colors">Publications</a>
+                <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center overflow-hidden bg-white pt-24" data-animate="fade-up">
+        <div class="max-w-[1440px] mx-auto px-8 w-full">
+            <div class="grid grid-cols-12 gap-12 items-center" data-stagger>
+                <!-- Left: Oversized Heading -->
+                <div class="col-span-7 relative z-10">
+                    <h1 class="hero-heading font-heading mb-8 leading-none">
+                        Delta Vega<br/>
+                        <span class="font-light">Api Test</span>
+                    </h1>
+                    <p class="subhead mb-12 max-w-xl text-black/70">
+                        A financial engineering consultancy delivering video, training, and publications to financial professionals.
+                    </p>
+                    <a href="#contact" class="cta-button">Risk Talks</a>
+                </div>
+                
+                <!-- Right: Atmospheric Visual -->
+                <div class="col-span-5 relative h-[600px]">
+                    <div class="gradient-orb absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-primary to-accent"></div>
+                    <div class="gradient-orb absolute bottom-20 left-0 w-80 h-80 bg-gradient-to-tr from-accent to-primary" style="animation-delay: -5s;"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="50" y="50" width="120" height="120" fill="#09240F" opacity="0.8"/>
+                            <rect x="200" y="100" width="150" height="150" fill="#FF0000" opacity="0.15"/>
+                            <rect x="120" y="220" width="180" height="130" fill="#09240F" opacity="0.3"/>
+                            <circle cx="300" cy="280" r="60" fill="#FF0000" opacity="0.2"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-center">
+            <div class="section-divider w-12 mx-auto mb-4"></div>
+            <div class="scroll-indicator">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 5v14M19 12l-7 7-7-7"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="relative py-32 bg-white dot-grid" data-animate="fade-up">
+        <div class="max-w-[1440px] mx-auto px-8">
+            <div class="grid grid-cols-12 gap-20 items-start" data-stagger>
+                <!-- Left: Heading -->
+                <div class="col-span-4">
+                    <h2 class="section-heading font-heading sticky top-32">More About<br/>Delta Vega</h2>
+                </div>
+                
+                <!-- Right: Content -->
+                <div class="col-span-8">
+                    <div class="body-text space-y-8 text-black/80 leading-relaxed max-w-3xl">
+                        <p>
+                            Delta Vega is a financial engineering (FE) consultancy. Its product lines include video, training, and publications.
+                        </p>
+                        <p>
+                            The company also offers regular talks on risk management, free and open to the public via Zoom and You Tube.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="relative py-32 bg-primary overflow-hidden" data-animate="fade-in">
+        <div class="radial-highlight absolute inset-0"></div>
+        <div class="max-w-[1440px] mx-auto px-8 relative z-10">
+            <h2 class="section-heading font-heading text-white mb-20 text-center">Product Lines</h2>
+            
+            <!-- Bento Grid -->
+            <div class="grid grid-cols-6 gap-6 auto-rows-[280px]" data-stagger>
+                <!-- Video - Large Card -->
+                <div id="video" class="glass-card col-span-4 row-span-1 p-12 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-4xl font-heading font-bold text-white mb-4">Video</h3>
+                        <p class="body-text text-white/70 max-w-lg">Professional video content for financial engineering education.</p>
+                    </div>
+                    <div class="flex items-center gap-3 text-white/50 text-sm tracking-wider uppercase">
+                        <span>Explore</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Training -->
+                <div id="training" class="glass-card col-span-2 row-span-1 p-10 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-3xl font-heading font-bold text-white mb-3">Training</h3>
+                        <p class="body-text text-white/70">Specialized training programs.</p>
+                    </div>
+                    <div class="flex items-center gap-3 text-white/50 text-sm tracking-wider uppercase">
+                        <span>Learn</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Publications -->
+                <div id="publications" class="glass-card col-span-6 row-span-1 p-12 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-4xl font-heading font-bold text-white mb-4">Publications</h3>
+                        <p class="body-text text-white/70 max-w-2xl">Research and insights through published materials.</p>
+                    </div>
+                    <div class="flex items-center gap-3 text-white/50 text-sm tracking-wider uppercase">
+                        <span>Read</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Band -->
+    <section id="contact" class="relative py-32 bg-primary overflow-hidden" data-animate="fade-up">
+        <div class="radial-highlight absolute inset-0"></div>
+        <div class="max-w-[1440px] mx-auto px-8 text-center relative z-10">
+            <h2 class="section-heading font-heading text-white mb-8 leading-tight max-w-4xl mx-auto">
+                Join our regular talks on risk management, free and open to the public
+            </h2>
+            <p class="subhead text-white/60 mb-12 max-w-2xl mx-auto">
+                Available via Zoom and YouTube
+            </p>
+            <a href="#risk-talks" class="cta-button">RISK TALKS</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-black/5 py-20">
+        <div class="max-w-[1440px] mx-auto px-8">
+            <div class="grid grid-cols-12 gap-12" data-stagger>
+                <div class="col-span-6">
+                    <h3 class="text-5xl font-heading font-light text-black/90 mb-6">Delta Vega<br/>Api Test</h3>
+                    <p class="body-text text-black/50">Financial Engineering Consultancy</p>
+                </div>
+                <div class="col-span-6 flex justify-end items-start">
+                    <nav class="flex flex-col gap-4 text-sm tracking-wider uppercase text-black/60">
+                        <a href="#home" class="hover:text-accent transition-colors">Home</a>
+                        <a href="#about" class="hover:text-accent transition-colors">About</a>
+                        <a href="#video" class="hover:text-accent transition-colors">Video</a>
+                        <a href="#training" class="hover:text-accent transition-colors">Training</a>
+                        <a href="#publications" class="hover:text-accent transition-colors">Publications</a>
+                        <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+<script>
+// Intersection Observer for scroll animations
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('[data-animate], [data-stagger]').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Parallax on hero
+    const hero = document.querySelector('.parallax-hero');
+    if (hero) {
+        window.addEventListener('scroll', () => {
+            const scroll = window.pageYOffset;
+            hero.style.transform = `translateY(${scroll * 0.3}px)`;
+        }, { passive: true });
+    }
+
+    // Add shimmer to primary CTA buttons
+    document.querySelectorAll('button, a').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+        if (el.classList.contains('bg-primary') || el.classList.contains('bg-accent') ||
+            text.includes('risk talks') || text.includes('get started') || text.includes('contact')) {
+            if (el.querySelector('span') || el.childNodes.length <= 3) {
+                el.classList.add('btn-shimmer');
+            }
+        }
+    });
+});
+</script>
+
+</body>
+</html>
