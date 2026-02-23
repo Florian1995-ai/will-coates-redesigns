@@ -373,6 +373,32 @@ nav, header nav, [class*="fixed"][class*="top"] {
   -webkit-backdrop-filter: blur(12px) saturate(1.5);
 }
 </style>
+<style>
+/* GHL Chat Widget — Brand Color Override */
+[class*="chat-widget"] button,
+[class*="hl-chat"] button,
+#chat-widget-button,
+.widget-btn,
+[data-testid="chat-button"] {
+  background-color: #FFFF00 !important;
+  border-color: #FFFF00 !important;
+}
+[class*="chat-widget"] a,
+[class*="hl-chat"] a {
+  color: #FFFF00 !important;
+}
+/* Position enforcement — always bottom-right */
+#chat-widget-container,
+[class*="chat-widget-container"],
+[class*="hl-chat-container"] {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  z-index: 99999 !important;
+  left: auto !important;
+  top: auto !important;
+}
+</style>
 </head>
 <body>
     <!-- HERO SECTION -->
@@ -588,5 +614,21 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <div style="text-align:center;padding:16px 12px;font-size:11px;opacity:0.4;font-family:system-ui,sans-serif;letter-spacing:0.02em;">Demo generated from publicly available website content · No claims invented</div>
+
+<!-- GoHighLevel Chat Widget — Mjmventures Assistant -->
+<script>
+  window.hl_chatbot_widget = {
+    locationId: "V99IPPukYvrLIB1hYHGG",
+    // Color overrides (applied via CSS injection above)
+    primaryColor: "#FFFF00",
+    title: "Mjmventures Assistant",
+  };
+</script>
+<script
+  src="https://widgets.leadconnectorhq.com/loader.js"
+  data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+  data-widget-id="V99IPPukYvrLIB1hYHGG"
+  async>
+</script>
 </body>
 </html>
