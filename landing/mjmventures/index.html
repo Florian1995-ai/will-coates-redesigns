@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MJM Ventures - Custom Apparel & Embroidery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;800&family=Playfair+Display:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="https://img1.wsimg.com/isteam/ip/static/pwa-app/logo-default.png/:/rs=w:57,h:57,m">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Source Sans Pro', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'brand-primary': '#8995A9',
+                        'brand-accent': '#FFFF00',
+                        'brand-dark': '#000000',
+                        'brand-light': '#FFFFFF',
+                    },
+                    fontSize: {
+                        'hero': 'clamp(44px, 5vw, 96px)',
+                        'h2': 'clamp(28px, 2.5vw, 48px)',
+                        'body': 'clamp(15px, 1.1vw, 18px)',
+                    },
+                    spacing: {
+                        'section': 'clamp(56px, 7vw, 112px)',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #000000;
+            background: #000000;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-heading {
+            font-size: clamp(44px, 5vw, 96px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .h2-heading {
+            font-size: clamp(28px, 2.5vw, 48px);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .body-text {
+            font-size: clamp(15px, 1.1vw, 18px);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .section-padding {
+            padding: clamp(56px, 7vw, 112px) 0;
+        }
+
+        .glass-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .btn-primary {
+            background: #FFFFFF;
+            color: #000000;
+            padding: 14px 32px;
+            border-radius: 4px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 24px rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #FFFFFF;
+            padding: 14px 32px;
+            border-radius: 4px;
+            font-weight: 600;
+            border: 2px solid #FFFF00;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-secondary:hover {
+            background: #FFFF00;
+            color: #000000;
+        }
+
+        .nav-sticky {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.6;
+        }
+
+        .orb-primary {
+            width: 400px;
+            height: 400px;
+            background: rgba(137, 149, 169, 0.4);
+            top: -100px;
+            right: -100px;
+        }
+
+        .orb-accent {
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 0, 0.2);
+            bottom: 50px;
+            left: -100px;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 24px;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 2px;
+            background: #FFFFFF;
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.95);
+                flex-direction: column;
+                gap: 20px;
+                padding: 30px 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+
+            .gradient-orb {
+                display: none;
+            }
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+
+<style>
+/* Scroll-triggered animations */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+[data-animate="fade-up"] { transform: translateY(40px); }
+[data-animate="fade-in"] { transform: translateY(0) scale(0.98); }
+[data-animate="slide-left"] { transform: translateX(-60px); opacity: 0; }
+[data-animate="slide-left"].visible { transform: translateX(0); opacity: 1; }
+[data-animate="slide-right"] { transform: translateX(60px); opacity: 0; }
+[data-animate="slide-right"].visible { transform: translateX(0); opacity: 1; }
+
+/* Staggered children */
+[data-stagger] > * { opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-stagger].visible > *:nth-child(1) { transition-delay: 0ms; }
+[data-stagger].visible > *:nth-child(2) { transition-delay: 120ms; }
+[data-stagger].visible > *:nth-child(3) { transition-delay: 240ms; }
+[data-stagger].visible > *:nth-child(4) { transition-delay: 360ms; }
+[data-stagger].visible > *:nth-child(5) { transition-delay: 480ms; }
+[data-stagger].visible > * { opacity: 1; transform: translateY(0); }
+
+/* Animated gradient background */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animated-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+}
+
+/* Parallax hero */
+.parallax-hero {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* Premium button shimmer */
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+.btn-shimmer { position: relative; overflow: hidden; }
+.btn-shimmer::after {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Smooth image reveal */
+img { transition: opacity 0.6s ease, transform 0.6s ease; }
+img:hover { transform: scale(1.02); }
+
+/* Line draw animation */
+@keyframes line-grow { from { width: 0; } to { width: 100%; } }
+.line-reveal { overflow: hidden; }
+.line-reveal.visible > div, .line-reveal.visible > span {
+    animation: line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+</style>
+
+<style>
+
+/* Design Polish: tokens */
+:root {
+  --dp-bg0: #000000;
+  --dp-bg1: #070707;
+  --dp-card: rgba(255,255,255,0.04);
+  --dp-card-hover: rgba(255,255,255,0.07);
+  --dp-text: #000000;
+  --dp-muted: rgba(248,250,252,0.6);
+  --dp-border: rgba(255,255,255,0.08);
+  --dp-border-hover: rgba(255,255,255,0.15);
+  --dp-primary: #8995A9;
+  --dp-accent: #FFFF00;
+  --dp-radius: 16px;
+  --dp-shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --dp-shadow-lg: 0 12px 40px rgba(0,0,0,0.5);
+  --dp-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dp-t-hero: clamp(44px, 5vw, 96px);
+  --dp-t-h2: clamp(28px, 2.5vw, 48px);
+  --dp-t-body: clamp(15px, 1.1vw, 18px);
+  --dp-section-pad: clamp(56px, 7vw, 112px);
+}
+/* Design Polish: subtle noise texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+/* Design Polish: section rhythm */
+section {
+  padding-top: var(--dp-section-pad, 80px);
+  padding-bottom: var(--dp-section-pad, 80px);
+}
+section:first-of-type {
+  padding-top: 0;
+}
+/* Design Polish: card surfaces */
+.dp-card,
+[class*="backdrop-blur"],
+[class*="bg-white/"],
+[class*="bg-black/"] {
+  border: 1px solid var(--dp-border);
+  border-radius: var(--dp-radius);
+  box-shadow: var(--dp-shadow-sm);
+  transition: all 0.4s var(--dp-ease);
+}
+.dp-card:hover,
+[class*="backdrop-blur"]:hover,
+[class*="bg-white/"]:hover,
+[class*="bg-black/"]:hover {
+  border-color: var(--dp-border-hover);
+  box-shadow: var(--dp-shadow-lg);
+  transform: translateY(-4px);
+}
+/* Design Polish: gradient hero heading */
+.dp-gradient-text {
+  background: linear-gradient(135deg, #000000 0%, #FFFF00 50%, #000000 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: dp-gradient-shift 6s ease infinite;
+}
+@keyframes dp-gradient-shift {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+/* Design Polish: sticky nav */
+nav, header nav, [class*="fixed"][class*="top"] {
+  backdrop-filter: blur(12px) saturate(1.5);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
+}
+</style>
+</head>
+<body class="bg-brand-dark">
+    <!-- Navigation -->
+    <nav class="nav-sticky">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="text-brand-light font-serif font-bold text-2xl">Mjmventures</div>
+            <div class="nav-menu flex gap-8 items-center">
+                <a href="#home" class="text-brand-light hover:text-brand-primary transition text-sm font-medium">Home</a>
+                <a href="#about" class="text-brand-light hover:text-brand-primary transition text-sm font-medium">About</a>
+                <a href="#services" class="text-brand-light hover:text-brand-primary transition text-sm font-medium">Services</a>
+                <a href="#contact" class="text-brand-light hover:text-brand-primary transition text-sm font-medium">Contact</a>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 overflow-hidden bg-brand-dark text-brand-light" data-animate="fade-up">
+        <div class="gradient-orb orb-primary"></div>
+        <div class="gradient-orb orb-accent"></div>
+        
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-3xl mx-auto text-center fade-in">
+                <h1 class="hero-heading mb-6 text-brand-light dp-gradient-text">Elevate Your Brand</h1>
+                <p class="body-text text-gray-300 mb-8 max-w-2xl mx-auto">Precision embroidery, screen printing, and custom apparel for businesses that demand excellence. 34 years of trusted craftsmanship.</p>
+                <button class="btn-primary mb-12">Request a Demo</button>
+            </div>
+        </div>
+    </section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#FFFF00" fill-opacity="0.06"/></svg></div>
+
+
+    <!-- About Section -->
+    <section id="about" class="section-padding bg-brand-light text-brand-dark" data-animate="fade-up">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center" data-stagger>
+                <div class="fade-in">
+                    <h2 class="h2-heading font-serif mb-4">Trusted Since 1990</h2>
+                    <p class="text-gray-700 mb-6 font-light">MJM Screen Print & Embroidery Studio has been the preferred partner for Wisconsin businesses, teams, and organizations seeking premium custom apparel personalization.</p>
+                </div>
+                <div class="glass-card p-8 backdrop-blur-lg bg-brand-dark/10 fade-in">
+                    <div class="space-y-4">
+                        <div class="border-b border-gray-300 pb-4">
+                            <p class="font-serif text-2xl font-bold text-brand-primary">34 Years</p>
+                            <p class="text-sm text-gray-600">Craftsmanship & Reliability</p>
+                        </div>
+                        <div class="border-b border-gray-300 pb-4">
+                            <p class="font-serif text-2xl font-bold text-brand-primary">A+ BBB Rating</p>
+                            <p class="text-sm text-gray-600">Wisconsin-Based Excellence</p>
+                        </div>
+                        <div>
+                            <p class="font-serif text-2xl font-bold text-brand-primary">Menomonee Falls, WI</p>
+                            <p class="text-sm text-gray-600">Local Expertise, Premium Service</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#FFFF00" fill-opacity="0.06"/></svg></div>
+
+
+    <!-- Services Section -->
+    <section id="services" class="section-padding bg-brand-dark text-brand-light" data-animate="fade-in">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="h2-heading font-serif mb-4">Our Services</h2>
+                <p class="body-text text-gray-400 max-w-2xl mx-auto">Comprehensive custom apparel solutions designed for businesses and organizations that value quality.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-stagger>
+                <!-- Embroidery -->
+                <div class="glass-card p-8 fade-in">
+                    <div class="service-icon mb-6 text-brand-accent">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-full h-full">
+                            <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2z"/>
+                            <path d="M12 6v12M6 12h12"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif font-bold text-lg mb-3">Embroidery</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Durable, high-quality embroidery for uniforms, team apparel, and branded merchandise.</p>
+                </div>
+
+                <!-- Screen Printing -->
+                <div class="glass-card p-8 fade-in">
+                    <div class="service-icon mb-6 text-brand-accent">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-full h-full">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M9 11h6M9 15h6"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif font-bold text-lg mb-3">Screen Printing</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Vibrant, long-lasting screen printing for t-shirts, polos, and custom apparel designs.</p>
+                </div>
+
+                <!-- Vinyl Application -->
+                <div class="glass-card p-8 fade-in">
+                    <div class="service-icon mb-6 text-brand-accent">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-full h-full">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
+                            <path d="M12 6v12M6 12h12"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif font-bold text-lg mb-3">Vinyl Application</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Professional vinyl cutting and application for logos, text, and custom designs.</p>
+                </div>
+
+                <!-- Heat Transfers -->
+                <div class="glass-card p-8 fade-in">
+                    <div class="service-icon mb-6 text-brand-accent">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-full h-full">
+                            <path d="M12 2v20M2 12h20"/>
+                            <circle cx="12" cy="12" r="10"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-serif font-bold text-lg mb-3">Photo Heat Transfers</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Photo-quality heat transfers for custom images and detailed artwork on apparel.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#FFFF00" fill-opacity="0.06"/></svg></div>
+
+
+    <!-- Design Services Callout -->
+    <section class="section-padding bg-brand-light text-brand-dark" data-animate="fade-up">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card p-12 backdrop-blur-lg bg-gradient-to-r from-brand-primary/10 to-brand-accent/10 border border-brand-primary/20 fade-in">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center" data-stagger>
+                    <div>
+                        <h3 class="h2-heading font-serif mb-4">Design That Stands Out</h3>
+                        <p class="body-text text-gray-700 mb-6">Our design team accepts custom vector files (.eps) or works from our extensive catalog of 1000+ lettering styles and stock designs.</p>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex gap-3">
+                                <span class="text-brand-accent font-bold">✓</span>
+                                <span>Custom vector design creation</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-brand-accent font-bold">✓</span>
+                                <span>1000+ professional lettering styles</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-brand-accent font-bold">✓</span>
+                                <span>Fast turnaround from concept to production</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="relative">
+                        <div class="bg-gradient-to-br from-brand-primary to-brand-accent/30 rounded-lg p-8 text-brand-dark">
+                            <p class="font-serif text-4xl font-bold mb-4">Apparel For Every Need</p>
+                            <p class="text-sm leading-relaxed">T-shirts • Polos • Jackets • Uniforms • Caps • Bags • Sweatshirts • Aprons</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#FFFF00" fill-opacity="0.06"/></svg></div>
+
+
+    <!-- CTA Section -->
+    <section id="contact" class="section-padding bg-brand-accent text-brand-dark" data-animate="fade-up">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in">
+            <h2 class="h2-heading font-serif mb-6">Ready to Elevate Your Brand?</h2>
+            <p class="body-text max-w-2xl mx-auto mb-10 text-gray-800">Let's create something exceptional for your business. Contact us today to discuss your custom apparel needs.</p>
+            <button class="btn-primary bg-brand-dark text-brand-light hover:bg-gray-900">Request a Demo</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-brand-light border-t border-gray-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12" data-stagger>
+                <div>
+                    <p class="text-brand-light font-serif font-bold text-xl mb-4">Mjmventures</p>
+                    <p class="text-gray-400 text-sm">Premium custom apparel and embroidery services since 1990.</p>
+                </div>
+                <div>
+                    <h4 class="font-serif font-bold mb-4">Navigation</h4>
+                    <div class="space-y-2">
+                        <a href="#home" class="text-gray-400 hover:text-brand-accent transition text-sm block">Home</a>
+                        <a href="#about" class="text-gray-400 hover:text-brand-accent transition text-sm block">About</a>
+                        <a href="#services" class="text-gray-400 hover:text-brand-accent transition text-sm block">Services</a>
+                        <a href="#contact" class="text-gray-400 hover:text-brand-accent transition text-sm block">Contact</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-serif font-bold mb-4">Contact</h4>
+                    <p class="text-gray-400 text-sm mb-2">Menomonee Falls, Wisconsin</p>
+                    <p class="text-gray-400 text-sm">Phone: </p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-xs">
+                <p>&copy; 2025 MJM Ventures, Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when link is clicked
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Fade-in Animation on Scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    const offsetTop = target.offsetTop - 70;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Button click handler (in real implementation, would send to contact form or email)
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                console.log('Demo requested');
+            });
+        });
+    </script>
+
+<script>
+// Intersection Observer for scroll animations
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('[data-animate], [data-stagger]').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Parallax on hero
+    const hero = document.querySelector('.parallax-hero');
+    if (hero) {
+        window.addEventListener('scroll', () => {
+            const scroll = window.pageYOffset;
+            hero.style.transform = `translateY(${scroll * 0.3}px)`;
+        }, { passive: true });
+    }
+
+    // Add shimmer to primary CTA buttons
+    document.querySelectorAll('button, a').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+        if (el.classList.contains('bg-primary') || el.classList.contains('bg-accent') ||
+            text.includes('risk talks') || text.includes('get started') || text.includes('contact')) {
+            if (el.querySelector('span') || el.childNodes.length <= 3) {
+                el.classList.add('btn-shimmer');
+            }
+        }
+    });
+});
+</script>
+
+<div style="text-align:center;padding:16px 12px;font-size:11px;opacity:0.4;font-family:system-ui,sans-serif;letter-spacing:0.02em;">Demo generated from publicly available website content · No claims invented · <a href="https://mjmventures.ai" style="color:inherit;text-decoration:underline" target="_blank">View original site</a></div>
+</body>
+</html>
