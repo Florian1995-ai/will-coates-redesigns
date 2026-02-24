@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Delta Vega | Financial Engineering Consultancy</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<!-- Tailwind via CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#09240F', // deep forest green
+                        accent: '#FF0000',  // bold red
+                        bgLight: '#FFFFFF', // white background
+                        textDark: '#000000', // black text
+                        surface: '#F5F5F5', // light grey for cards
+                    },
+                    fontFamily: {
+                        heading: ['Overpass', 'sans-serif'],
+                        body: ['Palanquin', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    borderRadius: {
+                        '2xl': '2rem',
+                        '3xl': '3rem',
+                        '4xl': '4rem',
+                    }
+                }
+            }
+        }
+    </script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Overpass:wght@400;700;900&amp;family=Palanquin:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<style>
+        /* Global setup */
+        :root {
+            --primary: #09240F;
+            --accent: #FF0000;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #FFFFFF;
+            color: #000000;
+            margin: 0;
+            overflow-x: hidden;
+            font-family: 'Palanquin', sans-serif;
+        }
+
+        /* Fixed Rule 1: Global CSS noise overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+            opacity: 0.04;
+            mix-blend-mode: multiply;
+        }
+
+        /* Fixed Rule 3: Magnetic scale and sliding background */
+        .btn-magnetic {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .btn-magnetic:hover {
+            transform: scale(1.03);
+        }
+
+        .btn-magnetic .bg-span {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(255, 0, 0, 0.1);
+            /* Subtle accent tint on hover over white */
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 0;
+        }
+
+        .btn-magnetic.bg-accent .bg-span {
+            background-color: rgba(0, 0, 0, 0.2);
+            /* Darken red buttons */
+        }
+
+        .btn-magnetic:hover .bg-span {
+            transform: translateY(0);
+        }
+
+        .btn-magnetic span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navbar Glass Morph */
+        .glass-nav {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(9, 36, 15, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Interactive link hover lift */
+        a.nav-link {
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), color 0.3s ease;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        a.nav-link:hover {
+            transform: translateY(-1px);
+            color: var(--accent);
+        }
+
+        /* Utility for card shadow depth */
+        .card-shadow {
+            box-shadow: 0 20px 40px -10px rgba(9, 36, 15, 0.08);
+            /* Primary color tinted shadow */
+        }
+
+        /* SVG Graph Grid Background for tech/finance feel */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, rgba(9, 36, 15, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(9, 36, 15, 0.05) 1px, transparent 1px);
+        }
+
+        .bg-grid-dark {
+            background-size: 40px 40px;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        }
+
+        /* Accordion transitions */
+        .accordion-content {
+            transition: max-height 0.4s ease-out, opacity 0.3s ease, margin 0.3s ease;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+    </style>
+<style>
+.anim-video-bg video { transition: opacity 0.3s; }
+</style></head>
+<body class="antialiased selection:bg-accent selection:text-white"><svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;">
+<defs>
+<filter color-interpolation-filters="sRGB" id="brandTint">
+<fecolormatrix type="saturate" values="0"></fecolormatrix>
+<fecolormatrix type="matrix" values="0.04 0 0 0 0.96 0.14 0 0 0 0.86 0.06 0 0 0 0.94 0 0 0 1 0"></fecolormatrix>
+</filter>
+</defs>
+</svg>
+<!-- A. NAVBAR -->
+<nav class="fixed top-6 left-1/2 -translate-x-1/2 z-50 flex items-center justify-between px-6 py-3 rounded-full transition-all duration-300 w-[92%] max-w-6xl border border-transparent bg-white/80 backdrop-blur-md shadow-sm" id="navbar">
+<a class="flex items-center gap-3" href="#">
+<img alt="Delta Vega Logo" class="h-8 w-auto" src="https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png"/>
+<span class="text-primary font-heading font-black tracking-tight text-xl hidden sm:block">Delta Vega</span>
+</a>
+<div class="hidden md:flex gap-8 text-sm font-heading text-textDark">
+<a class="nav-link" href="#about">About</a>
+<a class="nav-link" href="#services">Services</a>
+<a class="nav-link" href="#process">Process</a>
+<a class="nav-link" href="#faq">FAQ</a>
+</div>
+<a class="btn-magnetic bg-accent text-white font-heading font-bold px-6 py-2.5 rounded-full text-sm shadow-[0_4px_14px_rgba(255,0,0,0.3)] hover:shadow-[0_6px_20px_rgba(255,0,0,0.4)] transition-shadow" href="#risktalks">
+<div class="bg-span rounded-full"></div>
+<span class="flex items-center gap-2">
+<svg class="animate-pulse" fill="none" height="16" viewbox="0 0 24 24" width="16">
+<circle cx="12" cy="12" fill="currentColor" r="8"></circle>
+</svg>
+                Risk Talks
+            </span>
+</a>
+</nav>
+<!-- B. HERO -->
+<section class="h-[100dvh] w-full relative flex items-center justify-center px-6 md:px-12 bg-primary overflow-hidden">
+<!-- Financial Data Abstract Background -->
+<div class="absolute inset-0 z-0 bg-grid-dark opacity-30"></div>
+<div class="absolute inset-0 z-0">
+<img alt="Financial charts and data architecture abstract" class="w-full h-full object-cover opacity-20" src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&amp;w=1920"/>
+<!-- Gradient overlay matching brand primary -->
+<div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-transparent"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-primary via-transparent to-primary"></div>
+</div>
+<div class="relative z-10 max-w-5xl w-full text-center flex flex-col items-center mt-12">
+<div class="hero-el bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-1.5 rounded-full mb-8 font-mono text-xs text-white/90 uppercase tracking-widest inline-flex items-center gap-2" style="position: relative; overflow: hidden; "><div class="anim-video-bg" style="position:absolute;inset:0;z-index:0;overflow:hidden;">
+<video autoplay="" loop="" muted="" playsinline="" poster="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920" preload="auto" style="width:100%;height:100%;object-fit:cover;filter:url(#brandTint);">
+<source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_25fps.mp4" type="video/mp4"/>
+</video>
+<div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);"></div>
+<div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);"></div>
+<div style="position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);"></div>
+</div>
+                Dr. Jonathan Schachter <span class="w-1 h-1 rounded-full bg-accent" style="position: relative; z-index: 1; "></span> Consultancy
+            </div>
+<h1 class="font-heading font-black text-5xl sm:text-7xl md:text-[84px] text-white leading-[1.05] mb-6 hero-el tracking-tight">
+                Financial <span class="text-accent">Engineering</span><br/>Expertise.
+            </h1>
+<p class="font-body text-white/80 text-lg md:text-2xl max-w-2xl mb-12 hero-el leading-relaxed">
+                Specializing in video content, tailored training programs, and authoritative publications for financial
+                professionals.
+            </p>
+<div class="hero-el flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+<a class="btn-magnetic bg-accent text-white font-heading font-bold px-10 py-5 rounded-full text-lg shadow-[0_0_30px_rgba(255,0,0,0.3)] w-full sm:w-auto" href="#risktalks">
+<div class="bg-span rounded-full"></div>
+<span class="flex items-center justify-center gap-3">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20">
+<path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+</svg>
+                        Join Free Risk Talks
+                    </span>
+</a>
+<a class="btn-magnetic bg-white text-primary border border-primary/10 font-heading font-bold px-10 py-5 rounded-full text-lg w-full sm:w-auto" href="#services">
+<div class="bg-span rounded-full"></div>
+<span>Explore Services</span>
+</a>
+</div>
+</div>
+<!-- Scroll indicator -->
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 flex flex-col items-center gap-2 font-mono text-xs uppercase tracking-widest hero-el animate-pulse">
+            Scroll
+            <svg fill="none" height="24" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="24">
+<path d="M12 5v14M19 12l-7 7-7-7"></path>
+</svg>
+</div>
+</section>
+<!-- C. ABOUT / INTRO -->
+<section class="py-32 px-6 md:px-12 bg-white relative" id="about">
+<div class="bg-grid absolute inset-0 z-0"></div>
+<div class="max-w-4xl mx-auto text-center relative z-10 intro-text">
+<img alt="Delta Vega Logo" class="mx-auto h-16 w-auto mb-8 opacity-90 drop-shadow-sm" src="https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png"/>
+<h2 class="font-heading font-black text-4xl md:text-5xl text-primary mb-8 tracking-tight">Authoritative
+                Financial Engineering.</h2>
+<p class="font-body text-xl text-textDark/80 leading-relaxed mb-10">
+                Delta Vega is a specialized consultancy led by Jonathan Schachter, PhD. We deliver rigorous financial
+                engineering insights through structured educational content. Our mission is to distill complex risk
+                management and quantitative finance concepts into authoritative, accessible formats for industry
+                professionals.
+            </p>
+<div class="h-1 w-24 bg-accent mx-auto rounded-full"></div>
+</div>
+</section>
+<!-- D. SERVICES (Bento Cards) -->
+<section class="py-24 px-6 md:px-12 max-w-7xl mx-auto relative z-10" id="services">
+<div class="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-end gap-6">
+<div>
+<div class="font-mono text-accent text-sm tracking-widest uppercase mb-4 font-bold">• Core Offerings
+                </div>
+<h2 class="font-heading font-black text-4xl md:text-5xl text-primary tracking-tight">Structured
+                    <br/>Product Lines.</h2>
+</div>
+<p class="font-body text-textDark/70 max-w-md text-lg">Delivering specialized knowledge through three
+                distinct mediums designed for professional digestion.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface rounded-3xl p-10 border border-primary/5 card-shadow service-card flex flex-col h-full bg-white relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-[100%] transition-transform duration-500 group-hover:scale-110 origin-top-right">
+</div>
+<div class="w-16 h-16 bg-primary text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg relative z-10">
+<svg fill="none" height="28" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="28">
+<polygon points="23 7 16 12 23 17 23 7"></polygon>
+<rect height="14" rx="2" ry="2" width="15" x="1" y="5"></rect>
+</svg>
+</div>
+<h3 class="font-heading font-bold text-2xl text-primary mb-4 relative z-10">Video Content</h3>
+<p class="font-body text-textDark/70 text-lg mb-8 leading-relaxed relative z-10 flex-grow">Technical
+                    visual breakdowns of complex financial engineering models, designed for clear, step-by-step
+                    comprehension.</p>
+<div class="mt-auto pt-6 border-t border-primary/10 relative z-10">
+<span class="font-mono text-xs text-primary font-bold uppercase tracking-widest">Multimedia</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-primary rounded-3xl p-10 card-shadow service-card flex flex-col h-full relative overflow-hidden group transform md:-translate-y-4">
+<div class="absolute inset-0 bg-grid-dark opacity-10"></div>
+<div class="absolute top-0 right-0 w-32 h-32 bg-accent/20 rounded-bl-[100%] transition-transform duration-500 group-hover:scale-110 origin-top-right">
+</div>
+<div class="w-16 h-16 bg-accent text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg relative z-10">
+<svg fill="none" height="28" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="28">
+<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+</path>
+<polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+<line x1="12" x2="12" y1="22.08" y2="12"></line>
+</svg>
+</div>
+<h3 class="font-heading font-bold text-2xl text-white mb-4 relative z-10">Training Programs</h3>
+<p class="font-body text-white/80 text-lg mb-8 leading-relaxed relative z-10 flex-grow">Structured
+                    educational modules led by Dr. Schachter, bridging the gap between theoretical quantitative finance
+                    and applied practice.</p>
+<div class="mt-auto pt-6 border-t border-white/20 relative z-10">
+<span class="font-mono text-xs text-accent font-bold uppercase tracking-widest">Education</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface rounded-3xl p-10 border border-primary/5 card-shadow service-card flex flex-col h-full bg-white relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-bl-[100%] transition-transform duration-500 group-hover:scale-110 origin-top-right">
+</div>
+<div class="w-16 h-16 bg-primary text-white rounded-2xl flex items-center justify-center mb-8 shadow-lg relative z-10">
+<svg fill="none" height="28" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="28">
+<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+</svg>
+</div>
+<h3 class="font-heading font-bold text-2xl text-primary mb-4 relative z-10">Publications</h3>
+<p class="font-body text-textDark/70 text-lg mb-8 leading-relaxed relative z-10 flex-grow">Rigorous
+                    written materials, whitepapers, and guides detailing financial engineering methodologies and
+                    systemic risk analysis.</p>
+<div class="mt-auto pt-6 border-t border-primary/10 relative z-10">
+<span class="font-mono text-xs text-primary font-bold uppercase tracking-widest">Literature</span>
+</div>
+</div>
+</div>
+</section>
+<!-- E. PRIMARY CTA: RISK TALKS -->
+<section class="my-32 relative py-32 bg-primary text-white overflow-hidden" id="risktalks">
+<!-- Dark abstract imagery -->
+<div class="absolute inset-0 z-0">
+<img alt="Dark architectural curves" class="w-full h-full object-cover opacity-10 mix-blend-luminosity" loading="lazy" src="https://images.unsplash.com/photo-1590283603385-17ffb1418b76?q=80&amp;w=1920"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/50"></div>
+</div>
+<div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+<div>
+<div class="inline-flex items-center gap-2 bg-accent/20 border border-accent/30 px-4 py-2 rounded-full mb-8 label-pop">
+<div class="w-2 h-2 rounded-full bg-accent animate-pulse"></div>
+<span class="font-mono text-xs text-white uppercase tracking-widest font-bold">Free &amp; Open to
+                        Public</span>
+</div>
+<h2 class="font-heading font-black text-5xl md:text-7xl text-white mb-6 tracking-tight leading-none reveal-text">
+                    Risk<br/><span class="text-accent">Talks.</span>
+</h2>
+<p class="font-body text-xl text-white/80 leading-relaxed mb-10 max-w-lg reveal-text">
+                    Join Dr. Jonathan Schachter for regular, deep-dive discussions on risk management and financial
+                    engineering.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 reveal-text">
+<a class="btn-magnetic bg-accent text-white font-heading font-bold px-8 py-4 rounded-full text-lg shadow-[0_0_30px_rgba(255,0,0,0.4)] text-center" href="#">
+<div class="bg-span rounded-full"></div>
+<span class="flex items-center justify-center gap-2">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+<path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+</svg>
+                            Join via Zoom
+                        </span>
+</a>
+<a class="btn-magnetic bg-white/10 backdrop-blur border border-white/20 text-white font-heading font-bold px-8 py-4 rounded-full text-lg text-center" href="#">
+<div class="bg-span rounded-full bg-white/10"></div>
+<span class="flex items-center justify-center gap-2">
+<svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20">
+<path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29.01 29.01 0 0 0 1 11.75a29.17 29.17 0 0 0 1.46 5.33 2.78 2.78 0 0 0 1.94 2C8.12 19.54 12 19.54 12 19.54s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29.01 29.01 0 0 0 1.46-5.33 29.17 29.17 0 0 0-1.46-5.33z"></path>
+<polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+</svg>
+                            Watch on YouTube
+                        </span>
+</a>
+</div>
+</div>
+<!-- Abstract representation of a broadcast/talk -->
+<div class="relative h-[400px] hidden lg:flex items-center justify-center">
+<div class="absolute w-[400px] h-[400px] border border-white/10 rounded-full animate-[spin_60s_linear_infinite]">
+</div>
+<div class="absolute w-[300px] h-[300px] border border-accent/30 rounded-full animate-[spin_40s_linear_infinite_reverse] border-dashed">
+</div>
+<div class="absolute w-[200px] h-[200px] border border-white/20 rounded-full flex items-center justify-center bg-primary/50 backdrop-blur-md">
+<svg fill="none" height="64" stroke="var(--accent)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewbox="0 0 24 24" width="64">
+<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+<path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+<line x1="12" x2="12" y1="19" y2="22"></line>
+</svg>
+</div>
+</div>
+</div>
+</section>
+<!-- F. PROCESS / HOW IT WORKS (Sticky Timeline) -->
+<section class="py-32 px-6 md:px-12 bg-surface relative" id="process">
+<div class="max-w-3xl mx-auto text-center mb-20">
+<h2 class="font-heading font-black text-4xl md:text-5xl text-primary tracking-tight">Engagement Flow.</h2>
+</div>
+<div class="max-w-4xl mx-auto relative process-container h-[200vh]">
+<!-- Timeline line -->
+<div class="absolute left-8 md:left-1/2 top-0 bottom-[50vh] w-1 bg-primary/10 -translate-x-1/2 rounded-full hidden md:block">
+<div class="absolute top-0 w-full bg-accent rounded-full" id="timeline-progress" style="height: 0%;">
+</div>
+</div>
+<!-- Step 1 -->
+<div class="process-step sticky top-32 w-full mb-[20vh] bg-white rounded-3xl p-8 md:p-12 card-shadow border border-primary/5 flex flex-col md:flex-row gap-8 items-center z-10 origin-bottom transform transition-transform">
+<div class="w-16 h-16 rounded-full bg-primary/5 border border-primary/10 flex items-center justify-center font-mono font-bold text-2xl text-primary shrink-0 relative bg-white z-20 md:absolute md:-left-8 md:top-1/2 md:-translate-y-1/2 lg:left-[-7rem]">
+                    01</div>
+<div class="flex-grow text-center md:text-left">
+<h3 class="font-heading font-bold text-3xl text-primary mb-4">Browse Resources</h3>
+<p class="font-body text-textDark/70 text-lg">Explore our library of video content and authoritative
+                        publications to build foundational knowledge.</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="process-step sticky top-40 w-full mb-[20vh] bg-primary text-white rounded-3xl p-8 md:p-12 card-shadow border border-primary flex flex-col md:flex-row gap-8 items-center z-20 origin-bottom transform transition-transform mt-8">
+<div class="w-16 h-16 rounded-full bg-white border border-accent flex items-center justify-center font-mono font-bold text-2xl text-accent shrink-0 relative z-20 md:absolute md:-right-8 md:top-1/2 md:-translate-y-1/2 lg:right-[-7rem] shadow-[0_0_20px_rgba(255,0,0,0.3)]">
+                    02</div>
+<div class="flex-grow text-center md:text-left md:order-first">
+<h3 class="font-heading font-bold text-3xl text-white mb-4">Join Risk Talks</h3>
+<p class="font-body text-white/80 text-lg">Attend Dr. Schachter's free, live sessions on Zoom or
+                        YouTube to engage with high-level risk management discourse.</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="process-step sticky top-48 w-full mb-[50vh] bg-white rounded-3xl p-8 md:p-12 card-shadow border border-primary/5 flex flex-col md:flex-row gap-8 items-center z-30 origin-bottom transform transition-transform mt-8">
+<div class="w-16 h-16 rounded-full bg-primary/5 border border-primary/10 flex items-center justify-center font-mono font-bold text-2xl text-primary shrink-0 relative bg-white z-20 md:absolute md:-left-8 md:top-1/2 md:-translate-y-1/2 lg:left-[-7rem]">
+                    03</div>
+<div class="flex-grow text-center md:text-left">
+<h3 class="font-heading font-bold text-3xl text-primary mb-4">Explore Training</h3>
+<p class="font-body text-textDark/70 text-lg">Enlist in structured training programs to deeply
+                        integrate financial engineering models into your practice.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- G. FAQ (Accordion) -->
+<section class="py-32 px-6 md:px-12 max-w-4xl mx-auto bg-white" id="faq">
+<div class="text-center mb-16">
+<h2 class="font-heading font-black text-4xl md:text-5xl text-primary tracking-tight mb-4">Common Inquiries.
+            </h2>
+</div>
+<div class="space-y-4">
+<!-- FAQ 1 -->
+<div class="accordion-item bg-surface rounded-2xl border border-primary/5 overflow-hidden">
+<button class="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none">
+<span class="font-heading font-bold text-xl text-primary">Are the Risk Talks genuinely free?</span>
+<svg class="accordion-icon w-6 h-6 text-accent shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 6v6m0 0v6m0-6h6m-6 0H6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<div class="accordion-content px-8 pb-6">
+<p class="font-body text-textDark/70 text-lg">Yes. Delta Vega hosts regular risk management
+                        discussions that are completely free and open to the public via Zoom and YouTube broadcasts.</p>
+</div>
+</div>
+<!-- FAQ 2 -->
+<div class="accordion-item bg-surface rounded-2xl border border-primary/5 overflow-hidden">
+<button class="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none">
+<span class="font-heading font-bold text-xl text-primary">Who is the target audience for the
+                        training programs?</span>
+<svg class="accordion-icon w-6 h-6 text-accent shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 6v6m0 0v6m0-6h6m-6 0H6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<div class="accordion-content px-8 pb-6">
+<p class="font-body text-textDark/70 text-lg">Our materials are designed specifically for financial
+                        professionals seeking rigorous, structured education in financial engineering methodologies and
+                        quantitative risk analysis.</p>
+</div>
+</div>
+<!-- FAQ 3 -->
+<div class="accordion-item bg-surface rounded-2xl border border-primary/5 overflow-hidden">
+<button class="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none">
+<span class="font-heading font-bold text-xl text-primary">Who leads the consultancy?</span>
+<svg class="accordion-icon w-6 h-6 text-accent shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 6v6m0 0v6m0-6h6m-6 0H6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<div class="accordion-content px-8 pb-6">
+<p class="font-body text-textDark/70 text-lg">Delta Vega is founded and led by Jonathan Schachter,
+                        PhD, bringing deep academic and practical expertise to all content, talks, and training modules.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- H. FOOTER -->
+<footer class="bg-primary pt-24 pb-12 px-6 md:px-12 mt-10 rounded-t-[3rem] text-white relative overflow-hidden">
+<!-- Grid bg for footer -->
+<div class="absolute inset-0 z-0 bg-grid-dark opacity-10"></div>
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 relative z-10 mb-20">
+<div class="md:col-span-6">
+<div class="flex items-center gap-3 mb-6 bg-white w-max p-2 rounded-xl">
+<img alt="Delta Vega Logo" class="h-10 w-auto" src="https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png"/>
+</div>
+<p class="font-heading font-bold text-2xl tracking-tight mb-2">Financial Engineering <br/>Consultancy
+                </p>
+<p class="font-body text-white/60 mb-8 max-w-sm">Led by Jonathan Schachter, PhD.</p>
+<div class="inline-flex items-center gap-3 bg-white/5 backdrop-blur-md px-4 py-2 rounded-full border border-white/10">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-[pulse_2s_ease-in-out_infinite]"></div>
+<span class="font-mono text-[10px] text-white/90 uppercase tracking-widest font-bold">Systems
+                        Operational</span>
+</div>
+</div>
+<div class="md:col-span-3">
+<h4 class="font-mono text-xs text-accent uppercase tracking-widest font-bold mb-6">Directory</h4>
+<ul class="space-y-4 font-body">
+<li><a class="text-white/70 hover:text-white transition-colors" href="#">Home</a></li>
+<li><a class="text-white/70 hover:text-white transition-colors" href="#about">About</a></li>
+<li><a class="text-white/70 hover:text-white transition-colors" href="#services">Video Content</a>
+</li>
+<li><a class="text-white/70 hover:text-white transition-colors" href="#services">Training
+                            Programs</a></li>
+<li><a class="text-white/70 hover:text-white transition-colors" href="#services">Publications</a>
+</li>
+</ul>
+</div>
+<div class="md:col-span-3">
+<h4 class="font-mono text-xs text-accent uppercase tracking-widest font-bold mb-6">Engagement</h4>
+<ul class="space-y-4 font-body mb-8">
+<li><a class="text-white hover:text-accent transition-colors font-bold" href="#risktalks">Join Risk
+                            Talks</a></li>
+<li><a class="text-white/70 hover:text-white transition-colors" href="#">Contact</a></li>
+</ul>
+</div>
+</div>
+<div class="max-w-7xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 relative z-10">
+<p class="font-mono text-xs text-white/40 uppercase tracking-widest">Delta Vega</p>
+<div class="flex gap-6 font-mono text-xs text-white/40 uppercase tracking-widest">
+<a class="hover:text-white transition-colors" href="#">Privacy</a>
+<a class="hover:text-white transition-colors" href="#">Terms</a>
+</div>
+</div>
+</footer>
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            let ctx = gsap.context(() => {
+
+                // 1. Navbar Scrolled State
+                ScrollTrigger.create({
+                    start: "top -50",
+                    end: 99999,
+                    toggleClass: { className: 'glass-nav', targets: '#navbar' },
+                });
+
+                // 2. Hero Animations
+                gsap.from(".hero-el", {
+                    y: 40,
+                    opacity: 0,
+                    duration: 1,
+                    stagger: 0.15,
+                    ease: "power3.out",
+                    delay: 0.2
+                });
+
+                // 3. Intro Text Fade Up
+                gsap.from(".intro-text", {
+                    scrollTrigger: {
+                        trigger: "#about",
+                        start: "top 75%",
+                    },
+                    y: 40,
+                    opacity: 0,
+                    duration: 1,
+                    ease: "power2.out"
+                });
+
+                // 4. Services Stagger
+                gsap.from(".service-card", {
+                    scrollTrigger: {
+                        trigger: "#services",
+                        start: "top 75%",
+                    },
+                    y: 50,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: "back.out(1.2)"
+                });
+
+                // 5. Risk Talks Reveal
+                gsap.from(".label-pop", {
+                    scrollTrigger: { trigger: "#risktalks", start: "top 70%" },
+                    scale: 0.8, opacity: 0, duration: 0.6, ease: "back.out(2)"
+                });
+
+                gsap.from(".reveal-text", {
+                    scrollTrigger: { trigger: "#risktalks", start: "top 70%" },
+                    y: 30, opacity: 0, duration: 0.8, stagger: 0.2, ease: "power3.out"
+                });
+
+                // 6. Sticky Stacking Process Timeline
+                const steps = gsap.utils.toArray('.process-step');
+
+                // Draw timeline line
+                gsap.to("#timeline-progress", {
+                    height: "100%",
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: ".process-container",
+                        start: "top center",
+                        end: "bottom center",
+                        scrub: true
+                    }
+                });
+
+                // Stack effect (blur/scale previous cards slightly to show depth)
+                steps.forEach((step, i) => {
+                    if (i === 0) return;
+                    const prev = steps[i - 1];
+
+                    ScrollTrigger.create({
+                        trigger: step,
+                        start: "top center",
+                        end: "top top",
+                        scrub: true,
+                        animation: gsap.to(prev, {
+                            scale: 0.95,
+                            opacity: 0.5,
+                            filter: "blur(4px)",
+                            ease: "none"
+                        })
+                    });
+                });
+
+            }); // End GSAP Context
+
+            // 7. Accordion Logic (Vanilla JS)
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            accordionItems.forEach(item => {
+                const button = item.querySelector('button');
+                button.addEventListener('click', () => {
+                    // Close others
+                    accordionItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('active')) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    // Toggle current
+                    item.classList.toggle('active');
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
