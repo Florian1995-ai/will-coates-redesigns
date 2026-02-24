@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveBy Automation — AI-Powered Business Systems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#2B328C',
+                        dark: '#0a0a0f',
+                        darkCard: '#111118',
+                    },
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #0a0a0f; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        /* SVG Color Grading Filter */
+        .video-tinted { filter: url(#brandTint); }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: rgba(255,255,255,0.05);
+            line-height: 1;
+        }
+
+        .glow-border {
+            box-shadow: 0 0 30px rgba(43, 50, 140, 0.15), inset 0 0 30px rgba(43, 50, 140, 0.05);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #2B328C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG Filter Definitions (hidden) -->
+    <svg class="hidden" style="position:absolute;width:0;height:0;">
+        <defs>
+            <!-- Brand-tinted monotone filter (deep indigo #2B328C) -->
+            <filter id="brandTint" color-interpolation-filters="sRGB">
+                <feColorMatrix type="saturate" values="0"/>
+                <feColorMatrix type="matrix"
+                    values="0.17 0 0 0 0.83
+                            0.20 0 0 0 0.80
+                            0.55 0 0 0 0.45
+                            0    0 0 1 0"/>
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- NAV -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-dark/80 backdrop-blur-xl border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-brand flex items-center justify-center">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <span class="font-heading font-bold text-lg">DriveBy</span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-sm text-white/60">
+                <a href="#services" class="hover:text-white transition-colors">Services</a>
+                <a href="#process" class="hover:text-white transition-colors">Process</a>
+                <a href="#work" class="hover:text-white transition-colors">Work</a>
+                <a href="#contact" class="px-5 py-2 bg-brand rounded-full text-white text-sm font-medium hover:bg-brand/80 transition-colors">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO: Full-width Tinted Video -->
+    <section class="relative w-full h-screen overflow-hidden">
+        <video class="absolute inset-0 w-full h-full object-cover video-tinted" playsinline autoplay muted loop preload="auto">
+            <source src="https://videos.pexels.com/video-files/3129671/3129671-uhd_2560_1440_25fps.mp4" type="video/mp4">
+        </video>
+        <img src="https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&w=1920"
+             class="absolute inset-0 w-full h-full object-cover" alt="" loading="eager" style="z-index: -1; filter: url(#brandTint);">
+        <div class="absolute inset-0 bg-gradient-to-b from-dark/70 via-dark/40 to-dark"></div>
+
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
+            <div class="font-mono text-xs text-brand uppercase tracking-[0.4em] mb-6 fade-in-up">AI-Powered Automation</div>
+            <h1 class="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-8 fade-in-up" style="transition-delay: 0.15s;">
+                <span class="gradient-text">Build Systems.</span><br>
+                <span class="text-white/90">Not Busywork.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-white/50 max-w-xl mb-10 fade-in-up" style="transition-delay: 0.3s;">
+                We design and deploy intelligent automation that eliminates repetitive tasks and scales your operations.
+            </p>
+            <div class="flex gap-4 fade-in-up" style="transition-delay: 0.45s;">
+                <a href="#contact" class="px-8 py-4 bg-brand rounded-full text-white font-heading font-semibold hover:bg-brand/80 transition-all hover:scale-105">
+                    Book a Call
+                </a>
+                <a href="#work" class="px-8 py-4 border border-white/20 rounded-full text-white/70 font-heading hover:border-white/40 hover:text-white transition-all">
+                    See Our Work
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES: Numbered Cards with Vertical Lines -->
+    <section id="services" class="py-24 md:py-32 bg-dark">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <div class="font-mono text-xs text-brand uppercase tracking-[0.3em] mb-4 fade-in-up">What We Build</div>
+                <h2 class="font-heading text-4xl md:text-5xl font-bold fade-in-up" style="transition-delay: 0.1s;">Automation Services</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden">
+                <div class="bg-darkCard p-8 md:p-10 relative group hover:bg-darkCard/80 transition-all duration-500 fade-in-up" style="transition-delay: 0.15s;">
+                    <span class="service-number">1</span>
+                    <h3 class="font-heading text-xl font-bold mt-4 mb-3">CRM Automation</h3>
+                    <p class="text-white/40 text-sm leading-relaxed">Automated lead scoring, pipeline management, and follow-up sequences that close deals while you sleep.</p>
+                    <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+                <div class="bg-darkCard p-8 md:p-10 relative group hover:bg-darkCard/80 transition-all duration-500 fade-in-up" style="transition-delay: 0.25s;">
+                    <span class="service-number">2</span>
+                    <h3 class="font-heading text-xl font-bold mt-4 mb-3">AI Workflows</h3>
+                    <p class="text-white/40 text-sm leading-relaxed">Custom AI agents that handle data processing, content generation, and decision support at scale.</p>
+                    <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+                <div class="bg-darkCard p-8 md:p-10 relative group hover:bg-darkCard/80 transition-all duration-500 fade-in-up" style="transition-delay: 0.35s;">
+                    <span class="service-number">3</span>
+                    <h3 class="font-heading text-xl font-bold mt-4 mb-3">System Integration</h3>
+                    <p class="text-white/40 text-sm leading-relaxed">Connect your tech stack into one seamless machine. APIs, webhooks, and data pipelines that just work.</p>
+                    <div class="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2-COL: Tinted Video + Text -->
+    <section id="work" class="grid grid-cols-1 md:grid-cols-2 gap-0">
+        <div class="relative aspect-square md:aspect-auto overflow-hidden">
+            <video class="w-full h-full object-cover video-tinted" playsinline autoplay muted loop preload="none">
+                <source src="https://videos.pexels.com/video-files/5474057/5474057-hd_1920_1080_30fps.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="flex items-center p-10 md:p-16 bg-darkCard">
+            <div>
+                <div class="font-mono text-xs text-brand uppercase tracking-[0.3em] mb-4 fade-in-up">Case Study</div>
+                <h2 class="font-heading text-3xl md:text-4xl font-bold mb-6 fade-in-up" style="transition-delay: 0.1s;">
+                    From 40 Hours to 4 Minutes
+                </h2>
+                <p class="text-white/50 mb-8 leading-relaxed fade-in-up" style="transition-delay: 0.2s;">
+                    We automated a client's entire lead qualification pipeline. What took their team a full work week now runs autonomously, processing thousands of leads while they focus on closing.
+                </p>
+                <div class="grid grid-cols-3 gap-6 fade-in-up" style="transition-delay: 0.3s;">
+                    <div>
+                        <div class="font-heading text-3xl font-bold text-brand">98%</div>
+                        <div class="text-xs text-white/30 mt-1">Time Saved</div>
+                    </div>
+                    <div>
+                        <div class="font-heading text-3xl font-bold text-brand">3.2x</div>
+                        <div class="text-xs text-white/30 mt-1">Lead Quality</div>
+                    </div>
+                    <div>
+                        <div class="font-heading text-3xl font-bold text-brand">$47K</div>
+                        <div class="text-xs text-white/30 mt-1">Monthly Saved</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reverse: Text + Tinted Video -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-0">
+        <div class="flex items-center p-10 md:p-16 bg-dark order-2 md:order-1">
+            <div>
+                <div class="font-mono text-xs text-brand uppercase tracking-[0.3em] mb-4 fade-in-up">Our Process</div>
+                <h2 class="font-heading text-3xl md:text-4xl font-bold mb-6 fade-in-up" style="transition-delay: 0.1s;">
+                    Built for Speed. Designed to Scale.
+                </h2>
+                <div class="space-y-6 fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="flex gap-4 items-start">
+                        <div class="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0 mt-1">
+                            <span class="font-mono text-xs text-brand font-bold">1</span>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-semibold mb-1">Audit</h4>
+                            <p class="text-white/40 text-sm">We map your current workflows and identify the highest-impact automation opportunities.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0 mt-1">
+                            <span class="font-mono text-xs text-brand font-bold">2</span>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-semibold mb-1">Build</h4>
+                            <p class="text-white/40 text-sm">We design, develop, and test your custom automation systems end-to-end.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <div class="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center flex-shrink-0 mt-1">
+                            <span class="font-mono text-xs text-brand font-bold">3</span>
+                        </div>
+                        <div>
+                            <h4 class="font-heading font-semibold mb-1">Deploy + Iterate</h4>
+                            <p class="text-white/40 text-sm">Launch, monitor, and continuously optimize for maximum performance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="relative aspect-square md:aspect-auto overflow-hidden order-1 md:order-2">
+            <video class="w-full h-full object-cover video-tinted" playsinline autoplay muted loop preload="none">
+                <source src="https://videos.pexels.com/video-files/7710243/7710243-hd_1920_1080_30fps.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
+
+    <!-- DECORATIVE: Low-opacity noise video strip -->
+    <div class="relative w-full h-32 overflow-hidden">
+        <video class="w-full h-full object-cover opacity-20" playsinline autoplay muted loop preload="none">
+            <source src="https://videos.pexels.com/video-files/3129671/3129671-hd_1920_1080_25fps.mp4" type="video/mp4">
+        </video>
+        <div class="absolute inset-0 bg-gradient-to-r from-dark via-transparent to-dark"></div>
+    </div>
+
+    <!-- CTA -->
+    <section id="contact" class="py-24 md:py-32 bg-dark">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <div class="font-mono text-xs text-brand uppercase tracking-[0.3em] mb-4 fade-in-up">Ready?</div>
+            <h2 class="font-heading text-4xl md:text-6xl font-bold mb-6 fade-in-up" style="transition-delay: 0.1s;">
+                Let's Build Your<br><span class="gradient-text">Automation Engine.</span>
+            </h2>
+            <p class="text-white/40 text-lg mb-10 fade-in-up" style="transition-delay: 0.2s;">
+                Book a free strategy call. We'll audit your workflow and show you exactly where automation delivers the biggest ROI.
+            </p>
+            <a href="#" class="inline-block px-10 py-5 bg-brand rounded-full text-white font-heading font-bold text-lg hover:bg-brand/80 transition-all hover:scale-105 glow-border fade-in-up" style="transition-delay: 0.3s;">
+                Book Your Free Audit
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-8 bg-dark border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-6 h-6 rounded bg-brand flex items-center justify-center">
+                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <span class="font-heading font-bold text-sm">DriveBy Automation</span>
+            </div>
+            <p class="text-xs text-white/20">Intelligent systems for ambitious businesses.</p>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
