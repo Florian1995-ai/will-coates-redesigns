@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dunkertons — Award Winning Organic Ciders</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#faf7f4',
+                        charcoal: '#252a2b',
+                        gold: 'rgb(206, 163, 101)',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Palatino', 'Georgia', 'serif'],
+                        sans: ['Inter', 'Verdana', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #faf7f4; color: #252a2b; font-family: 'Inter', sans-serif; }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-video-overlay {
+            background: linear-gradient(to bottom,
+                rgba(0,0,0,0.3) 0%,
+                rgba(0,0,0,0.1) 40%,
+                rgba(0,0,0,0.4) 100%
+            );
+        }
+
+        .quote-overlay {
+            background: linear-gradient(135deg, rgba(37,42,43,0.7) 0%, rgba(37,42,43,0.5) 100%);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-item:hover .gallery-overlay {
+            background: rgba(37,42,43,0.6);
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO: Full-Screen Video -->
+    <section class="relative w-full h-screen overflow-hidden">
+        <!-- Desktop video -->
+        <video class="hidden md:block absolute inset-0 w-full h-full object-cover" playsinline autoplay muted loop>
+            <source src="https://videos.pexels.com/video-files/5529539/5529539-uhd_2560_1440_25fps.mp4" type="video/mp4">
+        </video>
+        <!-- Mobile video (lighter) -->
+        <video class="md:hidden absolute inset-0 w-full h-full object-cover" playsinline autoplay muted loop>
+            <source src="https://videos.pexels.com/video-files/5529539/5529539-hd_1920_1080_25fps.mp4" type="video/mp4">
+        </video>
+        <!-- Poster fallback -->
+        <img src="https://images.pexels.com/photos/1407846/pexels-photo-1407846.jpeg?auto=compress&cs=tinysrgb&w=1920"
+             class="absolute inset-0 w-full h-full object-cover" alt="Cider orchard" loading="eager"
+             style="z-index: -1;">
+        <!-- Dark overlay -->
+        <div class="absolute inset-0 hero-video-overlay"></div>
+        <!-- Content -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white z-10 px-6">
+            <div class="mb-8 fade-in-up">
+                <svg class="w-16 h-16 mx-auto mb-4 text-gold" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+                <p class="text-sm uppercase tracking-[0.3em] text-gold font-sans font-medium">Certified Organic</p>
+            </div>
+            <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 fade-in-up" style="transition-delay: 0.2s;">
+                The Home of Award Winning<br>Organic Ciders
+            </h1>
+            <p class="text-lg md:text-xl font-light max-w-2xl mb-10 fade-in-up" style="transition-delay: 0.4s; color: rgba(250,247,244,0.8);">
+                Crafted in the heart of Herefordshire since 1988. Real cider from real orchards.
+            </p>
+            <a href="#shop" class="inline-block border-2 border-cream text-cream px-10 py-4 uppercase tracking-[0.2em] text-sm font-sans font-medium hover:bg-cream hover:text-charcoal transition-all duration-500 fade-in-up" style="transition-delay: 0.6s;">
+                Explore Our Ciders
+            </a>
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 fade-in-up" style="transition-delay: 0.8s;">
+                <div class="w-px h-16 bg-gradient-to-b from-cream/60 to-transparent animate-pulse"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BRAND PILLARS: 3-Column Staggered -->
+    <section class="py-24 md:py-32 bg-cream">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 text-center">
+                <div class="fade-in-up" style="transition-delay: 0.15s;">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-charcoal/5 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-charcoal" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3">Founded in Herefordshire</h3>
+                    <p class="text-charcoal/60 leading-relaxed">Our orchards sit in the heart of England's cider country, where the soil and climate produce exceptional fruit.</p>
+                </div>
+                <div class="fade-in-up" style="transition-delay: 0.30s;">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-charcoal/5 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-charcoal" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3">Pressed with Care</h3>
+                    <p class="text-charcoal/60 leading-relaxed">Traditional methods meet modern craft. Every batch is pressed, blended, and matured to bring out the best flavour.</p>
+                </div>
+                <div class="fade-in-up" style="transition-delay: 0.45s;">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-charcoal/5 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-charcoal" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/></svg>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3">Certified Organic</h3>
+                    <p class="text-charcoal/60 leading-relaxed">Every apple, every drop. Our Soil Association certification guarantees the purity and integrity of our ciders.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- IMAGE GALLERY with Hover Overlays -->
+    <section id="shop" class="grid grid-cols-2 md:grid-cols-4 gap-0">
+        <div class="gallery-item relative group overflow-hidden aspect-square cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700" alt="Organic Ciders">
+            <div class="gallery-overlay absolute inset-0 bg-charcoal/30 transition-all duration-500 flex items-center justify-center">
+                <h3 class="text-cream text-xl md:text-2xl font-serif font-bold">Our Organic Ciders</h3>
+            </div>
+        </div>
+        <div class="gallery-item relative group overflow-hidden aspect-square cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700" alt="Taproom">
+            <div class="gallery-overlay absolute inset-0 bg-charcoal/30 transition-all duration-500 flex items-center justify-center">
+                <h3 class="text-cream text-xl md:text-2xl font-serif font-bold">The Taproom</h3>
+            </div>
+        </div>
+        <div class="gallery-item relative group overflow-hidden aspect-square cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700" alt="Tours">
+            <div class="gallery-overlay absolute inset-0 bg-charcoal/30 transition-all duration-500 flex items-center justify-center">
+                <h3 class="text-cream text-xl md:text-2xl font-serif font-bold">Tours &amp; Events</h3>
+            </div>
+        </div>
+        <div class="gallery-item relative group overflow-hidden aspect-square cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition-transform duration-700" alt="Shop">
+            <div class="gallery-overlay absolute inset-0 bg-charcoal/30 transition-all duration-500 flex items-center justify-center">
+                <h3 class="text-cream text-xl md:text-2xl font-serif font-bold">Our Shops</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- MID-PAGE BACKGROUND VIDEO with Quote -->
+    <section class="relative w-full h-[70vh] overflow-hidden">
+        <video class="absolute inset-0 w-full h-full object-cover" playsinline autoplay muted loop>
+            <source src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4" type="video/mp4">
+        </video>
+        <img src="https://images.pexels.com/photos/574919/pexels-photo-574919.jpeg?auto=compress&cs=tinysrgb&w=1920"
+             class="absolute inset-0 w-full h-full object-cover" alt="Orchard" loading="lazy" style="z-index: -1;">
+        <div class="absolute inset-0 quote-overlay"></div>
+        <div class="absolute inset-0 flex items-center justify-center text-center text-cream z-10 px-6">
+            <div class="max-w-2xl fade-in-up">
+                <h2 class="font-serif text-3xl md:text-5xl italic mb-4 leading-snug">"We're deep into flavour here..."</h2>
+                <p class="text-sm uppercase tracking-[0.3em] mb-8 font-sans" style="color: rgba(250,247,244,0.7);">IVOR DUNKERTON, CO-FOUNDER</p>
+                <a href="#" class="inline-block border-2 border-cream text-cream px-8 py-3 uppercase tracking-[0.2em] text-sm font-sans hover:bg-cream hover:text-charcoal transition-all duration-500">
+                    Our Brand
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCT GRID -->
+    <section class="py-24 md:py-32 bg-cream">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="text-sm uppercase tracking-[0.3em] text-gold font-sans mb-3 fade-in-up">Handcrafted Collection</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold fade-in-up" style="transition-delay: 0.1s;">Our Ciders</h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                <div class="text-center fade-in-up" style="transition-delay: 0.1s;">
+                    <div class="aspect-square bg-charcoal/5 rounded-2xl mb-4 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" alt="Dry Cider">
+                    </div>
+                    <h3 class="font-serif text-lg font-bold">Premium Dry</h3>
+                    <p class="text-sm text-charcoal/50 mt-1">750ml &bull; 6.8% ABV</p>
+                </div>
+                <div class="text-center fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="aspect-square bg-charcoal/5 rounded-2xl mb-4 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1560512823-829485b8bf24?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" alt="Medium Cider">
+                    </div>
+                    <h3 class="font-serif text-lg font-bold">Organic Medium</h3>
+                    <p class="text-sm text-charcoal/50 mt-1">500ml &bull; 5.0% ABV</p>
+                </div>
+                <div class="text-center fade-in-up" style="transition-delay: 0.3s;">
+                    <div class="aspect-square bg-charcoal/5 rounded-2xl mb-4 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed514?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" alt="Perry">
+                    </div>
+                    <h3 class="font-serif text-lg font-bold">Herefordshire Perry</h3>
+                    <p class="text-sm text-charcoal/50 mt-1">500ml &bull; 4.5% ABV</p>
+                </div>
+                <div class="text-center fade-in-up" style="transition-delay: 0.4s;">
+                    <div class="aspect-square bg-charcoal/5 rounded-2xl mb-4 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1570598912132-0ba1dc952b7d?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" alt="Vintage">
+                    </div>
+                    <h3 class="font-serif text-lg font-bold">Vintage Reserve</h3>
+                    <p class="text-sm text-charcoal/50 mt-1">750ml &bull; 7.2% ABV</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="py-20 bg-charcoal text-cream">
+        <div class="max-w-xl mx-auto px-6 text-center">
+            <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4 fade-in-up">Stay in the Orchard</h2>
+            <p class="mb-8 fade-in-up" style="color: rgba(250,247,244,0.6); transition-delay: 0.1s;">Sign up for news, offers, and stories from the cider house.</p>
+            <div class="flex gap-3 fade-in-up" style="transition-delay: 0.2s;">
+                <input type="email" placeholder="your@email.com" class="flex-1 px-4 py-3 bg-white/10 border border-white/20 text-cream placeholder:text-cream/40 focus:outline-none focus:border-gold text-sm">
+                <button class="px-6 py-3 bg-gold text-charcoal text-sm uppercase tracking-wider font-semibold hover:bg-gold/80 transition-colors">Subscribe</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 bg-charcoal border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="font-serif text-xl text-cream font-bold">Dunkertons</p>
+            <nav class="flex gap-6 text-sm text-cream/50">
+                <a href="#" class="hover:text-gold transition-colors">Our Ciders</a>
+                <a href="#" class="hover:text-gold transition-colors">Taproom</a>
+                <a href="#" class="hover:text-gold transition-colors">Tours</a>
+                <a href="#" class="hover:text-gold transition-colors">Our Story</a>
+                <a href="#" class="hover:text-gold transition-colors">Contact</a>
+            </nav>
+            <p class="text-xs text-cream/30">Herefordshire, England</p>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
