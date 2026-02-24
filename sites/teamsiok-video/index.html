@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Teamsiok — Insurance Services</title>
+<link href="https://teamsiok.com/favicon.ico" rel="icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Source Sans 3', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand': '#D62311',
+                        'text': '#403C3C',
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        * {
+            font-family: 'Source Sans 3', system-ui, sans-serif;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-card-light {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+        
+        .hero-text {
+            font-size: clamp(44px, 5vw, 96px);
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+        }
+        
+        .section-heading {
+            font-size: clamp(28px, 2.5vw, 48px);
+            letter-spacing: -0.02em;
+        }
+        
+        .body-text {
+            font-size: clamp(15px, 1.1vw, 18px);
+        }
+        
+        .gradient-orb {
+            background: radial-gradient(circle at 30% 40%, rgba(214, 35, 17, 0.15), rgba(214, 35, 17, 0.05) 50%, transparent 70%);
+            filter: blur(60px);
+        }
+        
+        .noise-bg {
+            background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        
+        .btn-primary {
+            background: #D62311;
+            color: #FFFFFF;
+            border-radius: 9999px;
+            box-shadow: 0 8px 24px rgba(214, 35, 17, 0.25);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 12px 32px rgba(214, 35, 17, 0.35);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            border: 2px solid #D62311;
+            color: #D62311;
+            border-radius: 9999px;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(214, 35, 17, 0.05);
+            transform: translateY(-2px);
+        }
+        
+        .service-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.15);
+        }
+        
+        .divider-line {
+            height: 1px;
+            background: linear-gradient(to right, transparent, rgba(64, 60, 60, 0.15), transparent);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+<style>
+/* Scroll-triggered animations */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+[data-animate="fade-up"] { transform: translateY(40px); }
+[data-animate="fade-in"] { transform: translateY(0) scale(0.98); }
+[data-animate="slide-left"] { transform: translateX(-60px); opacity: 0; }
+[data-animate="slide-left"].visible { transform: translateX(0); opacity: 1; }
+[data-animate="slide-right"] { transform: translateX(60px); opacity: 0; }
+[data-animate="slide-right"].visible { transform: translateX(0); opacity: 1; }
+
+/* Staggered children */
+[data-stagger] > * { opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-stagger].visible > *:nth-child(1) { transition-delay: 0ms; }
+[data-stagger].visible > *:nth-child(2) { transition-delay: 120ms; }
+[data-stagger].visible > *:nth-child(3) { transition-delay: 240ms; }
+[data-stagger].visible > *:nth-child(4) { transition-delay: 360ms; }
+[data-stagger].visible > *:nth-child(5) { transition-delay: 480ms; }
+[data-stagger].visible > * { opacity: 1; transform: translateY(0); }
+
+/* Animated gradient background */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animated-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+}
+
+/* Parallax hero */
+.parallax-hero {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* Premium button shimmer */
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+.btn-shimmer { position: relative; overflow: hidden; }
+.btn-shimmer::after {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Smooth image reveal */
+img { transition: opacity 0.6s ease, transform 0.6s ease; }
+img:hover { transform: scale(1.02); }
+
+/* Line draw animation */
+@keyframes line-grow { from { width: 0; } to { width: 100%; } }
+.line-reveal { overflow: hidden; }
+.line-reveal.visible > div, .line-reveal.visible > span {
+    animation: line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+</style>
+<style>
+
+/* Design Polish: tokens */
+:root {
+  --dp-bg0: #F5F5F5;
+  --dp-bg1: #ededed;
+  --dp-card: rgba(0,0,0,0.02);
+  --dp-card-hover: rgba(0,0,0,0.04);
+  --dp-text: #403C3C;
+  --dp-muted: rgba(0,0,0,0.55);
+  --dp-border: rgba(0,0,0,0.08);
+  --dp-border-hover: rgba(0,0,0,0.15);
+  --dp-primary: #D62311;
+  --dp-accent: #D62311;
+  --dp-radius: 16px;
+  --dp-shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --dp-shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+  --dp-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dp-t-hero: clamp(44px, 5vw, 96px);
+  --dp-t-h2: clamp(28px, 2.5vw, 48px);
+  --dp-t-body: clamp(15px, 1.1vw, 18px);
+  --dp-section-pad: clamp(56px, 7vw, 112px);
+}
+/* Design Polish: subtle noise texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+/* Design Polish: section rhythm */
+section {
+  padding-top: var(--dp-section-pad, 80px);
+  padding-bottom: var(--dp-section-pad, 80px);
+}
+section:first-of-type {
+  padding-top: 0;
+}
+/* Design Polish: card surfaces */
+.dp-card,
+[class*="backdrop-blur"],
+[class*="bg-white/"],
+[class*="bg-black/"] {
+  border: 1px solid var(--dp-border);
+  border-radius: var(--dp-radius);
+  box-shadow: var(--dp-shadow-sm);
+  transition: all 0.4s var(--dp-ease);
+}
+.dp-card:hover,
+[class*="backdrop-blur"]:hover,
+[class*="bg-white/"]:hover,
+[class*="bg-black/"]:hover {
+  border-color: var(--dp-border-hover);
+  box-shadow: var(--dp-shadow-lg);
+  transform: translateY(-4px);
+}
+/* Design Polish: gradient hero heading */
+.dp-gradient-text {
+  background: linear-gradient(135deg, #403C3C 0%, #D62311 50%, #403C3C 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: dp-gradient-shift 6s ease infinite;
+}
+@keyframes dp-gradient-shift {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+/* Design Polish: sticky nav */
+nav, header nav, [class*="fixed"][class*="top"] {
+  backdrop-filter: blur(12px) saturate(1.5);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
+}
+</style>
+<style>
+.anim-image-hero video { transition: opacity 0.5s; }
+</style><style>
+/* GHL Chat Widget */
+[data-chat-widget] {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    z-index: 99999 !important;
+}
+</style>
+</head>
+<body class="antialiased text-text bg-white"><svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;">
+<defs>
+<filter color-interpolation-filters="sRGB" id="brandTint">
+<fecolormatrix type="saturate" values="0"></fecolormatrix>
+<fecolormatrix type="matrix" values="0.84 0 0 0 0.16 0.14 0 0 0 0.86 0.07 0 0 0 0.93 0 0 0 1 0"></fecolormatrix>
+</filter>
+</defs>
+</svg>
+<!-- HERO SECTION -->
+<section class="relative min-h-screen flex items-center overflow-hidden bg-white" data-animate="fade-up" style="position: relative; overflow: hidden; min-height: 70vh; "><div class="anim-image-hero" style="position:absolute;inset:0;z-index:0;overflow:hidden;">
+<video autoplay loop muted playsinline poster="https://ephemera.mirus.io/imgr/1920x0/https://storage.googleapis.com/static.mirus.io/images/dco/mx/approvals/accepted/RFFS01YS000_office_banner_20250501223955Z_teamsiok_com_jbbsbvimhi.jpg" src="hero.mp4" style="width:100%;height:100%;object-fit:cover;filter:url(#brandTint);will-change:transform;"></video>
+<div style="position:absolute;inset:0;background:rgba(0,0,0,0.45);"></div>
+<div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.65) 100%);"></div>
+<div style="position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.02) 2px, rgba(0,0,0,0.02) 4px);"></div>
+</div>
+<div class="absolute inset-0 gradient-orb" style="position: relative; z-index: 1; top: -20%; right: -10%; width: 60%; height: 120%;"></div>
+<div class="max-w-[1440px] mx-auto px-8 lg:px-16 py-20 w-full relative z-10" style="position: relative; z-index: 1; ">
+<div class="grid lg:grid-cols-2 gap-16 items-center">
+<div class="space-y-8">
+<h1 class="hero-text font-extrabold text-text leading-none dp-gradient-text">
+                        Teamsiok
+                    </h1>
+<p class="text-xl lg:text-2xl font-light tracking-wide text-text/80 max-w-lg" style="line-height: 1.6;">
+                        Brad Siok Insurance Agency providing trusted insurance services.
+                    </p>
+<div class="pt-4">
+<button class="btn-primary px-10 py-4 text-lg font-semibold">
+                            File a Claim
+                        </button>
+</div>
+</div>
+<div class="relative h-[500px] lg:h-[600px] float">
+<div class="absolute top-1/4 right-1/4 w-96 h-96 rounded-full opacity-30" style="background: radial-gradient(circle, #D62311 0%, rgba(214,35,17,0.3) 40%, transparent 70%); filter: blur(80px);"></div>
+<div class="absolute bottom-1/4 left-1/4 w-80 h-80 rounded-full opacity-20" style="background: radial-gradient(circle, #D62311 0%, rgba(214,35,17,0.2) 40%, transparent 70%); filter: blur(60px);"></div>
+</div>
+</div>
+</div>
+<div class="absolute bottom-16 left-1/2 -translate-x-1/2 text-center z-20" style="position: relative; z-index: 1; ">
+<div class="divider-line w-screen mb-8"></div>
+<div class="text-sm font-light tracking-widest text-text/40">SCROLL</div>
+</div>
+</section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg style="display:block;width:100%" viewbox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#D62311" fill-opacity="0.06"></path></svg></div>
+<!-- ABOUT SECTION -->
+<section class="py-20 lg:py-32 bg-white noise-bg" data-animate="fade-up">
+<div class="max-w-[1440px] mx-auto px-8 lg:px-16">
+<div class="grid lg:grid-cols-12 gap-16 items-start">
+<div class="lg:col-span-5" data-animate="slide-left">
+<h2 class="section-heading font-bold text-text">Brad Siok Insurance Agcy Inc</h2>
+</div>
+<div class="lg:col-span-7 space-y-6">
+<p class="body-text font-light leading-relaxed text-text/90">
+                        Professional insurance services tailored to your needs.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg style="display:block;width:100%" viewbox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#D62311" fill-opacity="0.06"></path></svg></div>
+<!-- SERVICES SECTION -->
+<section class="py-20 lg:py-32 bg-gradient-to-b from-gray-900 to-gray-950 relative overflow-hidden" data-animate="fade-in">
+<div class="absolute inset-0 gradient-orb" style="top: 30%; left: -20%; width: 50%; height: 80%;"></div>
+<div class="max-w-[1440px] mx-auto px-8 lg:px-16 relative z-10">
+<h2 class="section-heading font-bold text-white mb-16">Services</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-stagger="">
+<div class="glass-card p-8 rounded-2xl service-card lg:col-span-2 lg:row-span-2" data-animate="slide-right">
+<h3 class="text-3xl font-bold text-white mb-4">Call</h3>
+<p class="body-text text-white/70 font-light">Direct phone consultation</p>
+</div>
+<div class="glass-card p-8 rounded-2xl service-card">
+<h3 class="text-2xl font-bold text-white mb-3">Text</h3>
+<p class="body-text text-white/70 font-light">Message us anytime</p>
+</div>
+<div class="glass-card p-8 rounded-2xl service-card">
+<h3 class="text-2xl font-bold text-white mb-3">#PeoriaAZ</h3>
+<p class="body-text text-white/70 font-light">Local presence</p>
+</div>
+<div class="glass-card p-8 rounded-2xl service-card lg:col-span-2" data-animate="slide-right">
+<h3 class="text-2xl font-bold text-white mb-3">#Leadership</h3>
+<p class="body-text text-white/70 font-light">Expert guidance and support</p>
+</div>
+<div class="glass-card p-8 rounded-2xl service-card">
+<h3 class="text-2xl font-bold text-white mb-3">#LoveLocal</h3>
+<p class="body-text text-white/70 font-light">Community focused</p>
+</div>
+</div>
+</div>
+</section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg style="display:block;width:100%" viewbox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#D62311" fill-opacity="0.06"></path></svg></div>
+<!-- CTA BAND -->
+<section class="py-24 lg:py-32 bg-brand relative overflow-hidden" data-animate="fade-up">
+<div class="absolute inset-0" style="background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 60%);"></div>
+<div class="max-w-[1440px] mx-auto px-8 lg:px-16 text-center relative z-10">
+<h2 class="text-4xl lg:text-5xl font-bold text-white mb-12 tracking-tight">
+                Ready to protect what matters most?
+            </h2>
+<div class="flex flex-wrap gap-4 justify-center">
+<button class="bg-white text-brand px-10 py-4 text-lg font-semibold rounded-full hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                    File a Claim
+                </button>
+<button class="border-2 border-white text-white px-10 py-4 text-lg font-semibold rounded-full hover:bg-white/10 transition-all duration-300 hover:-translate-y-1">
+                    Send Payment
+                </button>
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer class="py-20 bg-gray-950 border-t border-white/5">
+<div class="max-w-[1440px] mx-auto px-8 lg:px-16">
+<div class="grid lg:grid-cols-2 gap-12 items-start mb-16">
+<div>
+<h3 class="text-5xl font-light text-white mb-4">Teamsiok</h3>
+<p class="body-text text-white/50 font-light">Brad Siok Insurance Agcy Inc</p>
+</div>
+<div class="lg:text-right space-y-3">
+<div class="flex flex-wrap gap-6 lg:justify-end body-text">
+<a class="text-white/60 hover:text-white transition-colors font-light" href="#call">Call</a>
+<a class="text-white/60 hover:text-white transition-colors font-light" href="#text">Text</a>
+<a class="text-white/60 hover:text-white transition-colors font-light" href="#presidentsday">#PresidentsDay</a>
+<a class="text-white/60 hover:text-white transition-colors font-light" href="#leadership">#Leadership</a>
+<a class="text-white/60 hover:text-white transition-colors font-light" href="#usa">#USA</a>
+<a class="text-white/60 hover:text-white transition-colors font-light" href="#valentinesday">#ValentinesDay</a>
+</div>
+</div>
+</div>
+<div class="divider-line mb-8"></div>
+<div class="text-center">
+<p class="text-white/30 text-sm font-light">Professional insurance services</p>
+</div>
+</div>
+</footer>
+<script>
+// Intersection Observer for scroll animations
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('[data-animate], [data-stagger]').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Parallax on hero
+    const hero = document.querySelector('.parallax-hero');
+    if (hero) {
+        window.addEventListener('scroll', () => {
+            const scroll = window.pageYOffset;
+            hero.style.transform = `translateY(${scroll * 0.3}px)`;
+        }, { passive: true });
+    }
+
+    // Add shimmer to primary CTA buttons
+    document.querySelectorAll('button, a').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+        if (el.classList.contains('bg-primary') || el.classList.contains('bg-accent') ||
+            text.includes('risk talks') || text.includes('get started') || text.includes('contact')) {
+            if (el.querySelector('span') || el.childNodes.length <= 3) {
+                el.classList.add('btn-shimmer');
+            }
+        }
+    });
+});
+</script>
+<div style="text-align:center;padding:16px 12px;font-size:11px;opacity:0.4;font-family:system-ui,sans-serif;letter-spacing:0.02em;">Demo generated from publicly available website content · No claims invented</div>
+
+<!-- GHL Chat Widget -->
+<script>
+window.hl_chatbot_widget = { locationId: "V99IPPukYvrLIB1hYHGG" };
+</script>
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"></script>
+</body>
+</html>
