@@ -1,1035 +1,561 @@
-<!DOCTYPE html><!--[if IE 9 ]> <html lang="en-US" class="ie9 loading-site no-js"> <![endif]--><!--[if IE 8 ]> <html lang="en-US" class="ie8 loading-site no-js"> <![endif]--><!--[if (gte IE 9)|!(IE)]><!--><html lang="en-US" class="js"><!--<![endif]-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexGen Roofing & Construction | Premium Roofing Services</title>
+    <link rel="icon" href="https://nexgenroofing.com.au/wp-content/uploads/2022/11/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            font-family: 'Rajdhani', sans-serif;
+        }
 
-<body data-rsssl="1" class="home wp-singular page-template page-template-page-blank page-template-page-blank-php page page-id-28 wp-theme-flatsome wp-child-theme-nexgen-child lightbox nav-dropdown-has-arrow nav-dropdown-has-shadow nav-dropdown-has-border">
+        @layer components {
+            .hero-heading {
+                font-size: clamp(44px, 5vw, 96px);
+                font-weight: 800;
+                letter-spacing: -0.02em;
+                line-height: 1.1;
+            }
 
+            .section-heading {
+                font-size: clamp(28px, 2.5vw, 48px);
+                font-weight: 700;
+                letter-spacing: -0.01em;
+            }
 
-<a class="skip-link screen-reader-text" href="https://nexgenroofing.com.au/#main">Skip to content</a>
+            .body-text {
+                font-size: clamp(15px, 1.1vw, 18px);
+                font-weight: 400;
+                line-height: 1.6;
+            }
 
-<div id="wrapper">
+            .glass-card {
+                backdrop-filter: blur(10px);
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
 
-	
-	<header id="header" class="header header-full-width has-sticky sticky-jump" style="">
-		<div class="header-wrapper">
-			<div id="masthead" class="header-main nav-dark">
-      <div class="header-inner flex-row container logo-left" role="navigation">
+            .glass-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+                background: rgba(255, 255, 255, 0.08);
+                border-color: rgba(255, 255, 255, 0.12);
+            }
 
-          <!-- Logo -->
-          <div id="logo" class="flex-col logo">
-            
-<!-- Header logo -->
-<a href="https://nexgenroofing.com.au/" title="NexGen Roofing And Construction" rel="home">
-		<img width="267" height="133" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/logo.png" class="header_logo header-logo" alt="NexGen Roofing And Construction"><img width="267" height="133" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/logo.png" class="header-logo-dark" alt="NexGen Roofing And Construction"></a>
-          </div>
+            .cta-button {
+                background-color: #F57F01;
+                color: #FFFFFF;
+                border-radius: 8px;
+                font-weight: 600;
+                padding: 14px 32px;
+                transition: all 0.3s ease;
+                box-shadow: 0 0 20px rgba(245, 127, 1, 0.3);
+            }
 
-          <!-- Mobile Left Elements -->
-          <div class="flex-col show-for-medium flex-left">
-            <ul class="mobile-nav nav nav-left ">
-                          </ul>
-          </div>
+            .cta-button:hover {
+                background-color: #E06A00;
+                box-shadow: 0 0 30px rgba(245, 127, 1, 0.5);
+                transform: translateY(-2px);
+            }
 
-          <!-- Left Elements -->
-          <div class="flex-col hide-for-medium flex-left
-            flex-grow">
-            <ul class="header-nav header-nav-main nav nav-left  nav-size-xlarge nav-spacing-xlarge nav-uppercase">
-              <li id="menu-item-36" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-28 current_page_item menu-item-36 active menu-item-design-default"><a href="https://nexgenroofing.com.au/" aria-current="page" class="nav-top-link">Home</a></li>
-<li id="menu-item-81" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-81 menu-item-design-default"><a href="https://nexgenroofing.com.au/about-us/" class="nav-top-link">About Us</a></li>
-<li id="menu-item-84" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-84 menu-item-design-default"><a href="https://nexgenroofing.com.au/service/" class="nav-top-link">Services</a></li>
-<li id="menu-item-83" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-83 menu-item-design-default"><a href="https://nexgenroofing.com.au/gallery/" class="nav-top-link">Gallery</a></li>
-<li id="menu-item-82" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-82 menu-item-design-default"><a href="https://nexgenroofing.com.au/contact-us/" class="nav-top-link">Contact Us</a></li>
-            </ul>
-          </div>
+            .secondary-button {
+                border: 2px solid #F57F01;
+                color: #F57F01;
+                border-radius: 8px;
+                font-weight: 600;
+                padding: 12px 30px;
+                background: transparent;
+                transition: all 0.3s ease;
+            }
 
-          <!-- Right Elements -->
-          <div class="flex-col hide-for-medium flex-right">
-            <ul class="header-nav header-nav-main nav nav-right  nav-size-xlarge nav-spacing-xlarge nav-uppercase">
-              <li class="header-block"><div class="header-block-block-1"><div class="row row-small row-full-width align-middle align-center" id="row-1969193380">
+            .secondary-button:hover {
+                background-color: rgba(245, 127, 1, 0.1);
+            }
 
+            .gradient-orb-1 {
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                background: radial-gradient(circle, rgba(245, 127, 1, 0.3) 0%, rgba(68, 96, 132, 0.1) 70%, transparent 100%);
+                border-radius: 50%;
+                filter: blur(40px);
+                top: -100px;
+                right: -100px;
+                z-index: 0;
+            }
 
-	<div id="col-1139149930" class="col medium-3 small-12 large-3">
-				<div class="col-inner">
-			
-			
+            .gradient-orb-2 {
+                position: absolute;
+                width: 300px;
+                height: 300px;
+                background: radial-gradient(circle, rgba(68, 96, 132, 0.2) 0%, transparent 70%);
+                border-radius: 50%;
+                filter: blur(50px);
+                bottom: 100px;
+                left: -50px;
+                z-index: 0;
+            }
 
-	<div class="img has-hover x md-x lg-x y md-y lg-y" id="image_1685738808">
-								<div class="img-inner dark">
-			<img width="49" height="49" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/phone.png" class="attachment-large size-large" alt="" decoding="async">						
-					</div>
-								
+            .section-divider {
+                border-top: 1px solid rgba(68, 96, 132, 0.1);
+            }
 
-	</div>
-	
+            .scroll-indicator {
+                animation: bounce 2s infinite;
+            }
 
+            @keyframes bounce {
+                0%, 100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(8px);
+                }
+            }
 
-		</div>
-					</div>
+            .dot-pattern {
+                background-image: radial-gradient(circle, rgba(68, 96, 132, 0.05) 1px, transparent 1px);
+                background-size: 40px 40px;
+            }
 
-	
+            .nav-link {
+                font-weight: 400;
+                font-size: 14px;
+                letter-spacing: 0.5px;
+                transition: color 0.3s ease;
+            }
 
-	<div id="col-611013596" class="col medium-8 small-12 large-8">
-				<div class="col-inner">
-			
-			
+            .nav-link:hover {
+                color: #F57F01;
+            }
+        }
+    </style>
 
-	<div id="text-3975157576" class="text">
-		
+<style>
+/* Scroll-triggered animations */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+[data-animate="fade-up"] { transform: translateY(40px); }
+[data-animate="fade-in"] { transform: translateY(0) scale(0.98); }
+[data-animate="slide-left"] { transform: translateX(-60px); opacity: 0; }
+[data-animate="slide-left"].visible { transform: translateX(0); opacity: 1; }
+[data-animate="slide-right"] { transform: translateX(60px); opacity: 0; }
+[data-animate="slide-right"].visible { transform: translateX(0); opacity: 1; }
 
-<p>Need Help? Make A Call</p>
-		
+/* Staggered children */
+[data-stagger] > * { opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-stagger].visible > *:nth-child(1) { transition-delay: 0ms; }
+[data-stagger].visible > *:nth-child(2) { transition-delay: 120ms; }
+[data-stagger].visible > *:nth-child(3) { transition-delay: 240ms; }
+[data-stagger].visible > *:nth-child(4) { transition-delay: 360ms; }
+[data-stagger].visible > *:nth-child(5) { transition-delay: 480ms; }
+[data-stagger].visible > * { opacity: 1; transform: translateY(0); }
 
-	</div>
-	
-	<div id="text-4030939540" class="text">
-		
+/* Animated gradient background */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animated-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+}
 
-<h1>0448 159 254</h1>
-		
+/* Parallax hero */
+.parallax-hero {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
 
-	</div>
-	
+/* Premium button shimmer */
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+.btn-shimmer { position: relative; overflow: hidden; }
+.btn-shimmer::after {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
 
+/* Smooth image reveal */
+img { transition: opacity 0.6s ease, transform 0.6s ease; }
+img:hover { transform: scale(1.02); }
 
-<p><i class="icon-envelop"></i> aaron@nexgenroofing.com.au</p>
+/* Line draw animation */
+@keyframes line-grow { from { width: 0; } to { width: 100%; } }
+.line-reveal { overflow: hidden; }
+.line-reveal.visible > div, .line-reveal.visible > span {
+    animation: line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+</style>
 
+<style>
 
-		</div>
-					</div>
+/* Design Polish: tokens */
+:root {
+  --dp-bg0: #1F1F2F;
+  --dp-bg1: #1e1e2d;
+  --dp-card: rgba(0,0,0,0.02);
+  --dp-card-hover: rgba(0,0,0,0.04);
+  --dp-text: #F57F01;
+  --dp-muted: rgba(0,0,0,0.55);
+  --dp-border: rgba(0,0,0,0.08);
+  --dp-border-hover: rgba(0,0,0,0.15);
+  --dp-primary: #446084;
+  --dp-accent: #F57F01;
+  --dp-radius: 16px;
+  --dp-shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --dp-shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+  --dp-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dp-t-hero: clamp(44px, 5vw, 96px);
+  --dp-t-h2: clamp(28px, 2.5vw, 48px);
+  --dp-t-body: clamp(15px, 1.1vw, 18px);
+  --dp-section-pad: clamp(56px, 7vw, 112px);
+}
+/* Design Polish: subtle noise texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+/* Design Polish: section rhythm */
+section {
+  padding-top: var(--dp-section-pad, 80px);
+  padding-bottom: var(--dp-section-pad, 80px);
+}
+section:first-of-type {
+  padding-top: 0;
+}
+/* Design Polish: card surfaces */
+.dp-card,
+[class*="backdrop-blur"],
+[class*="bg-white/"],
+[class*="bg-black/"] {
+  border: 1px solid var(--dp-border);
+  border-radius: var(--dp-radius);
+  box-shadow: var(--dp-shadow-sm);
+  transition: all 0.4s var(--dp-ease);
+}
+.dp-card:hover,
+[class*="backdrop-blur"]:hover,
+[class*="bg-white/"]:hover,
+[class*="bg-black/"]:hover {
+  border-color: var(--dp-border-hover);
+  box-shadow: var(--dp-shadow-lg);
+  transform: translateY(-4px);
+}
+/* Design Polish: gradient hero heading */
+.dp-gradient-text {
+  background: linear-gradient(135deg, #F57F01 0%, #F57F01 50%, #F57F01 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: dp-gradient-shift 6s ease infinite;
+}
+@keyframes dp-gradient-shift {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+/* Design Polish: sticky nav */
+nav, header nav, [class*="fixed"][class*="top"] {
+  backdrop-filter: blur(12px) saturate(1.5);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
+}
+</style>
+</head>
+<body class="bg-white text-gray-900">
 
-	
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 backdrop-blur-md bg-white/80 border-b border-gray-200/20">
+        <div class="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
+            <div class="text-xl font-bold text-gray-900">NexGen Roofing</div>
+            <div class="flex gap-8 items-center">
+                <a href="#home" class="nav-link text-gray-700">Home</a>
+                <a href="#about" class="nav-link text-gray-700">About Us</a>
+                <a href="#services" class="nav-link text-gray-700">Services</a>
+                <a href="#gallery" class="nav-link text-gray-700">Gallery</a>
+                <a href="#contact" class="nav-link text-gray-700">Contact Us</a>
+                <button class="secondary-button">Get in Touch</button>
+            </div>
+        </div>
+    </nav>
 
-	<div id="col-1817615461" class="col small-12 large-12">
-				<div class="col-inner">
-			
-			
-
-
-		</div>
-					</div>
-
-	
-
-
-
-</div></div></li>            </ul>
-          </div>
-
-          <!-- Mobile Right Elements -->
-          <div class="flex-col show-for-medium flex-right">
-            <ul class="mobile-nav nav nav-right ">
-              <li class="nav-icon has-icon">
-  		<a href="https://nexgenroofing.com.au/#" data-open="#main-menu" data-pos="right" data-bg="main-menu-overlay" data-color="" class="is-small" aria-label="Menu" aria-controls="main-menu" aria-expanded="false">
-		
-		  <i class="icon-menu"></i>
-		  		</a>
-	</li>            </ul>
-          </div>
-
-      </div>
-     
-            <div class="container"><div class="top-divider full-width"></div></div>
-      </div>
-<div class="header-bg-container fill"><div class="header-bg-image fill"></div><div class="header-bg-color fill"></div></div>		</div>
-	</header>
-
-	
-	<main id="main" class="">
-
-
-<div id="content" role="main" class="content-area">
-
-		
-			
-<div class="slider-wrapper relative" id="slider-1368364405">
-    <div class="slider slider-nav-circle slider-nav-large slider-nav-light slider-style-normal is-draggable flickity-enabled" data-flickity-options="{
-            &quot;cellAlign&quot;: &quot;center&quot;,
-            &quot;imagesLoaded&quot;: true,
-            &quot;lazyLoad&quot;: 1,
-            &quot;freeScroll&quot;: false,
-            &quot;wrapAround&quot;: true,
-            &quot;autoPlay&quot;: 3000,
-            &quot;pauseAutoPlayOnHover&quot; : true,
-            &quot;prevNextButtons&quot;: true,
-            &quot;contain&quot; : true,
-            &quot;adaptiveHeight&quot; : true,
-            &quot;dragThreshold&quot; : 10,
-            &quot;percentPosition&quot;: true,
-            &quot;pageDots&quot;: true,
-            &quot;rightToLeft&quot;: false,
-            &quot;draggable&quot;: true,
-            &quot;selectedAttraction&quot;: 0.1,
-            &quot;parallax&quot; : 0,
-            &quot;friction&quot;: 0.6        }" tabindex="0">
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen pt-24 pb-20 overflow-hidden bg-white flex items-center" data-animate="fade-up">
+        <div class="gradient-orb-1"></div>
+        <div class="gradient-orb-2"></div>
         
-
-	
-	
-
-	
-	
-
-	
-	
-
-	
-	
-
-
-     <div class="flickity-viewport" style="height: 787.781px; touch-action: pan-y;"><div class="flickity-slider" style="left: 0px; transform: translateX(-200%);"><div class="img has-hover x md-x lg-x y md-y lg-y" id="image_58125972" style="position: absolute; left: 0%;" aria-hidden="true">
-								<div class="img-inner dark">
-			<img fetchpriority="high" decoding="async" width="1020" height="419" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/1-1.jpg" class="attachment-large size-large" alt="">						
-					</div>
-								
-
-	</div><div class="img has-hover x md-x lg-x y md-y lg-y" id="image_194295063" style="position: absolute; left: 100%;" aria-hidden="true">
-								<div class="img-inner dark">
-			<img decoding="async" width="1020" height="419" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/2-1.jpg" class="attachment-large size-large" alt="">						
-					</div>
-								
-
-	</div><div class="img has-hover x md-x lg-x y md-y lg-y is-selected" id="image_2029738526" style="position: absolute; left: 200%;">
-								<div class="img-inner dark">
-			<img decoding="async" width="1020" height="419" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/3-1.jpg" class="attachment-large size-large" alt="">						
-					</div>
-								
-
-	</div><div class="img has-hover x md-x lg-x y md-y lg-y" id="image_1584596377" aria-hidden="true" style="position: absolute; left: 300%;">
-								<div class="img-inner dark">
-			<img loading="lazy" decoding="async" width="1020" height="419" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/4-1.jpg" class="attachment-large size-large" alt="">						
-					</div>
-								
-
-	</div></div></div><button class="flickity-button flickity-prev-next-button previous" type="button" aria-label="Previous"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg></button><button class="flickity-button flickity-prev-next-button next" type="button" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button><ol class="flickity-page-dots"><li class="dot" aria-label="Page dot 1"></li><li class="dot" aria-label="Page dot 2"></li><li class="dot is-selected" aria-label="Page dot 3" aria-current="step"></li><li class="dot" aria-label="Page dot 4"></li></ol></div>
-
-     <div class="loading-spin dark large centered" style="display: none;"></div>
-
-     	</div>
-
-
-	<section class="section" id="section_1512728478">
-		<div class="bg section-bg fill bg-fill bg-loaded">
-
-			
-			
-			
-
-		</div>
-
-		
-
-		<div class="section-content relative">
-			
-
-<div class="row" id="row-1380010850">
-
-
-	<div id="col-618372496" class="col medium-4 small-12 large-4">
-				<div class="col-inner">
-			
-			
-
-	<div class="img has-hover x md-x lg-x y md-y lg-y" id="image_1877081090">
-								<div class="img-inner dark">
-			<img loading="lazy" decoding="async" width="399" height="358" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/welcome.jpg" class="attachment-large size-large" alt="">						
-					</div>
-								
-
-	</div>
-	
-
-
-		</div>
-					</div>
-
-	
-
-	<div id="col-1599558674" class="col medium-8 small-12 large-8">
-				<div class="col-inner">
-			
-			
-
-	<div id="text-1247649545" class="text">
-		
-
-<h1>NexGen Roofing And Construction</h1>
-		
-
-	</div>
-	
-	<div id="text-652892172" class="text">
-		
-
-<p>Licenced And Insured For All Types Of Roofing Work</p>
-		
-
-	</div>
-	
-	<div id="text-146523073" class="text">
-		
-
-<p>When you need a reliable roofing specialist, contact NexGen Roofing &amp; Construction. We offer competitive rates on all our roofing services including new roof construction, roof maintenance and repairs.</p>
-<p>At NexGen Roofing &amp; Construction we provide all aspects of roofing including gutters, down pipes, as well as whirlybird installation, repair and service. whether you have a large-scale roof replacement project or you need you roof resealed, we can take care of your roof work. From new gutters, flashing or whirlybirds to general roof maintenance, we can help.</p>
-		
-
-	</div>
-	
-<div class="row row-collapse" id="row-855682179">
-
-
-	<div id="col-1960143530" class="col medium-3 small-12 large-3">
-				<div class="col-inner">
-			
-			
-
-<a href="https://nexgenroofing.com.au/about-us/" target="_self" class="button secondary">
-    <span>Read More</span>
-  </a>
-
-
-
-		</div>
-					</div>
-
-	
-
-	<div id="col-98566432" class="col medium-4 small-12 large-4">
-				<div class="col-inner">
-			
-			
-
-<a href="https://nexgenroofing.com.au/contact-us/" target="_self" class="button primary">
-    <span>Contact NexGen Today</span>
-  </a>
-
-
-
-		</div>
-					</div>
-
-	
-
-</div>
-
-		</div>
-					</div>
-
-	
-
-</div>
-
-		</div>
-
-		
-
-	</section>
-	
-	<section class="section" id="section_1123643657">
-		<div class="bg section-bg fill bg-fill bg-loaded">
-
-			
-			
-			
-
-		</div>
-
-		
-
-		<div class="section-content relative">
-			
-
-<div class="row row-large align-equal" id="row-1376447852">
-
-
-	<div id="col-1649224636" class="col medium-4 small-12 large-4">
-				<div class="col-inner text-center">
-			
-			
-
-	<div class="img has-hover x md-x lg-x y md-y lg-y" id="image_157312165">
-								<div class="img-inner dark">
-			<img loading="lazy" decoding="async" width="82" height="81" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/icon1.png" class="attachment-large size-large" alt="">						
-					</div>
-								
-
-	</div>
-	
-
-	<div id="text-3283496153" class="text">
-		
-
-<h2 class="thin-font">Customer Satisfaction</h2>
-		
-
-	</div>
-	
-<div class="is-divider divider clearfix" style="margin-top:0.4em;margin-bottom:0.4em;max-width:50px;background-color:rgb(245, 127, 1);"></div>
-
-	<div id="text-346795001" class="text">
-		
-
-<p>We pride ourselves in our workmanship and our dedication to our individual clients.</p>
-		
-
-	</div>
-	
-
-		</div>
-					</div>
-
-	
-
-	<div id="col-1857744550" class="col medium-4 small-12 large-4">
-				<div class="col-inner text-center">
-			
-			
-
-	<div class="img has-hover x md-x lg-x y md-y lg-y" id="image_1538358540">
-								<div class="img-inner dark">
-			<img loading="lazy" decoding="async" width="83" height="81" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/icon2.png" class="attachment-large size-large" alt="">						
-					</div>
-								
-
-	</div>
-	
-
-	<div id="text-3614235213" class="text">
-		
-
-<h2 class="thin-font">Licensed, Insured And Bonded</h2>
-		
-
-	</div>
-	
-<div class="is-divider divider clearfix" style="margin-top:0.4em;margin-bottom:0.4em;max-width:50px;background-color:rgb(245, 127, 1);"></div>
-
-	<div id="text-336981702" class="text">
-		
-
-<p>We are fully licensed, insured, and bonded, so that we can help you with any projects.</p>
-		
-
-	</div>
-	
-
-		</div>
-					</div>
-
-	
-
-	<div id="col-387660064" class="col medium-4 small-12 large-4">
-				<div class="col-inner text-center">
-			
-			
-
-	<div class="img has-hover x md-x lg-x y md-y lg-y" id="image_1854717058">
-								<div class="img-inner dark">
-			<img loading="lazy" decoding="async" width="82" height="81" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/icon3.png" class="attachment-large size-large" alt="">						
-					</div>
-								
-
-	</div>
-	
-
-	<div id="text-3307824309" class="text">
-		
-
-<h2 class="thin-font">Quality And Efficiency</h2>
-		
-
-	</div>
-	
-<div class="is-divider divider clearfix" style="margin-top:0.4em;margin-bottom:0.4em;max-width:50px;background-color:rgb(245, 127, 1);"></div>
-
-	<div id="text-1122249513" class="text">
-		
-
-<p>If you want a job done with excellent quality then do not hesitate to call us.</p>
-		
-
-	</div>
-	
-
-		</div>
-					</div>
-
-	
-
-
-
-</div>
-
-		</div>
-
-		
-
-	</section>
-	
-	<section class="section" id="section_928262702">
-		<div class="bg section-bg fill bg-fill bg-loaded">
-
-			
-			
-			
-
-		</div>
-
-		
-
-		<div class="section-content relative">
-			
-
-<div class="row align-equal" id="row-792391283">
-
-
-	<div id="col-1440616689" class="col medium-4 small-12 large-4">
-				<div class="col-inner text-left">
-			
-			
-
-	<div class="img has-hover x md-x lg-x y md-y lg-y" id="image_1295532347">
-								<div class="img-inner image-cover dark" style="padding-top:75%;">
-			<img loading="lazy" decoding="async" width="768" height="648" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/newroof.jpg" class="attachment-large size-large" alt="">						
-					</div>
-								
-
-	</div>
-	
-
-
-  <div class="banner has-hover" id="banner-870733759">
-          <div class="banner-inner fill">
-        <div class="banner-bg fill">
-            <div class="bg fill bg-fill bg-loaded"></div>
-                                    
+        <div class="max-w-7xl mx-auto w-full relative z-10">
+            <div class="grid grid-cols-2 gap-16 items-center" data-stagger>
+                <!-- Left Content -->
+                <div>
+                    <h1 class="hero-heading text-gray-900 mb-6 dp-gradient-text">
+                        NexGen Roofing & Construction
+                    </h1>
+                    <p class="text-xl font-light tracking-wide text-gray-600 mb-8 leading-relaxed">
+                        Licensed, insured roofing specialist providing competitive rates on new roof construction, maintenance, repairs, gutters, and whirlybird installation.
+                    </p>
+                    <div class="flex gap-4">
+                        <button class="cta-button">Get in Touch</button>
                     </div>
-		
-        <div class="banner-layers container">
-            <div class="fill banner-link"></div>            
+                </div>
 
-   <div id="text-box-1133897944" class="text-box banner-layer x5 md-x5 lg-x5 y0 md-y0 lg-y0 res-text">
-                                <div class="text-box-content text dark">
-              
-              <div class="text-inner text-left">
-                  
+                <!-- Right Visual -->
+                <div class="relative h-96">
+                    <svg class="w-full h-full" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                        <!-- Layered abstract shapes -->
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#F57F01;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#446084;stop-opacity:0.2" />
+                            </linearGradient>
+                            <linearGradient id="grad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#446084;stop-opacity:0.25" />
+                                <stop offset="100%" style="stop-color:#F57F01;stop-opacity:0.15" />
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Large geometric shapes -->
+                        <circle cx="200" cy="200" r="150" fill="url(#grad1)" opacity="0.8"/>
+                        <rect x="100" y="100" width="200" height="200" fill="url(#grad2)" opacity="0.6" transform="rotate)"/>
+                        <circle cx="320" cy="80" r="80" fill="#F57F01" opacity="0.15"/>
+                        <path d="M 50 250 Q 150 150 300 250" stroke="#446084" stroke-width="2" fill="none" opacity="0.3"/>
+                        <circle cx="100" cy="300" r="60" fill="#446084" opacity="0.1"/>
+                    </svg>
+                </div>
+            </div>
 
-	<div id="text-1326061832" class="text">
-		
-
-<h4>New Roof Installation</h4>
-		
-
-	</div>
-	
-<p>We work with the best materials and have the experience to take on a roofing job on any type of home, regardless of the complexity of the architecture.</p>
-<a href="https://nexgenroofing.com.au/service/" target="_self" class="button primary">
-    <span>View More</span>
-  </a>
-
-
-
-              </div>
-           </div>
-                            
-
-    </div>
- 
-
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+                <span class="text-xs tracking-widest text-gray-500 mb-2">SCROLL</span>
+                <svg class="w-5 h-5 text-gray-400 scroll-indicator" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
         </div>
-      </div>
-
-            
-
-  </div>
+    </section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#F57F01" fill-opacity="0.06"/></svg></div>
 
 
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
 
-		</div>
-					</div>
-
-	
-
-	<div id="col-897837415" class="col medium-4 small-12 large-4">
-				<div class="col-inner text-left">
-			
-			
-
-	<div class="img has-hover x md-x lg-x y md-y lg-y" id="image_1571185204">
-								<div class="img-inner image-cover dark" style="padding-top:75%;">
-			<img loading="lazy" decoding="async" width="768" height="648" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/skylight.jpg" class="attachment-large size-large" alt="">						
-					</div>
-								
-
-	</div>
-	
-
-
-  <div class="banner has-hover" id="banner-517600032">
-          <div class="banner-inner fill">
-        <div class="banner-bg fill">
-            <div class="bg fill bg-fill bg-loaded"></div>
-                                    
-                    </div>
-		
-        <div class="banner-layers container">
-            <div class="fill banner-link"></div>            
-
-   <div id="text-box-868209117" class="text-box banner-layer x5 md-x5 lg-x5 y0 md-y0 lg-y0 res-text">
-                                <div class="text-box-content text dark">
-              
-              <div class="text-inner text-left">
-                  
-
-	<div id="text-974066554" class="text">
-		
-
-<h4>Skylight Installation</h4>
-		
-
-	</div>
-	
-<p>Whether it’s for aesthetic reasons or energy-efficient benefits, we are fully equipped to handle your skylight installation and repair needs.</p>
-<a href="https://nexgenroofing.com.au/service/" target="_self" class="button primary">
-    <span>View More</span>
-  </a>
-
-
-
-              </div>
-           </div>
-                            
-
-    </div>
- 
-
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-gray-50" data-animate="fade-up">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="grid grid-cols-2 gap-16 items-start" data-stagger>
+                <div>
+                    <h2 class="section-heading text-gray-900 mb-2">About</h2>
+                    <div class="w-16 h-1 bg-gradient-to-r from-gray-900 to-gray-600 mb-12"></div>
+                </div>
+                <div>
+                    <p class="body-text text-gray-700 mb-6">
+                        When you need a reliable roofing specialist, contact NexGen Roofing & Construction. We offer competitive rates on all our roofing services including new roof construction, roof maintenance and repairs.
+                    </p>
+                    <p class="body-text text-gray-700">
+                        At NexGen Roofing & Construction we provide all aspects of roofing including gutters, down pipes, as well as whirlybird installation, repair and service. Whether you have a large-scale roof replacement project or you need your roof resealed, we can take care of your roof work.
+                    </p>
+                    <p class="text-3xl font-light text-gray-400 mt-12 tracking-tight">Need Help? Make A Call</p>
+                    <p class="text-4xl font-bold text-gray-900 mt-2">0448 159 254</p>
+                </div>
+            </div>
         </div>
-      </div>
-
-            
-
-  </div>
+    </section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#F57F01" fill-opacity="0.06"/></svg></div>
 
 
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
 
-		</div>
-					</div>
+    <!-- Services Section -->
+    <section id="services" class="py-32 bg-gradient-to-b from-white to-gray-50 relative" data-animate="fade-in">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="mb-20">
+                <h2 class="section-heading text-gray-900">Services</h2>
+            </div>
 
-	
+            <div class="grid grid-cols-3 gap-6 auto-rows-max" data-stagger>
+                <!-- Large Card -->
+                <div class="col-span-2 row-span-2 glass-card p-8 backdrop-blur-xl bg-gradient-to-br from-gray-900 to-gray-800 border border-white/10 rounded-2xl">
+                    <h3 class="text-3xl font-bold text-white mb-4">New Roof Installation</h3>
+                    <p class="body-text text-gray-300">
+                        Complete new roof construction with competitive rates and professional installation.
+                    </p>
+                </div>
 
-	<div id="col-2059748759" class="col medium-4 small-12 large-4">
-				<div class="col-inner text-left">
-			
-			
+                <!-- Small Cards -->
+                <div class="glass-card p-6 backdrop-blur-xl bg-white border border-gray-200 rounded-2xl">
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Quality & Efficiency</h3>
+                    <p class="text-sm text-gray-600">Professional craftsmanship on every project</p>
+                </div>
 
-	<div class="img has-hover x md-x lg-x y md-y lg-y" id="image_1237687411">
-								<div class="img-inner image-cover dark" style="padding-top:75%;">
-			<img loading="lazy" decoding="async" width="768" height="648" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/roofsealing.jpg" class="attachment-large size-large" alt="">						
-					</div>
-								
+                <div class="glass-card p-6 backdrop-blur-xl bg-white border border-gray-200 rounded-2xl">
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Licensed, Insured & Bonded</h3>
+                    <p class="text-sm text-gray-600">Full coverage for peace of mind</p>
+                </div>
 
-	</div>
-	
+                <div class="glass-card p-6 backdrop-blur-xl bg-white border border-gray-200 rounded-2xl">
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Colorbond Flashings</h3>
+                    <p class="text-sm text-gray-600">Durable and weather-resistant solutions</p>
+                </div>
 
+                <div class="glass-card p-6 backdrop-blur-xl bg-white border border-gray-200 rounded-2xl">
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Skylight Installation</h3>
+                    <p class="text-sm text-gray-600">Bring natural light to your home</p>
+                </div>
 
-  <div class="banner has-hover" id="banner-1073249043">
-          <div class="banner-inner fill">
-        <div class="banner-bg fill">
-            <div class="bg fill bg-fill bg-loaded"></div>
-                                    
-                    </div>
-		
-        <div class="banner-layers container">
-            <div class="fill banner-link"></div>            
-
-   <div id="text-box-473253038" class="text-box banner-layer x5 md-x5 lg-x5 y0 md-y0 lg-y0 res-text">
-                                <div class="text-box-content text dark">
-              
-              <div class="text-inner text-left">
-                  
-
-	<div id="text-1967690930" class="text">
-		
-
-<h4>Roof Cleaning And Roof Sealing</h4>
-		
-
-	</div>
-	
-<p>Having a roof over your head satisfies one of your basic needs. With a good roof, you can stay safe, warm, and dry against the harshest summer sun or torrents of rain.</p>
-<a href="https://nexgenroofing.com.au/service/" target="_self" class="button primary">
-    <span>View More</span>
-  </a>
-
-
-
-              </div>
-           </div>
-                            
-
-    </div>
- 
-
+                <div class="glass-card p-6 backdrop-blur-xl bg-white border border-gray-200 rounded-2xl">
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Customer Satisfaction</h3>
+                    <p class="text-sm text-gray-600">Your trust is our priority</p>
+                </div>
+            </div>
         </div>
-      </div>
-
-            
-
-  </div>
+    </section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#F57F01" fill-opacity="0.06"/></svg></div>
 
 
+    <!-- Section Divider -->
+    <div class="section-divider"></div>
 
-		</div>
-					</div>
+    <!-- CTA Band -->
+    <section class="py-32 bg-gradient-to-r from-gray-900 to-gray-800 relative overflow-hidden" data-animate="fade-up">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 dot-pattern opacity-5"></div>
+        <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-500/10 to-transparent rounded-full filter blur-3xl"></div>
+        
+        <div class="max-w-7xl mx-auto px-8 relative z-10 text-center">
+            <h2 class="text-4xl md:text-5xl font-light tracking-tight text-white mb-8">
+                Ready to protect your home?
+            </h2>
+            <p class="text-lg text-gray-300 mb-12 max-w-2xl mx-auto">
+                Contact NexGen Roofing & Construction today for a free estimate and consultation on your roofing needs.
+            </p>
+            <button class="cta-button text-lg px-8 py-4">Get in Touch</button>
+        </div>
+    </section>
 
-	
-
-
-
-</div>
-
-		</div>
-
-		
-
-	</section>
-	
-	<section class="section" id="section_701817732">
-		<div class="bg section-bg fill bg-fill bg-loaded">
-
-			
-			
-			
-
-		</div>
-
-		
-
-		<div class="section-content relative">
-			
-
-<div class="row" id="row-1428368028">
-
-
-	<div id="col-1019242521" class="col small-12 large-12">
-				<div class="col-inner text-center">
-			
-			
-
-	<div id="text-877587473" class="text">
-		
-
-<h1>Our Project Work</h1>
-		
-
-	</div>
-	
-	<div id="gap-1177407997" class="gap-element clearfix" style="display:block; height:auto;">
-		
-
-	</div>
-	
-
-
-  
-    <div class="row large-columns-3 medium-columns- small-columns-2 row-small">
-  <div class="gallery-col col">
-          <div class="col-inner">
-            <a class="image-lightbox lightbox-gallery" href="https://nexgenroofing.com.au/wp-content/uploads/2022/11/1.jpg" title="">            <div class="box has-hover gallery-box box-overlay dark">
-              <div class="box-image image-cover" style="padding-top:66%;">
-                <img loading="lazy" decoding="async" width="708" height="400" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/1-708x400.jpg" class="attachment-medium size-medium" alt="" ids="103,104,105,106,107,108" col_spacing="small" columns="3" image_height="66%">                                  <div class="overlay fill" style="background-color: rgba(0,0,0,.15)">
-                  </div>
-                                                              </div>
-              <div class="box-text text-left">
-                 <p></p>
-              </div>
+    <!-- Footer -->
+    <footer class="py-16 bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-8">
+            <div class="grid grid-cols-4 gap-12 mb-12" data-stagger>
+                <div>
+                    <h3 class="text-2xl font-light text-gray-900 mb-2">NexGen Roofing</h3>
+                    <p class="text-sm text-gray-600">Professional roofing construction and repair services.</p>
+                </div>
+                <div>
+                    <p class="text-xs tracking-widest text-gray-500 mb-4 font-semibold">COMPANY</p>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-sm text-gray-700 hover:text-orange-500 transition">Home</a></li>
+                        <li><a href="#about" class="text-sm text-gray-700 hover:text-orange-500 transition">About Us</a></li>
+                        <li><a href="#services" class="text-sm text-gray-700 hover:text-orange-500 transition">Services</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-xs tracking-widest text-gray-500 mb-4 font-semibold">SERVICES</p>
+                    <ul class="space-y-2">
+                        <li><a href="#services" class="text-sm text-gray-700 hover:text-orange-500 transition">New Roof Installation</a></li>
+                        <li><a href="#services" class="text-sm text-gray-700 hover:text-orange-500 transition">Colorbond Flashings</a></li>
+                        <li><a href="#services" class="text-sm text-gray-700 hover:text-orange-500 transition">Skylight Installation</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-xs tracking-widest text-gray-500 mb-4 font-semibold">CONTACT</p>
+                    <p class="text-sm text-gray-700 font-semibold">0448 159 254</p>
+                </div>
             </div>
-            </a>          </div>
-         </div><div class="gallery-col col">
-          <div class="col-inner">
-            <a class="image-lightbox lightbox-gallery" href="https://nexgenroofing.com.au/wp-content/uploads/2022/11/2.jpg" title="">            <div class="box has-hover gallery-box box-overlay dark">
-              <div class="box-image image-cover" style="padding-top:66%;">
-                <img loading="lazy" decoding="async" width="708" height="400" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/2-708x400.jpg" class="attachment-medium size-medium" alt="" ids="103,104,105,106,107,108" col_spacing="small" columns="3" image_height="66%">                                  <div class="overlay fill" style="background-color: rgba(0,0,0,.15)">
-                  </div>
-                                                              </div>
-              <div class="box-text text-left">
-                 <p></p>
-              </div>
+            <div class="border-t border-gray-200 pt-8 text-center text-sm text-gray-600">
+                <p>NexGen Roofing & Construction. All rights reserved.</p>
             </div>
-            </a>          </div>
-         </div><div class="gallery-col col">
-          <div class="col-inner">
-            <a class="image-lightbox lightbox-gallery" href="https://nexgenroofing.com.au/wp-content/uploads/2022/11/3.jpg" title="">            <div class="box has-hover gallery-box box-overlay dark">
-              <div class="box-image image-cover" style="padding-top:66%;">
-                <img loading="lazy" decoding="async" width="708" height="400" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/3-708x400.jpg" class="attachment-medium size-medium" alt="" ids="103,104,105,106,107,108" col_spacing="small" columns="3" image_height="66%">                                  <div class="overlay fill" style="background-color: rgba(0,0,0,.15)">
-                  </div>
-                                                              </div>
-              <div class="box-text text-left">
-                 <p></p>
-              </div>
-            </div>
-            </a>          </div>
-         </div><div class="gallery-col col">
-          <div class="col-inner">
-            <a class="image-lightbox lightbox-gallery" href="https://nexgenroofing.com.au/wp-content/uploads/2022/11/4.jpg" title="">            <div class="box has-hover gallery-box box-overlay dark">
-              <div class="box-image image-cover" style="padding-top:66%;">
-                <img loading="lazy" decoding="async" width="708" height="400" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/4-708x400.jpg" class="attachment-medium size-medium" alt="" ids="103,104,105,106,107,108" col_spacing="small" columns="3" image_height="66%">                                  <div class="overlay fill" style="background-color: rgba(0,0,0,.15)">
-                  </div>
-                                                              </div>
-              <div class="box-text text-left">
-                 <p></p>
-              </div>
-            </div>
-            </a>          </div>
-         </div><div class="gallery-col col">
-          <div class="col-inner">
-            <a class="image-lightbox lightbox-gallery" href="https://nexgenroofing.com.au/wp-content/uploads/2022/11/5.jpg" title="">            <div class="box has-hover gallery-box box-overlay dark">
-              <div class="box-image image-cover" style="padding-top:66%;">
-                <img loading="lazy" decoding="async" width="708" height="400" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/5-708x400.jpg" class="attachment-medium size-medium" alt="" ids="103,104,105,106,107,108" col_spacing="small" columns="3" image_height="66%">                                  <div class="overlay fill" style="background-color: rgba(0,0,0,.15)">
-                  </div>
-                                                              </div>
-              <div class="box-text text-left">
-                 <p></p>
-              </div>
-            </div>
-            </a>          </div>
-         </div><div class="gallery-col col">
-          <div class="col-inner">
-            <a class="image-lightbox lightbox-gallery" href="https://nexgenroofing.com.au/wp-content/uploads/2022/11/6.jpg" title="">            <div class="box has-hover gallery-box box-overlay dark">
-              <div class="box-image image-cover" style="padding-top:66%;">
-                <img loading="lazy" decoding="async" width="708" height="400" src="https://nexgenroofing.com.au/wp-content/uploads/2022/11/6-708x400.jpg" class="attachment-medium size-medium" alt="" ids="103,104,105,106,107,108" col_spacing="small" columns="3" image_height="66%">                                  <div class="overlay fill" style="background-color: rgba(0,0,0,.15)">
-                  </div>
-                                                              </div>
-              <div class="box-text text-left">
-                 <p></p>
-              </div>
-            </div>
-            </a>          </div>
-         </div></div>
+        </div>
+    </footer>
 
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
 
-		</div>
-					</div>
+        // Nav transparency on scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-white/95');
+            } else {
+                nav.classList.remove('bg-white/95');
+            }
+        });
+    </script>
 
-	
+<script>
+// Intersection Observer for scroll animations
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
+    document.querySelectorAll('[data-animate], [data-stagger]').forEach(el => {
+        observer.observe(el);
+    });
 
+    // Parallax on hero
+    const hero = document.querySelector('.parallax-hero');
+    if (hero) {
+        window.addEventListener('scroll', () => {
+            const scroll = window.pageYOffset;
+            hero.style.transform = `translateY(${scroll * 0.3}px)`;
+        }, { passive: true });
+    }
 
-</div>
+    // Add shimmer to primary CTA buttons
+    document.querySelectorAll('button, a').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+        if (el.classList.contains('bg-primary') || el.classList.contains('bg-accent') ||
+            text.includes('risk talks') || text.includes('get started') || text.includes('contact')) {
+            if (el.querySelector('span') || el.childNodes.length <= 3) {
+                el.classList.add('btn-shimmer');
+            }
+        }
+    });
+});
+</script>
 
-		</div>
-
-		
-
-	</section>
-	
-
-		
-				
-</div>
-
-
-
-</main>
-
-<footer id="footer" class="footer-wrapper">
-
-	
-<!-- FOOTER 1 -->
-<div class="footer-widgets footer footer-1">
-		<div class="row large-columns-1 mb-0">
-	   		<div id="custom_html-3" class="widget_text col pb-0 widget widget_custom_html"><div class="textwidget custom-html-widget"><div class="smls-main-logo-outer-486641506 smls-main-logo-wrapper">
-        <div class="smls-note-admin">
-         Note: Carousel will only load on frontend.     </div>
-      <div class="smls-carousel-logo smls-carousel-template-2 smls-carousel-arrow-type-1 smls-hover-type-1 owl-carousel owl-theme owl-responsive-768 owl-loaded" data-autoplay="true" data-id="smls_1971021" data-pager="false" data-controls="true" data-controls-type="arrow" data-slide-count="4" data-auto-speed="2000" data-template="template-2" data-pager-template="" data-arrow-type="type-1">
-                 
-      
-      
-      
-      
-      
-      
-      
-<div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-2030px, 0px, 0px); transition: 0.25s; width: 4640px;"><div class="owl-item cloned" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-3.png" alt="">
-         </div>
-</div></div><div class="owl-item cloned" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-6.png" alt="">
-         </div>
-</div></div><div class="owl-item cloned" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-8.png" alt="">
-         </div>
-</div></div><div class="owl-item cloned" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-2.png" alt="">
-         </div>
-</div></div><div class="owl-item" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-1.png" alt="">
-         </div>
-</div></div><div class="owl-item" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-5.png" alt="">
-         </div>
-</div></div><div class="owl-item" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-4.png" alt="">
-         </div>
-</div></div><div class="owl-item active" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-7.png" alt="">
-         </div>
-</div></div><div class="owl-item active" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-3.png" alt="">
-         </div>
-</div></div><div class="owl-item active" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-6.png" alt="">
-         </div>
-</div></div><div class="owl-item active" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-8.png" alt="">
-         </div>
-</div></div><div class="owl-item" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-2.png" alt="">
-         </div>
-</div></div><div class="owl-item cloned" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-1.png" alt="">
-         </div>
-</div></div><div class="owl-item cloned" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-5.png" alt="">
-         </div>
-</div></div><div class="owl-item cloned" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-4.png" alt="">
-         </div>
-</div></div><div class="owl-item cloned" style="width: 290px; margin-right: 0px;"><div class="smls-carousel-four-items  ">
-     <div class="smls-car-img-wrap">
-               <img src="https://uniwebau.tech/nexgen/wp-content/uploads/2022/11/client-7.png" alt="">
-         </div>
-</div></div></div></div><div class="owl-controls"><div class="owl-nav"><div class="owl-prev" style=""><i class="fa fa-angle-left" aria-hidden="true"></i></div><div class="owl-next" style=""><i class="fa fa-angle-right" aria-hidden="true"></i></div></div><div class="owl-dots" style="display: none;"></div></div></div>
-  </div>
-  </div></div>        
-		</div>
-</div>
-
-<!-- FOOTER 2 -->
-<div class="footer-widgets footer footer-2 dark">
-		<div class="row dark large-columns-1 mb-0">
-	   		
-		<div id="block_widget-2" class="col pb-0 widget block_widget">
-		
-		<div class="row row-collapse align-equal" id="row-1701520907">
-
-
-	<div id="col-563115696" class="col medium-4 small-12 large-4">
-				<div class="col-inner">
-			
-			
-
-<ul class="sidebar-wrapper ul-reset"><div id="text-13" class="col pb-0 widget widget_text"><span class="widget-title">Why choose us?</span><div class="is-divider small"></div>			<div class="textwidget"><p>All our contractors are certified, licensed and insured so that they can do justice to your investment. From the initial site inspection, consultation &amp; careful evaluation to quoting and beyond, we guide you through the entire project and ensure all work is being done the perfect way.</p>
-</div>
-		</div></ul>
-
-
-		</div>
-					</div>
-
-	
-
-	<div id="col-1579572336" class="col medium-5 small-12 large-5">
-				<div class="col-inner">
-			
-			
-
-<ul class="sidebar-wrapper ul-reset"><div id="nav_menu-2" class="col pb-0 widget widget_nav_menu"><span class="widget-title">Our Services</span><div class="is-divider small"></div><div class="menu-our-services-container"><ul id="menu-our-services" class="menu"><li id="menu-item-85" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-85"><a href="https://nexgenroofing.com.au/service/">New Roof Installation</a></li>
-<li id="menu-item-86" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-86"><a href="https://nexgenroofing.com.au/service/">Colorbond flashings</a></li>
-<li id="menu-item-87" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-87"><a href="https://nexgenroofing.com.au/service/">Skylight Installation</a></li>
-<li id="menu-item-88" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-88"><a href="https://nexgenroofing.com.au/service/">Colorbond cladding</a></li>
-<li id="menu-item-89" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-89"><a href="https://nexgenroofing.com.au/service/">Roof Painting</a></li>
-<li id="menu-item-90" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-90"><a href="https://nexgenroofing.com.au/service/">New Roofs</a></li>
-<li id="menu-item-91" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-91"><a href="https://nexgenroofing.com.au/service/">Metal Cladding</a></li>
-<li id="menu-item-92" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-92"><a href="https://nexgenroofing.com.au/service/">Roof Sealing</a></li>
-<li id="menu-item-93" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-93"><a href="https://nexgenroofing.com.au/service/">Gutter Cleaning Services</a></li>
-<li id="menu-item-94" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-94"><a href="https://nexgenroofing.com.au/service/">Whirlybirds servicing</a></li>
-</ul></div></div></ul>
-
-
-		</div>
-					</div>
-
-	
-
-	<div id="col-361771005" class="col medium-3 small-12 large-3">
-				<div class="col-inner">
-			
-			
-
-<ul class="sidebar-wrapper ul-reset"><div id="custom_html-2" class="widget_text col pb-0 widget widget_custom_html"><span class="widget-title">Contact Details</span><div class="is-divider small"></div><div class="textwidget custom-html-widget"><p><i class="icon-phone"></i> 0448 159 254</p>
-<p><i class="icon-envelop"></i> aaron@nexgenroofing.com.au</p>
-<p><i class="icon-map-pin-fil"></i> Fannie Bay Northern Territory 0820</p></div></div></ul>
-
-
-		</div>
-					</div>
-
-	
-
-</div>
-		</div>
-		        
-		</div>
-</div>
-
-
-
-<div class="absolute-footer dark medium-text-center text-center">
-  <div class="container clearfix">
-
-    
-    <div class="footer-primary pull-left">
-            <div class="copyright-footer">
-        Copyright 2026 © <strong>NexGen Roofing &amp; Construction. </strong>All Rights Reserved.      </div>
-          </div>
-  </div>
-</div>
-
-<a href="https://nexgenroofing.com.au/#top" class="back-to-top button icon invert plain fixed bottom z-1 is-outline hide-for-medium circle" id="top-link" aria-label="Go to top" style=""><i class="icon-angle-up"></i></a>
-
-</footer>
-
-</div>
-
-<div id="main-menu" class="mobile-sidebar no-scrollbar mfp-hide">
-
-	
-	<div class="sidebar-menu no-scrollbar ">
-
-		
-					<ul class="nav nav-sidebar nav-vertical nav-uppercase" data-tab="1">
-				<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-28 current_page_item menu-item-36"><a href="https://nexgenroofing.com.au/" aria-current="page">Home</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-81"><a href="https://nexgenroofing.com.au/about-us/">About Us</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-84"><a href="https://nexgenroofing.com.au/service/">Services</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-83"><a href="https://nexgenroofing.com.au/gallery/">Gallery</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-82"><a href="https://nexgenroofing.com.au/contact-us/">Contact Us</a></li>
-			</ul>
-		
-		
-	</div>
-
-	
-</div>
-
-
-
-
-
-
-
-
-
-
-</body></html>
+<div style="text-align:center;padding:16px 12px;font-size:11px;opacity:0.4;font-family:system-ui,sans-serif;letter-spacing:0.02em;">Demo generated from publicly available website content · No claims invented</div>
+</body>
+</html>
