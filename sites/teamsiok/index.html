@@ -1,247 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#D62311">
-    <title>Brad Siok Insurance Agency — Professional Insurance Services in Peoria, AZ</title>
-    <link rel="icon" href="https://teamsiok.com/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;800&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teamsiok Insurance | Trusted Insurance Solutions</title>
+  <link rel="icon" href="https://teamsiok.com/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;800&family=Merriweather+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary: #D62311;
+      --accent: #AA1B0D;
+      --text: #403C3C;
+      --light-bg: #FAFAF9;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    * {
+      font-family: 'Merriweather Sans', sans-serif;
+    }
 
-        :root {
-            --primary: #D62311;
-            --primary-dark: #AA1B0D;
-            --text: #403C3C;
-            --bg-light: #FAFAF9;
-            --bg-dark: #1A1A1A;
-            --border-light: rgba(255, 255, 255, 0.08);
-            --border-dark: rgba(64, 60, 60, 0.1);
-        }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Source Sans Pro', sans-serif;
+    }
 
-        body {
-            font-family: 'Merriweather', 'Source Sans Pro', sans-serif;
-            color: var(--text);
-            background: var(--bg-light);
-            line-height: 1.6;
-        }
+    body {
+      background-color: var(--light-bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Source Sans Pro', sans-serif;
-            letter-spacing: -0.02em;
-        }
+    .hero-heading {
+      font-size: clamp(44px, 5vw, 96px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
 
-        h1 {
-            font-size: clamp(48px, 7vw, 96px);
-            font-weight: 800;
-            line-height: 1.1;
-        }
+    .section-heading {
+      font-size: clamp(28px, 2.5vw, 48px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
 
-        h2 {
-            font-size: clamp(28px, 4vw, 56px);
-            font-weight: 700;
-            line-height: 1.2;
-        }
+    .body-text {
+      font-size: clamp(15px, 1.1vw, 18px);
+      font-weight: 400;
+      line-height: 1.6;
+    }
 
-        h3 {
-            font-size: clamp(18px, 2.5vw, 28px);
-            font-weight: 600;
-            line-height: 1.3;
-        }
+    .subhead-text {
+      font-size: clamp(18px, 1.3vw, 24px);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
 
-        body {
-            font-size: clamp(15px, 1.2vw, 18px);
-        }
+    .gradient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.6;
+    }
 
-        .button-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 40px;
-            border-radius: 9999px;
-            background: var(--primary);
-            color: #FFFFFF;
-            font-weight: 600;
-            font-family: 'Source Sans Pro', sans-serif;
-            text-decoration: none;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(214, 35, 17, 0.3);
-        }
+    .orb-primary {
+      background: radial-gradient(circle, rgba(214, 35, 17, 0.4) 0%, transparent 70%);
+    }
 
-        .button-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(214, 35, 17, 0.5);
-        }
+    .orb-secondary {
+      background: radial-gradient(circle, rgba(170, 27, 13, 0.3) 0%, transparent 70%);
+    }
 
-        .button-secondary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px 40px;
-            border-radius: 9999px;
-            background: transparent;
-            color: var(--primary-dark);
-            font-weight: 600;
-            font-family: 'Source Sans Pro', sans-serif;
-            text-decoration: none;
-            cursor: pointer;
-            border: 2px solid var(--primary-dark);
-            transition: all 0.3s ease;
-        }
+    .glassmorphism {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
 
-        .button-secondary:hover {
-            background: var(--primary-dark);
-            color: #FFFFFF;
-        }
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.33, 0.66, 0.66, 1);
+    }
 
-        .card-glass {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-light);
-            border-radius: 16px;
-            padding: 32px;
-            transition: all 0.3s ease;
-        }
+    .card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
 
-        .card-glass:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.1);
-        }
+    .cta-button {
+      background-color: var(--primary);
+      color: white;
+      padding: 16px 48px;
+      border-radius: 9999px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(214, 35, 17, 0.2);
+    }
 
-        .card-elevated {
-            background: #FFFFFF;
-            border-radius: 16px;
-            padding: 32px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(214, 35, 17, 0.4);
+    }
 
-        .card-elevated:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-        }
+    .cta-button-secondary {
+      background-color: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+      padding: 14px 46px;
+    }
 
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.6;
-            filter: blur(60px);
-        }
+    .cta-button-secondary:hover {
+      background-color: rgba(170, 27, 13, 0.05);
+    }
 
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(135deg, rgba(214, 35, 17, 0.3), rgba(170, 27, 13, 0.1));
-            top: -100px;
-            right: -100px;
-        }
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(64, 60, 60, 0.1), transparent);
+    }
 
-        .orb-2 {
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(135deg, rgba(214, 35, 17, 0.2), rgba(100, 100, 100, 0.1));
-            bottom: 100px;
-            left: -50px;
-        }
+    .section-padding {
+      padding-top: clamp(56px, 7vw, 112px);
+      padding-bottom: clamp(56px, 7vw, 112px);
+    }
 
-        .divider {
-            height: 1px;
-            background: var(--border-dark);
-        }
+    .scroll-indicator {
+      animation: bounce 2s infinite;
+    }
 
-        .section-padding {
-            padding: clamp(56px, 10vw, 120px) 0;
-        }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(8px); }
+    }
 
-        .container-max {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 clamp(20px, 5vw, 80px);
-        }
+    .dot-pattern {
+      background-image: radial-gradient(circle, rgba(64, 60, 60, 0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
 
-        .text-balance {
-            text-wrap: balance;
-        }
+    .nav-link {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      transition: color 0.2s ease;
+      font-size: 14px;
+    }
 
-        .scroll-indicator {
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(8px); }
-        }
-
-        .hero-section {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            background: var(--bg-light);
-        }
-
-        .dark-section {
-            background: var(--bg-dark);
-            color: #FFFFFF;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .dark-section h2,
-        .dark-section h3 {
-            color: #FFFFFF;
-        }
-
-        .grid-bento {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-
-        .grid-item-large {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .grid-item-small {
-            grid-column: span 2;
-        }
-
-        @media (max-width: 1024px) {
-            .grid-bento {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .grid-item-large {
-                grid-column: span 2;
-                grid-row: span 1;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .grid-bento {
-                grid-template-columns: 1fr;
-            }
-            .grid-item-large,
-            .grid-item-small {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-        }
-    </style>
+    .nav-link:hover {
+      color: var(--primary);
+    }
+  </style>
 
 <style>
 /* Scroll-triggered animations */
@@ -398,200 +305,238 @@ nav, header nav, [class*="fixed"][class*="top"] {
 </style>
 </head>
 <body>
-    <!-- HERO SECTION -->
-    <section class="hero-section" data-animate="fade-up">
-        <div class="orb orb-1"></div>
-        <div class="container-max w-full">
-            <div class="grid grid-cols-2 gap-16 items-center" style="min-height: 80vh;" data-stagger>
-                <!-- Left: Heading & CTA -->
-                <div class="flex flex-col justify-center">
-                    <h1 class="text-balance mb-8 dp-gradient-text">Brad Siok Insurance Agency</h1>
-                    <p class="text-lg mb-12 font-light tracking-wide opacity-90">Professional insurance solutions for individuals and families in Peoria, AZ.</p>
-                    <div class="flex gap-6 items-center">
-                        <a href="#cta" class="button-primary">File a Claim</a>
-                    </div>
-                </div>
+  <!-- HEADER / NAV -->
+  <header class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
+      <div class="text-2xl font-bold text-gray-900">Teamsiok</div>
+      <nav class="hidden md:flex gap-8">
+        <a href="#" class="nav-link">Call</a>
+        <a href="#" class="nav-link">Text</a>
+        <a href="#" class="nav-link">#LifeInsurance</a>
+        <a href="#" class="nav-link">#FamilyFirst</a>
+      </nav>
+      <button class="md:hidden text-gray-900">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
 
-                <!-- Right: Atmospheric Visual -->
-                <div class="relative h-96 flex items-center justify-center">
-                    <div style="
-                        width: 100%;
-                        height: 100%;
-                        background: linear-gradient(135deg, rgba(214, 35, 17, 0.15), rgba(170, 27, 13, 0.08));
-                        border-radius: 32px;
-                        position: relative;
-                        overflow: hidden;
-                        border: 1px solid rgba(214, 35, 17, 0.2);
-                    ">
-                        <div style="
-                            position: absolute;
-                            top: 20%;
-                            left: 15%;
-                            width: 180px;
-                            height: 180px;
-                            background: radial-gradient(circle, rgba(214, 35, 17, 0.2), transparent);
-                            border-radius: 50%;
-                            filter: blur(40px);
-                        "></div>
-                        <div style="
-                            position: absolute;
-                            bottom: 15%;
-                            right: 10%;
-                            width: 140px;
-                            height: 140px;
-                            background: radial-gradient(circle, rgba(170, 27, 13, 0.15), transparent);
-                            border-radius: 50%;
-                            filter: blur(35px);
-                        "></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- HERO -->
+  <section class="relative h-screen flex items-center overflow-hidden bg-white pt-20" data-animate="fade-up">
+    <!-- Background Orbs -->
+    <div class="gradient-orb orb-primary" style="width: 600px; height: 600px; top: -200px; right: -100px;"></div>
+    <div class="gradient-orb orb-secondary" style="width: 400px; height: 400px; bottom: -150px; right: 100px;"></div>
 
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-2">
-            <div class="divider" style="width: 1px; height: 32px; opacity: 0.3;"></div>
-            <svg class="scroll-indicator" width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M10 3v10M6 13l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </div>
-    </section>
+    <div class="max-w-7xl mx-auto grid grid-cols-2 gap-20 items-center relative z-10 px-8 w-full" data-stagger>
+      <!-- Left Content -->
+      <div>
+        <h1 class="hero-heading text-gray-900 mb-6 dp-gradient-text">
+          Insurance You Can Trust
+        </h1>
+        <p class="subhead-text text-gray-600 mb-8 font-light">
+          Professional guidance for life, family, and peace of mind.
+        </p>
+        <button class="cta-button">File a Claim</button>
+      </div>
+
+      <!-- Right Visual -->
+      <div class="relative h-96 flex items-center justify-center">
+        <div class="absolute w-64 h-64 bg-gradient-to-br from-red-400/20 to-orange-300/10 rounded-full blur-3xl"></div>
+        <div class="absolute w-48 h-48 bg-gradient-to-tl from-red-500/15 to-transparent rounded-full blur-2xl -top-10 -right-10"></div>
+        <svg class="relative z-10" width="280" height="280" viewBox="0 0 280 280" fill="none">
+          <circle cx="140" cy="140" r="120" stroke="url(#grad1)" stroke-width="2" opacity="0.3"/>
+          <circle cx="140" cy="140" r="100" stroke="url(#grad2)" stroke-width="2" opacity="0.5"/>
+          <path d="M140 40 L160 80 L200 90 L170 120 L180 160 L140 140 L100 160 L110 120 L80 90 L120 80 Z" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.2"/>
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#D62311;stop-opacity:0.4" />
+              <stop offset="100%" style="stop-color:#AA1B0D;stop-opacity:0.1" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#AA1B0D;stop-opacity:0.5" />
+              <stop offset="100%" style="stop-color:#D62311;stop-opacity:0.2" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+      <div class="scroll-indicator text-gray-400">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+      </div>
+    </div>
+
+    <div class="absolute bottom-0 w-full h-px divider"></div>
+  </section>
 <div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#AA1B0D" fill-opacity="0.06"/></svg></div>
 
 
-    <!-- SERVICES SECTION -->
-    <section class="section-padding dark-section" data-animate="fade-up">
-        <div class="orb orb-2"></div>
-        <div class="container-max relative z-10">
-            <div class="mb-16">
-                <h2 class="text-balance">Coverage We Offer</h2>
-            </div>
-
-            <div class="grid-bento">
-                <!-- Primary Service -->
-                <div class="grid-item-large card-glass">
-                    <h3 class="mb-4">Life Insurance</h3>
-                    <p class="opacity-90">Comprehensive life insurance coverage tailored to your family's needs.</p>
-                </div>
-
-                <!-- Secondary Services -->
-                <div class="card-glass">
-                    <h3 class="mb-3">#FamilyFirst</h3>
-                    <p class="text-sm opacity-75">Family-focused insurance solutions.</p>
-                </div>
-
-                <div class="card-glass">
-                    <h3 class="mb-3">#TEAMSiok</h3>
-                    <p class="text-sm opacity-75">Professional team guidance and support.</p>
-                </div>
-
-                <div class="card-glass">
-                    <h3 class="mb-3">#StateFarm</h3>
-                    <p class="text-sm opacity-75">State Farm partnership and benefits.</p>
-                </div>
-
-                <div class="card-glass">
-                    <h3 class="mb-3">#PeoriaAZ</h3>
-                    <p class="text-sm opacity-75">Local expertise in Peoria, Arizona.</p>
-                </div>
-
-                <div class="card-glass">
-                    <h3 class="mb-3">Claims Support</h3>
-                    <p class="text-sm opacity-75">Streamlined claims processing and support.</p>
-                </div>
-            </div>
+  <!-- ABOUT / PROOF -->
+  <section class="section-padding bg-white dot-pattern relative" data-animate="fade-up">
+    <div class="max-w-7xl mx-auto grid grid-cols-2 gap-16 items-start px-8" data-stagger>
+      <div>
+        <h2 class="section-heading text-gray-900 mb-2">
+          Brad Siok Insurance Agency Inc
+        </h2>
+      </div>
+      <div>
+        <p class="body-text text-gray-600 mb-6 leading-relaxed">
+          Dedicated to providing professional insurance guidance to individuals and families seeking trusted coverage. Our mission is to make insurance simple, transparent, and accessible.
+        </p>
+        <div class="flex gap-4">
+          <button class="cta-button-secondary">Call</button>
+          <button class="cta-button-secondary">Text</button>
         </div>
-    </section>
+      </div>
+    </div>
+
+    <!-- Trust Badges -->
+    <div class="max-w-7xl mx-auto mt-20 px-8">
+      <div class="text-gray-500 text-sm uppercase tracking-wider mb-8">Trusted by families</div>
+      <div class="grid grid-cols-4 gap-8 items-center" data-stagger>
+        <div class="glassmorphism p-6 text-center rounded-lg">
+          <div class="text-2xl font-bold text-gray-400">State Farm</div>
+        </div>
+        <div class="glassmorphism p-6 text-center rounded-lg">
+          <div class="text-2xl font-bold text-gray-400">Licensed Agent</div>
+        </div>
+        <div class="glassmorphism p-6 text-center rounded-lg">
+          <div class="text-2xl font-bold text-gray-400">Local Community</div>
+        </div>
+        <div class="glassmorphism p-6 text-center rounded-lg">
+          <div class="text-2xl font-bold text-gray-400">Peoria, AZ</div>
+        </div>
+      </div>
+    </div>
+  </section>
 <div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#AA1B0D" fill-opacity="0.06"/></svg></div>
 
 
-    <!-- CTA BAND SECTION -->
-    <section id="cta" class="section-padding" style="background: var(--primary);" data-animate="fade-in">
-        <div class="container-max">
-            <div class="flex flex-col items-center justify-center text-center">
-                <h2 class="text-white text-balance mb-12 max-w-2xl">Ready to protect what matters most?</h2>
-                <div class="flex gap-6 justify-center flex-wrap">
-                    <a href="#" class="button-primary" style="background: var(--primary-dark);">File a Claim</a>
-                    <a href="#" class="button-secondary">Send Payment</a>
-                </div>
-            </div>
+  <!-- SERVICES -->
+  <section class="section-padding bg-gray-900 relative overflow-hidden" data-animate="fade-in">
+    <!-- Background elements -->
+    <div class="gradient-orb orb-primary" style="width: 500px; height: 500px; top: -200px; left: 10%; opacity: 0.3;"></div>
+    
+    <div class="max-w-7xl mx-auto px-8 relative z-10">
+      <h2 class="section-heading text-white mb-16">Insurance Solutions</h2>
+      
+      <div class="grid grid-cols-3 gap-6 auto-rows-fr" data-stagger>
+        <!-- Large Featured Card -->
+        <div class="col-span-2 row-span-2 glassmorphism p-10 rounded-2xl card-hover flex flex-col justify-between">
+          <div>
+            <h3 class="text-3xl font-bold text-white mb-4">#LifeInsurance</h3>
+            <p class="body-text text-gray-200">Comprehensive life insurance coverage tailored to your family's needs.</p>
+          </div>
+          <div class="pt-6 border-t border-white/10">
+            <button class="cta-button text-sm">Learn More</button>
+          </div>
         </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer class="section-padding border-t" style="border-color: var(--border-dark);">
-        <div class="container-max">
-            <div class="grid grid-cols-3 gap-16 mb-16" data-stagger>
-                <!-- Brand -->
-                <div>
-                    <h3 class="font-light text-3xl">Brad Siok</h3>
-                    <p class="mt-4 opacity-60 text-sm">Insurance Agency Inc.</p>
-                </div>
-
-                <!-- Nav -->
-                <div>
-                    <h4 class="font-semibold mb-4 text-sm">Services</h4>
-                    <ul class="space-y-2 text-sm opacity-70">
-                        <li><a href="#" class="hover:opacity-100 transition">Life Insurance</a></li>
-                        <li><a href="#" class="hover:opacity-100 transition">Family Coverage</a></li>
-                        <li><a href="#" class="hover:opacity-100 transition">Claims Support</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact Methods -->
-                <div>
-                    <h4 class="font-semibold mb-4 text-sm">Get In Touch</h4>
-                    <ul class="space-y-2 text-sm opacity-70">
-                        <li><a href="tel:" class="hover:opacity-100 transition">Call</a></li>
-                        <li><a href="#" class="hover:opacity-100 transition">Text</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="divider mb-8"></div>
-
-            <div class="flex justify-between items-center text-xs opacity-50">
-                <p>Brad Siok Insurance Agency Inc. — Peoria, AZ</p>
-                <div class="flex gap-8">
-                    <a href="#" class="hover:opacity-100 transition">#StateFarm</a>
-                    <a href="#" class="hover:opacity-100 transition">#PeoriaAZ</a>
-                </div>
-            </div>
+        <!-- Card 1 -->
+        <div class="glassmorphism p-8 rounded-2xl card-hover flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-white mb-3">#FamilyFirst</h3>
+            <p class="text-sm text-gray-300">Family protection and security.</p>
+          </div>
         </div>
-    </footer>
 
-    <script>
-        // Smooth scroll behavior for CTA buttons
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                }
-            });
-        });
+        <!-- Card 2 -->
+        <div class="glassmorphism p-8 rounded-2xl card-hover flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-white mb-3">#TEAMSiok</h3>
+            <p class="text-sm text-gray-300">Expert guidance from our team.</p>
+          </div>
+        </div>
 
-        // Fade in on scroll effect
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
+        <!-- Card 3 -->
+        <div class="glassmorphism p-8 rounded-2xl card-hover flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-white mb-3">File a Claim</h3>
+            <p class="text-sm text-gray-300">Simple, straightforward claims process.</p>
+          </div>
+        </div>
 
-        document.querySelectorAll('.card-glass, .card-elevated').forEach(el => {
-            el.style.opacity = '0.8';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-    </script>
+        <!-- Card 4 -->
+        <div class="glassmorphism p-8 rounded-2xl card-hover flex flex-col justify-between">
+          <div>
+            <h3 class="text-xl font-bold text-white mb-3">Send Payment</h3>
+            <p class="text-sm text-gray-300">Secure and convenient payment options.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#AA1B0D" fill-opacity="0.06"/></svg></div>
+
+
+  <!-- CTA BAND -->
+  <section class="section-padding" style="background-color: var(--primary);" data-animate="fade-up">
+    <div class="max-w-7xl mx-auto px-8 text-center relative z-10">
+      <h2 class="section-heading text-white mb-8">Ready to Protect Your Family?</h2>
+      <button class="cta-button" style="background-color: var(--accent);">File a Claim</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-gray-950 text-white py-20 px-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-4 gap-12 mb-16" data-stagger>
+        <div>
+          <h3 class="text-4xl font-bold mb-4">Teamsiok</h3>
+          <p class="text-gray-400 text-sm">Professional insurance guidance for families.</p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4 text-white">Services</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#" class="nav-link text-gray-400">#LifeInsurance</a></li>
+            <li><a href="#" class="nav-link text-gray-400">#FamilyFirst</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4 text-white">Contact</h4>
+          <ul class="space-y-2 text-sm text-gray-400">
+            <li><a href="#" class="nav-link text-gray-400">Call</a></li>
+            <li><a href="#" class="nav-link text-gray-400">Text</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4 text-white">Location</h4>
+          <p class="text-sm text-gray-400">#PeoriaAZ</p>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+        <p>Brad Siok Insurance Agency Inc. | All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll behavior
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Mobile menu toggle
+    const menuButton = document.querySelector('button.md\\:hidden');
+    if (menuButton) {
+      menuButton.addEventListener('click', () => {
+        const nav = document.querySelector('nav');
+        nav?.classList.toggle('hidden');
+      });
+    }
+  </script>
 
 <script>
 // Intersection Observer for scroll animations
