@@ -1,222 +1,177 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NexGen Roofing And Construction — Professional Roofing Services</title>
-  <link rel="icon" href="https://nexgenroofing.com.au/wp-content/uploads/2022/11/logo.png">
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    * {
-      font-family: 'Rajdhani', system-ui, sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* Glass morphism effect */
-    .glass {
-      backdrop-filter: blur(10px);
-      background-color: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    /* Gradient orbs */
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.6;
-    }
-
-    .orb-primary {
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(244, 127, 1, 0.4) 0%, transparent 70%);
-    }
-
-    .orb-secondary {
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(68, 96, 132, 0.3) 0%, transparent 70%);
-    }
-
-    /* Dot grid texture */
-    .dot-grid {
-      background-image: radial-gradient(circle, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-      background-size: 30px 30px;
-    }
-
-    /* Animations */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-
-    .float {
-      animation: float 6s ease-in-out infinite;
-    }
-
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(244, 127, 1, 0.5); }
-      50% { box-shadow: 0 0 30px rgba(244, 127, 1, 0.8); }
-    }
-
-    .glow {
-      animation: glow 2s ease-in-out infinite;
-    }
-
-    /* Card hover effect */
-    .card-lift {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .card-lift:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    }
-
-    /* CTA Button */
-    .btn-primary {
-      background-color: #F57F01;
-      color: #FFFFFF;
-      border-radius: 8px;
-      padding: 14px 40px;
-      font-weight: 600;
-      font-size: 16px;
-      letter-spacing: 0.5px;
-      transition: all 0.3s ease;
-      border: none;
-      cursor: pointer;
-    }
-
-    .btn-primary:hover {
-      background-color: #e67a01;
-      box-shadow: 0 8px 24px rgba(244, 127, 1, 0.35);
-    }
-
-    .btn-secondary {
-      background-color: transparent;
-      color: #F57F01;
-      border: 2px solid #F57F01;
-      border-radius: 8px;
-      padding: 12px 32px;
-      font-weight: 600;
-      font-size: 16px;
-      letter-spacing: 0.5px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .btn-secondary:hover {
-      background-color: #F57F01;
-      color: #FFFFFF;
-    }
-
-    /* Type scale with clamp */
-    .hero-heading {
-      font-size: clamp(44px, 5vw, 96px);
-      font-weight: 800;
-      letter-spacing: -2px;
-      line-height: 1.1;
-    }
-
-    .section-heading {
-      font-size: clamp(28px, 2.5vw, 48px);
-      font-weight: 700;
-      letter-spacing: -1px;
-    }
-
-    .subheading {
-      font-size: clamp(20px, 1.5vw, 24px);
-      font-weight: 300;
-      letter-spacing: 1.5px;
-    }
-
-    .body-text {
-      font-size: clamp(15px, 1.1vw, 18px);
-      font-weight: 400;
-      line-height: 1.6;
-    }
-
-    /* Section padding */
-    .section-pad {
-      padding-top: clamp(56px, 7vw, 112px);
-      padding-bottom: clamp(56px, 7vw, 112px);
-    }
-
-    /* Divider */
-    .divider {
-      height: 1px;
-      background: rgba(0, 0, 0, 0.08);
-    }
-
-    .divider-light {
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    /* Scroll indicator */
-    @keyframes scroll-indicator {
-      0%, 100% { opacity: 0.5; transform: translateY(0); }
-      50% { opacity: 1; transform: translateY(8px); }
-    }
-
-    .scroll-indicator {
-      animation: scroll-indicator 2s ease-in-out infinite;
-    }
-
-    /* Bento grid */
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: clamp(20px, 2vw, 32px);
-    }
-
-    .bento-item {
-      background: white;
-      border-radius: 12px;
-      padding: clamp(28px, 2.5vw, 40px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    }
-
-    .bento-item-large {
-      grid-column: span 2;
-    }
-
-    .bento-dark {
-      background: #446084;
-      color: white;
-    }
-
-    /* Gradient overlay */
-    .gradient-overlay {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .gradient-overlay::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, transparent 60%);
-      z-index: 2;
-    }
-
-    /* Nav styles */
-    nav a {
-      font-size: 14px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      transition: color 0.3s ease;
-    }
-
-    nav a:hover {
-      color: #F57F01;
-    }
-  </style>
-
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexGen Roofing — Professional Roofing Services</title>
+<link href="https://nexgenroofing.com.au/wp-content/uploads/2022/11/logo.png" rel="icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+        * {
+            font-family: 'Rajdhani', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .hero-heading {
+            font-size: clamp(44px, 5vw, 96px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            color: #446084;
+        }
+        
+        .subheading {
+            font-size: clamp(20px, 2.5vw, 48px);
+            font-weight: 300;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #446084;
+        }
+        
+        .body-text {
+            font-size: clamp(15px, 1.1vw, 18px);
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            background-color: #F57F01;
+            color: #ffffff;
+            border-radius: 8px;
+            padding: clamp(12px, 1.2vw, 16px) clamp(24px, 2vw, 32px);
+            font-weight: 600;
+            font-size: clamp(14px, 1vw, 16px);
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 30px rgba(245, 127, 1, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 50px rgba(245, 127, 1, 0.5);
+        }
+        
+        .cta-button-secondary {
+            background-color: transparent;
+            color: #F57F01;
+            border: 1px solid #F57F01;
+            border-radius: 8px;
+            padding: clamp(12px, 1.2vw, 16px) clamp(24px, 2vw, 32px);
+            font-weight: 600;
+            font-size: clamp(14px, 1vw, 16px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button-secondary:hover {
+            background-color: #F57F01;
+            color: #ffffff;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: all 0.4s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        .elevated-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(68, 96, 132, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .elevated-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(68, 96, 132, 0.15);
+        }
+        
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            filter: blur(60px);
+        }
+        
+        .orb-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #446084, #F57F01);
+            top: 10%;
+            right: 5%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .orb-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #F57F01, #446084);
+            bottom: 10%;
+            right: 15%;
+            animation: float 8s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+        
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+        
+        .section-padding {
+            padding-top: clamp(56px, 7vw, 112px);
+            padding-bottom: clamp(56px, 7vw, 112px);
+        }
+        
+        .dark-section {
+            background: linear-gradient(135deg, #446084 0%, #3a4f6e 100%);
+            color: #ffffff;
+        }
+        
+        .light-section {
+            background: #fafafa;
+            color: #446084;
+        }
+        
+        .divider-line {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #446084, transparent);
+        }
+        
+        .text-accent {
+            color: #F57F01;
+        }
+        
+        .max-w-1440 {
+            max-width: 1440px;
+        }
+        
+        svg {
+            display: inline-block;
+        }
+    </style>
 <style>
 /* Scroll-triggered animations */
 [data-animate] {
@@ -288,7 +243,6 @@ img:hover { transform: scale(1.02); }
     animation: line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 </style>
-
 <style>
 
 /* Design Polish: tokens */
@@ -370,248 +324,201 @@ nav, header nav, [class*="fixed"][class*="top"] {
   -webkit-backdrop-filter: blur(12px) saturate(1.5);
 }
 </style>
-</head>
-<body class="bg-white text-gray-900">
-
-  <!-- NAVIGATION -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
-      <div class="text-xl font-bold text-gray-900">NexGen</div>
-      <div class="hidden md:flex gap-8">
-        <a href="#home" class="text-gray-700">Home</a>
-        <a href="#about" class="text-gray-700">About Us</a>
-        <a href="#services" class="text-gray-700">Services</a>
-        <a href="#gallery" class="text-gray-700">Gallery</a>
-        <a href="#contact" class="text-gray-700">Contact Us</a>
-      </div>
-      <button class="btn-primary text-sm">Get in Touch</button>
-    </div>
-  </nav>
-
-  <!-- HERO SECTION -->
-  <section id="home" class="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 pt-20" data-animate="fade-up">
-    <!-- Floating orbs -->
-    <div class="absolute top-20 right-32 orb orb-primary float"></div>
-    <div class="absolute bottom-40 right-20 orb orb-secondary float" style="animation-delay: 2s;"></div>
-
-    <div class="max-w-7xl mx-auto grid grid-cols-2 gap-20 px-8 w-full items-center" data-stagger>
-      <!-- Left: Hero text -->
-      <div class="relative z-10">
-        <h1 class="hero-heading text-gray-900 mb-6 dp-gradient-text">
-          Professional Roofing for Your Home
-        </h1>
-        <p class="subheading text-gray-600 mb-10 font-light tracking-wide">
-          Licensed, insured, and trusted by homeowners and builders across the region.
-        </p>
-        <button class="btn-primary glow">Get in Touch</button>
-      </div>
-
-      <!-- Right: Atmospheric gradient -->
-      <div class="relative h-96 hidden lg:block">
-        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 via-orange-500 to-gray-900 rounded-3xl blur-2xl opacity-20"></div>
-        <div class="absolute inset-0 bg-gradient-to-tl from-orange-400 to-blue-800 rounded-3xl blur-3xl opacity-15"></div>
-        <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#F57F01;stop-opacity:0.4" />
-              <stop offset="100%" style="stop-color:#446084;stop-opacity:0.2" />
-            </linearGradient>
-          </defs>
-          <circle cx="100" cy="100" r="120" fill="url(#grad1)" />
-          <circle cx="300" cy="200" r="100" fill="url(#grad1)" opacity="0.6" />
-          <path d="M50 250 Q 250" stroke="rgba(244, 127, 1, 0.1)" stroke-width="2" fill="none" />
-        </svg>
-      </div>
-    </div>
-
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center">
-      <div class="divider mb-3"></div>
-      <div class="scroll-indicator text-gray-600 text-sm">Scroll to explore</div>
-    </div>
-  </section>
-<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#F57F01" fill-opacity="0.06"/></svg></div>
-
-
-  <!-- DIVIDER -->
-  <div class="max-w-7xl mx-auto px-8">
-    <div class="divider"></div>
-  </div>
-
-  <!-- ABOUT SECTION -->
-  <section id="about" class="section-pad bg-white" data-animate="fade-up">
-    <div class="max-w-7xl mx-auto px-8">
-      <div class="grid grid-cols-2 gap-20 items-start" data-stagger>
-        <div>
-          <h2 class="section-heading text-gray-900 mb-4">NexGen Roofing And Construction</h2>
-          <div class="w-12 h-1 bg-orange-500 mb-8"></div>
-        </div>
-        <div class="body-text text-gray-700 space-y-6">
-          <p>
-            When you need a reliable roofing specialist, contact NexGen Roofing & Construction. We offer competitive rates on all our roofing services including new roof construction, roof maintenance and repairs.
-          </p>
-          <p>
-            At NexGen Roofing & Construction we provide all aspects of roofing including gutters, down pipes, as well as whirlybird installation, repair and service. Whether you have a large-scale roof replacement project or you need your roof resealed, we can take care of your roof work.
-          </p>
-          <div class="pt-4">
-            <p class="font-semibold text-gray-900">Licensed And Insured For All Types Of Roofing Work</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#F57F01" fill-opacity="0.06"/></svg></div>
-
-
-  <!-- SERVICES SECTION -->
-  <section id="services" class="section-pad bg-gradient-to-b from-gray-900 to-gray-800 dot-grid relative overflow-hidden" data-animate="fade-in">
-    <div class="absolute top-0 left-1/3 w-96 h-96 bg-orange-500 rounded-full blur-3xl opacity-5"></div>
-
-    <div class="max-w-7xl mx-auto px-8 relative z-10">
-      <div class="mb-16">
-        <h2 class="section-heading text-white mb-4">Our Services</h2>
-        <div class="w-12 h-1 bg-orange-500"></div>
-      </div>
-
-      <div class="bento-grid">
-        <!-- Service 1: Large card -->
-        <div class="bento-item bento-item-large bento-dark card-lift">
-          <h3 class="text-2xl font-bold mb-3 text-orange-500">New Roof Installation</h3>
-          <p class="text-gray-100 text-sm leading-relaxed">Complete new roof construction with precision engineering and premium materials. From design consultation to final inspection.</p>
-        </div>
-
-        <!-- Service 2 -->
-        <div class="bento-item card-lift bg-gray-800 text-white border border-gray-700">
-          <h3 class="text-lg font-bold mb-2">Services</h3>
-          <p class="text-gray-300 text-sm">Comprehensive roofing solutions tailored to your needs.</p>
-        </div>
-
-        <!-- Service 3 -->
-        <div class="bento-item card-lift bg-gray-800 text-white border border-gray-700">
-          <h3 class="text-lg font-bold mb-2">Gallery</h3>
-          <p class="text-gray-300 text-sm">Before and after project showcases of our finest work.</p>
-        </div>
-
-        <!-- Service 4 -->
-        <div class="bento-item card-lift bg-gray-800 text-white border border-gray-700">
-          <h3 class="text-lg font-bold mb-2">Colorbond Flashings</h3>
-          <p class="text-gray-300 text-sm">Professional flashing installation and repair services.</p>
-        </div>
-
-        <!-- Service 5 -->
-        <div class="bento-item card-lift bg-gray-800 text-white border border-gray-700">
-          <h3 class="text-lg font-bold mb-2">Skylight Installation</h3>
-          <p class="text-gray-300 text-sm">Expert skylight fitting and maintenance solutions.</p>
-        </div>
-
-        <!-- Service 6 -->
-        <div class="bento-item bento-item-large card-lift bg-gradient-to-br from-orange-500 to-orange-600 text-white border border-orange-400">
-          <h3 class="text-2xl font-bold mb-3">Customer Satisfaction</h3>
-          <p class="text-white text-sm leading-relaxed">Quality workmanship and reliable service that exceeds expectations on every project we undertake.</p>
-        </div>
-
-        <!-- Service 7 -->
-        <div class="bento-item card-lift bg-gray-800 text-white border border-gray-700">
-          <h3 class="text-lg font-bold mb-2">Licensed & Insured</h3>
-          <p class="text-gray-300 text-sm">Fully bonded and certified for complete peace of mind.</p>
-        </div>
-
-        <!-- Service 8 -->
-        <div class="bento-item card-lift bg-gray-800 text-white border border-gray-700">
-          <h3 class="text-lg font-bold mb-2">Contact Us</h3>
-          <p class="text-gray-300 text-sm">Ready to discuss your roofing project and provide a free estimate.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#F57F01" fill-opacity="0.06"/></svg></div>
-
-
-  <!-- DIVIDER -->
-  <div class="max-w-7xl mx-auto px-8">
-    <div class="divider"></div>
-  </div>
-
-  <!-- CTA BAND -->
-  <section id="contact" class="section-pad bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 relative overflow-hidden" data-animate="fade-up">
-    <div class="absolute top-1/2 right-0 w-80 h-80 bg-orange-500 rounded-full blur-3xl opacity-10 transform translate-x-1/3"></div>
-
-    <div class="max-w-7xl mx-auto px-8 relative z-10 text-center">
-      <h2 class="section-heading text-white mb-8">Need Help? Make A Call</h2>
-      <div class="flex items-center justify-center gap-4 flex-wrap">
-        <a href="tel:0448159254" class="btn-primary glow text-lg">Get in Touch</a>
-        <p class="text-gray-300 text-lg font-light">0448 159 254</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- DIVIDER -->
-  <div class="max-w-7xl mx-auto px-8">
-    <div class="divider"></div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="section-pad bg-white">
-    <div class="max-w-7xl mx-auto px-8">
-      <div class="grid grid-cols-4 gap-12 mb-12" data-stagger>
-        <div>
-          <p class="text-4xl font-extrabold text-gray-900 leading-tight">NexGen</p>
-          <p class="text-gray-600 text-sm mt-2">Professional roofing and construction services.</p>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-gray-900 mb-4">Company</p>
-          <nav class="space-y-2">
-            <a href="#home" class="block text-gray-600 hover:text-orange-500 text-sm">Home</a>
-            <a href="#about" class="block text-gray-600 hover:text-orange-500 text-sm">About Us</a>
-            <a href="#services" class="block text-gray-600 hover:text-orange-500 text-sm">Services</a>
-          </nav>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-gray-900 mb-4">Services</p>
-          <nav class="space-y-2">
-            <a href="#" class="block text-gray-600 hover:text-orange-500 text-sm">New Roof Installation</a>
-            <a href="#" class="block text-gray-600 hover:text-orange-500 text-sm">Colorbond Flashings</a>
-            <a href="#" class="block text-gray-600 hover:text-orange-500 text-sm">Skylight Installation</a>
-          </nav>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-gray-900 mb-4">Contact</p>
-          <p class="text-gray-600 text-sm mb-4">
-            <a href="tel:0448159254" class="hover:text-orange-500">0448 159 254</a>
-          </p>
-          <p class="text-xs text-gray-500">Licensed, Insured And Bonded</p>
-        </div>
-      </div>
-
-      <div class="divider mb-8"></div>
-      <p class="text-center text-gray-500 text-xs">Professional roofing services for homeowners and construction clients.</p>
-    </div>
-  </footer>
-
-  <script>
-    // Smooth scroll for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-
-    // Sticky nav color change on scroll
-    window.addEventListener('scroll', function() {
-      const nav = document.querySelector('nav');
-      if (window.scrollY > 50) {
-        nav.classList.add('shadow-sm');
-      } else {
-        nav.classList.remove('shadow-sm');
-      }
-    });
-  </script>
-
-
+<style>
+.anim-fade-in-up {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.anim-fade-in-up.anim-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style></head>
+<body class="bg-white">
+<!-- NAVIGATION -->
+<nav class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200">
+<div class="max-w-1440 mx-auto px-8 py-4 flex items-center justify-between">
+<div class="text-2xl font-bold text-accent">NexGen</div>
+<div class="hidden md:flex gap-8">
+<a class="text-sm font-600 text-gray-700 hover:text-accent transition" href="#home">Home</a>
+<a class="text-sm font-600 text-gray-700 hover:text-accent transition" href="#about">About Us</a>
+<a class="text-sm font-600 text-gray-700 hover:text-accent transition" href="#services">Services</a>
+<a class="text-sm font-600 text-gray-700 hover:text-accent transition" href="#contact">Contact</a>
+</div>
+</div>
+</nav>
+<!-- HERO SECTION -->
+<section class="relative w-full min-h-screen flex items-center pt-20 section-padding overflow-hidden" data-animate="fade-up" id="home">
+<div class="absolute inset-0 pointer-events-none anim-fade-in-up" style=" transition-delay: 0.0s;">
+<div class="gradient-orb orb-1"></div>
+<div class="gradient-orb orb-2"></div>
+</div>
+<div class="max-w-1440 mx-auto w-full px-8 grid grid-cols-2 gap-20 items-center relative z-10 anim-fade-in-up" data-stagger="" style=" transition-delay: 0.1s;">
+<!-- Left: Heading -->
+<div>
+<h1 class="hero-heading mb-6 dp-gradient-text">NexGen Roofing</h1>
+<p class="text-lg font-300 text-gray-600 mb-8 leading-relaxed">
+                    Licenced and insured roofing specialist providing competitive rates on new roof construction, maintenance, repairs, gutters, downpipes, and whirlybird installation.
+                </p>
+<button class="cta-button mb-12">Get in Touch</button>
+<div class="text-sm font-600 text-gray-500 tracking-widest uppercase">
+                    Call: 
+                </div>
+</div>
+<!-- Right: Abstract Visual -->
+<div class="relative h-96 hidden lg:block">
+<div class="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-50 rounded-2xl"></div>
+<svg class="w-full h-full" viewbox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="grad1" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#446084;stop-opacity:0.8"></stop>
+<stop offset="100%" style="stop-color:#F57F01;stop-opacity:0.6"></stop>
+</lineargradient>
+</defs>
+<path d="M100,50 Q200,20 300,80 T400,200" fill="none" opacity="0.6" stroke="url(#grad1)" stroke-width="2"></path>
+<path d="M50,150 Q150,100 250,180 T400,300" fill="none" opacity="0.4" stroke="url(#grad1)" stroke-width="2"></path>
+<circle cx="200" cy="200" fill="none" opacity="0.3" r="80" stroke="url(#grad1)" stroke-width="1"></circle>
+<circle cx="200" cy="200" fill="none" opacity="0.5" r="50" stroke="#F57F01" stroke-width="1.5"></circle>
+<line opacity="0.2" stroke="#446084" stroke-width="1" x1="200" x2="200" y1="100" y2="300"></line>
+<line opacity="0.2" stroke="#446084" stroke-width="1" x1="100" x2="300" y1="200" y2="200"></line>
+</svg>
+</div>
+</div>
+<!-- Scroll Indicator -->
+<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 scroll-indicator anim-fade-in-up" style=" transition-delay: 0.2s;">
+<svg fill="none" height="24" stroke="#446084" stroke-width="2" viewbox="0 0 24 24" width="24">
+<polyline points="6 9 12 15 18 9"></polyline>
+</svg>
+</div>
+<!-- Divider -->
+<div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent anim-fade-in-up" style=" transition-delay: 0.3s;"></div>
+</section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg style="display:block;width:100%" viewbox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#F57F01" fill-opacity="0.06"></path></svg></div>
+<!-- ABOUT SECTION -->
+<section class="light-section section-padding" data-animate="fade-up" id="about">
+<div class="max-w-1440 mx-auto px-8 anim-fade-in-up" style=" transition-delay: 0.4s;">
+<div class="grid grid-cols-2 gap-20 items-center" data-stagger="">
+<div>
+<h2 class="subheading mb-8">About</h2>
+</div>
+<div class="body-text text-gray-700">
+<p class="mb-6">
+                        When you need a reliable roofing specialist, contact NexGen Roofing &amp; Construction. We offer competitive rates on all our roofing services including new roof construction, roof maintenance and repairs.
+                    </p>
+<p class="mb-6">
+                        At NexGen Roofing &amp; Construction we provide all aspects of roofing including gutters, down pipes, as well as whirlybird installation, repair and service. Whether you have a large-scale roof replacement project or you need your roof resealed, we can take care of your roof work.
+                    </p>
+<div class="mt-10 pt-6 border-t border-gray-300">
+<p class="text-sm font-600 text-accent tracking-widest uppercase mb-2">Licensed &amp; Insured</p>
+<p class="font-light text-gray-600">Bonded for all types of roofing work</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg style="display:block;width:100%" viewbox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#F57F01" fill-opacity="0.06"></path></svg></div>
+<!-- SERVICES SECTION -->
+<section class="dark-section section-padding" data-animate="fade-in" id="services">
+<div class="max-w-1440 mx-auto px-8 anim-fade-in-up" style=" transition-delay: 0.5s;">
+<h2 class="subheading mb-16 text-white">Services</h2>
+<div class="grid grid-cols-4 gap-6 auto-rows-max" data-stagger="">
+<!-- Large Card: New Roof Installation -->
+<div class="col-span-2 row-span-2">
+<div class="glass-card p-10 h-full flex flex-col justify-between">
+<div>
+<h3 class="text-3xl font-800 text-white mb-4">New Roof Installation</h3>
+<p class="text-white/80 font-light">Professional new roof construction with competitive rates.</p>
+</div>
+<div class="mt-8 pt-6 border-t border-white/10">
+<p class="text-xs text-white/60 uppercase tracking-widest font-600">Featured Service</p>
+</div>
+</div>
+</div>
+<!-- Small Card: Roof Repairs -->
+<div class="col-span-1">
+<div class="glass-card p-6 h-full">
+<h3 class="text-xl font-700 text-white mb-3">Roof Repairs</h3>
+<p class="text-white/70 text-sm font-light">Maintenance and repair services.</p>
+</div>
+</div>
+<!-- Small Card: Gutters & Downpipes -->
+<div class="col-span-1">
+<div class="glass-card p-6 h-full">
+<h3 class="text-xl font-700 text-white mb-3">Gutters &amp; Downpipes</h3>
+<p class="text-white/70 text-sm font-light">Complete gutter solutions.</p>
+</div>
+</div>
+<!-- Small Card: Whirlybird Installation -->
+<div class="col-span-1">
+<div class="glass-card p-6 h-full">
+<h3 class="text-xl font-700 text-white mb-3">Whirlybird Service</h3>
+<p class="text-white/70 text-sm font-light">Installation, repair &amp; maintenance.</p>
+</div>
+</div>
+<!-- Small Card: Colorbond Flashings -->
+<div class="col-span-1">
+<div class="glass-card p-6 h-full">
+<h3 class="text-xl font-700 text-white mb-3">Colorbond Flashings</h3>
+<p class="text-white/70 text-sm font-light">Durable flashing solutions.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg style="display:block;width:100%" viewbox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#F57F01" fill-opacity="0.06"></path></svg></div>
+<!-- CTA SECTION -->
+<section class="dark-section section-padding" data-animate="fade-up" id="contact">
+<div class="max-w-1440 mx-auto px-8 text-center anim-fade-in-up" style=" transition-delay: 0.0s;">
+<h2 class="text-5xl font-800 text-white mb-4 leading-tight">
+                Need Help?<br/>Make A Call
+            </h2>
+<p class="text-xl font-light text-white/80 mb-12 max-w-2xl mx-auto">
+                Get a free estimate and expert advice from our licensed roofing specialists.
+            </p>
+<button class="cta-button mb-8 inline-block">Get in Touch</button>
+<div class="mt-12 text-white/70 font-light">
+<p class="text-lg"></p>
+</div>
+</div>
+</section>
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-white section-padding">
+<div class="max-w-1440 mx-auto px-8">
+<div class="grid grid-cols-3 gap-12 mb-12" data-stagger="">
+<div>
+<h3 class="text-3xl font-800 mb-4">NexGen</h3>
+<p class="font-light text-white/60">Professional roofing services.</p>
+</div>
+<div>
+<p class="text-sm font-600 text-white/50 uppercase tracking-widest mb-4">Navigation</p>
+<div class="space-y-2 text-white/70 font-light">
+<a class="block hover:text-white transition" href="#home">Home</a>
+<a class="block hover:text-white transition" href="#about">About Us</a>
+<a class="block hover:text-white transition" href="#services">Services</a>
+<a class="block hover:text-white transition" href="#contact">Contact</a>
+</div>
+</div>
+<div>
+<p class="text-sm font-600 text-white/50 uppercase tracking-widest mb-4">Contact</p>
+<p class="text-white/70 font-light"></p>
+</div>
+</div>
+<div class="border-t border-white/10 pt-8">
+<p class="text-white/50 text-sm font-light text-center">
+                    NexGen Roofing &amp; Construction — Licensed, Insured &amp; Bonded
+                </p>
+</div>
+</div>
+</footer>
+<script>
+        // Smooth scroll on CTA buttons
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
 <script>
 // Intersection Observer for scroll animations
 document.addEventListener('DOMContentLoaded', () => {
@@ -649,7 +556,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
-
 <div style="text-align:center;padding:16px 12px;font-size:11px;opacity:0.4;font-family:system-ui,sans-serif;letter-spacing:0.02em;">Demo generated from publicly available website content · No claims invented</div>
-</body>
+<script>
+(function(){
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting) e.target.classList.add('anim-visible');
+    });
+  }, {threshold: 0.1});
+  document.querySelectorAll('.anim-fade-in-up').forEach(function(el){ obs.observe(el); });
+})();
+</script></body>
 </html>
